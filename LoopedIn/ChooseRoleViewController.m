@@ -14,6 +14,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *studentButton;
 @property (strong, nonatomic) IBOutlet UIButton *parentButton;
 @property (strong, nonatomic) IBOutlet UIButton *teacherButton;
+@property (strong, nonatomic) IBOutlet UITextField *parenthoodTextfield;
+@property (strong, nonatomic) IBOutlet UIButton *backButtonLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *backButtonArrow;
 @end
 
 @implementation ChooseRoleViewController
@@ -27,13 +30,82 @@
     view.layer.borderWidth = 1.0f;
 }
 
+- (void)hideParenthoodTextfield:(BOOL)wasStudent {
+    [self.parenthoodTextfield setHidden:YES];
+    
+    /* Move parenthood text field below student or parent text field */
+    CGRect parenthoodTextFieldFrame = self.parenthoodTextfield.frame;
+    
+    /* Move parent text field, teacher text field, and back button down */
+    CGRect parentTextFieldFrame = self.parentButton.frame;
+    CGRect teacherTextFieldFrame = self.teacherButton.frame;
+    CGRect backButtonLabelFrame = self.backButtonLabel.frame;
+    CGRect backButtonArrowFrame = self.backButtonArrow.frame;
+    
+    CGFloat dy = parenthoodTextFieldFrame.size.height + 5;
+    parentTextFieldFrame.origin.y -= dy;
+    teacherTextFieldFrame.origin.y -= dy;
+    backButtonLabelFrame.origin.y -= dy;
+    backButtonArrowFrame.origin.y -= dy;
+    
+    if (wasStudent) {
+        self.parentButton.frame = parentTextFieldFrame;
+    }
+    self.teacherButton.frame = teacherTextFieldFrame;
+    self.backButtonLabel.frame = backButtonLabelFrame;
+    self.backButtonArrow.frame = backButtonArrowFrame;
+}
+
+/* This method displays the parenthood text field (which asks a parent to type in their child's email, or a child to type in their parent's email) and adjusts other views accordingly. It also updates the placeholder text of the parenthood text field depending on |isStudent|  */
+- (void)showParenthoodTextfield:(BOOL)isStudent {
+    [self.parenthoodTextfield setHidden:NO];
+    
+    if (isStudent) {
+        self.parenthoodTextfield.placeholder = @"your parent's email";
+    } else {
+        self.parenthoodTextfield.placeholder = @"your child's email";
+    }
+    
+    /* Move parenthood text field below student or parent text field */
+    CGRect parenthoodTextFieldFrame = self.parenthoodTextfield.frame;
+    if (isStudent) {
+        CGRect studentTextFieldFrame = self.studentButton.frame;
+        parenthoodTextFieldFrame.origin.y = studentTextFieldFrame.origin.y + studentTextFieldFrame.size.height + 5;
+    } else {
+        CGRect parentTextFieldFrame = self.parentButton.frame;
+        parenthoodTextFieldFrame.origin.y = parentTextFieldFrame.origin.y + parentTextFieldFrame.size.height + 5;
+    }
+    self.parenthoodTextfield.frame = parenthoodTextFieldFrame;
+    
+    /* Move parent text field, teacher text field, and back button down */
+    CGRect parentTextFieldFrame = self.parentButton.frame;
+    CGRect teacherTextFieldFrame = self.teacherButton.frame;
+    CGRect backButtonLabelFrame = self.backButtonLabel.frame;
+    CGRect backButtonArrowFrame = self.backButtonArrow.frame;
+    
+    CGFloat dy = parenthoodTextFieldFrame.size.height + 5;
+    parentTextFieldFrame.origin.y += dy;
+    teacherTextFieldFrame.origin.y += dy;
+    backButtonLabelFrame.origin.y += dy;
+    backButtonArrowFrame.origin.y += dy;
+
+    if (isStudent) {
+        self.parentButton.frame = parentTextFieldFrame;
+    }
+    self.teacherButton.frame = teacherTextFieldFrame;
+    self.backButtonLabel.frame = backButtonLabelFrame;
+    self.backButtonArrow.frame = backButtonArrowFrame;
+}
+
 - (IBAction)studentButtonPressed:(id)sender {
     if (self.studentButton.isSelected) {
+        /* Deselecting student button */
         self.studentButton.backgroundColor = [UIColor clearColor];
         [self.studentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.studentButton setSelected:NO];
-
+        [self hideParenthoodTextfield:YES];
     } else {
+        /* Selecting student button */
         self.studentButton.backgroundColor = [UIColor whiteColor];
         [self.studentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.studentButton setSelected:YES];
@@ -44,16 +116,19 @@
         if (self.teacherButton.isSelected) {
             [self teacherButtonPressed:self];
         }
+        [self showParenthoodTextfield:YES];
     }
 }
 
 - (IBAction)parentButtonPressed:(id)sender {
     if (self.parentButton.isSelected) {
+        /* Deselecting parent button */
         self.parentButton.backgroundColor = [UIColor clearColor];
         [self.parentButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.parentButton setSelected:NO];
-        
+        [self hideParenthoodTextfield:NO];
     } else {
+        /* Selecting parent button */
         self.parentButton.backgroundColor = [UIColor whiteColor];
         [self.parentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self.parentButton setSelected:YES];
@@ -64,6 +139,7 @@
         if (self.teacherButton.isSelected) {
             [self teacherButtonPressed:self];
         }
+        [self showParenthoodTextfield:NO];
     }
 }
 
@@ -102,6 +178,42 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)createParenthoodRelation:(PFUser *)user {
+    if (self.studentButton.isSelected) {
+        NSString *parentEmail = self.parenthoodTextfield.text;
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:parentEmail];
+        PFObject *parent = [query getFirstObject];
+        if (parent) {
+            NSString *studentEmail = [parent objectForKey:PARENTHOOD_EMAIL];
+            if ([studentEmail isEqualToString:self.username]) {
+                PFObject *parenthoodRelation = [PFObject objectWithClassName:PARENTHOOD_CLASS_NAME];
+                [parenthoodRelation setObject:user forKey:CHILD];
+                [parenthoodRelation setObject:parent forKey:PARENT];
+                [parenthoodRelation saveInBackground];
+            }
+        }
+        user[PARENTHOOD_EMAIL] = parentEmail;
+        [user saveInBackground];
+    } else if (self.parentButton.isSelected) {
+        NSString *studentEmail = self.parenthoodTextfield.text;
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"username" equalTo:studentEmail];
+        PFObject *student = [query getFirstObject];
+        if (student) {
+            NSString *parentEmail = [student objectForKey:PARENTHOOD_EMAIL];
+            if ([parentEmail isEqualToString:self.username]) {
+                PFObject *parenthoodRelation = [PFObject objectWithClassName:PARENTHOOD_CLASS_NAME];
+                [parenthoodRelation setObject:user forKey:PARENT];
+                [parenthoodRelation setObject:student forKey:CHILD];
+                [parenthoodRelation saveInBackground];
+            }
+        }
+        user[PARENTHOOD_EMAIL] = studentEmail;
+        [user saveInBackground];
+    }
+}
+
 - (IBAction)signUpPressed:(id)sender {
     NSString *role = @"";
     if (self.studentButton.isSelected) {
@@ -125,6 +237,7 @@
 
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {   // Hooray! Let them use the app now.
+            [self createParenthoodRelation:user];
             if ([role isEqualToString:STUDENT_ROLE]) {
                 [self performSegueWithIdentifier:@"toStudentHome" sender:self];
             } else if ([role isEqualToString:TEACHER_ROLE]) {
@@ -139,7 +252,6 @@
             [alert show];
         }
     }];
-
 }
 
 - (IBAction)backButtonPressed:(id)sender {

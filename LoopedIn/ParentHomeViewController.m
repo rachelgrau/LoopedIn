@@ -20,6 +20,15 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)logoutPressed:(id)sender {
+    if ([PFUser currentUser]) {
+        [PFUser logOut];
+    }
+    [self performSegueWithIdentifier:@"toLogIn" sender:self];
+
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -8,12 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-/* User keys */
+/* User table keys */
 #define ROLE @"role"
 #define FULL_NAME @"fullName"
 #define POINTS @"points"
+#define PARENTHOOD_EMAIL @"parenthoodEmail"
 
 /* Role types */
 #define STUDENT_ROLE @"Student"
 #define PARENT_ROLE @"Parent"
 #define TEACHER_ROLE @"Teacher"
+
+#define PARENTHOOD_CLASS_NAME @"Parenthood"
+/* Parenthood table keys */
+#define CHILD @"child"
+#define PARENT @"parent"

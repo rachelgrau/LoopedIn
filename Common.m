@@ -10,6 +10,31 @@
 
 @implementation Common
 
+/* Given a string that contains the full name of a user, returns the first name only */
++ (NSString *)getFirstNameFromFullName:(NSString *)fullName {
+    NSMutableString *firstName = [NSMutableString stringWithString:@""];
+    for (int i=0; i < fullName.length; i++) {
+        if ([fullName characterAtIndex:i] == ' ') {
+            break;
+        } else {
+            [firstName appendString:[NSString stringWithFormat:@"%c", [fullName characterAtIndex:i]]];
+        }
+    }
+    return firstName;
+}
+
+/* Given a string that contains the full name of a user, returns the last name only. If the user has a middle name (or multiple last names), returns the last name that's separated by a space. If there are no spaces (just one name), then returns the full name. */
++ (NSString *)getLastNameFromFullName:(NSString *)fullName {
+    int lastSpaceIndex = -1;
+    for (int i=0; i < fullName.length; i++) {
+        if ([fullName characterAtIndex:i] == ' ') {
+            lastSpaceIndex = i;
+        }
+    }
+    if (lastSpaceIndex == -1) return fullName;
+    return [fullName substringFromIndex:lastSpaceIndex];
+}
+
 + (void)setBorder:(UIView *)view withColor:(UIColor *)color {
     view.layer.masksToBounds = YES;
     view.layer.borderColor = [color CGColor];

@@ -17,12 +17,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *parenthoodTextfield;
 @property (strong, nonatomic) IBOutlet UIButton *backButtonLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *backButtonArrow;
+
+@property NSString *username;
 @end
 
 @implementation ChooseRoleViewController
-
-@synthesize username;
-@synthesize password;
 
 - (void)setBorderOfView:(UIView *)view toColor:(UIColor *)color {
     view.layer.masksToBounds = YES;
@@ -171,6 +170,10 @@
     [self setBorderOfView:self.studentButton toColor:[UIColor whiteColor]];
     [self setBorderOfView:self.teacherButton toColor:[UIColor whiteColor]];
     [self setBorderOfView:self.parentButton toColor:[UIColor whiteColor]];
+    
+    if ([PFUser currentUser]) {
+        self.username = [PFUser currentUser].username;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -228,30 +231,19 @@
         return;
     }
     
-    PFUser *user = [PFUser user];
-    user.username = self.username;
-    user.password = self.password;
-    user[ROLE] = role;
-    user[FULL_NAME] = self.fullName;
-    user[POINTS] = @0;
-
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {   // Hooray! Let them use the app now.
-            [self createParenthoodRelation:user];
-            if ([role isEqualToString:STUDENT_ROLE]) {
-                [self performSegueWithIdentifier:@"toStudentHome" sender:self];
-            } else if ([role isEqualToString:TEACHER_ROLE]) {
-                [self performSegueWithIdentifier:@"toTeacherHome" sender:self];
-            } else {
-                [self performSegueWithIdentifier:@"toParentHome" sender:self];
-            }
-        } else {
-            NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
-            NSLog(@"%@", errorString);
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:errorString message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-        }
-    }];
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[ROLE] = role;
+    if ([role isEqualToString:STUDENT_ROLE] || [role isEqualToString:PARENT_ROLE]) {
+        [self createParenthoodRelation:currentUser];
+    }
+    
+    if ([role isEqualToString:STUDENT_ROLE]) {
+        [self performSegueWithIdentifier:@"toStudentHome" sender:self];
+    } else if ([role isEqualToString:TEACHER_ROLE]) {
+        [self performSegueWithIdentifier:@"toTeacherHome" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"toParentHome" sender:self];
+    }
 }
 
 - (IBAction)backButtonPressed:(id)sender {

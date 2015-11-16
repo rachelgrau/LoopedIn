@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 /* User table keys */
+#define USERNAME @"username"
+#define PASSWORD @"password"
 #define ROLE @"role"
 #define FULL_NAME @"fullName"
 #define POINTS @"points"

@@ -10,6 +10,7 @@
 #import "TeacherHomeViewController.h"
 #import "ChooseRoleViewController.h"
 #import <Parse/Parse.h>
+#import "DBKeys.h"
 
 @interface SignUpViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
@@ -64,9 +65,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if ([PFUser currentUser]) {
-        [self performSegueWithIdentifier:@"toTeacherHome" sender:self];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,22 +107,59 @@
     }
 }
 
+/* Creates a user with the given credentials & segues to choose role, or displays an error message.
+   Note: if user is already logged in, update fields instead of creating a new user (this can happen 
+   if they go to the next screen and click back). */
 - (IBAction)nextButtonPressed:(id)sender {
-    if ([self passwordIsValid]) {
-        [self performSegueWithIdentifier:@"toChooseRole" sender:self];
+    if (![PFUser currentUser]) {
+        /* CREATE NEW USER */
+        if ([self passwordIsValid]) {
+            PFUser *user = [PFUser user];
+            user.username = self.usernameTextField.text;
+            user.password = self.passwordTextField.text;
+            user[FULL_NAME] = self.nameTextField.text;
+            user[POINTS] = @0;
+            [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {   // Hooray! Let them use the app now.
+                    [self performSegueWithIdentifier:@"toChooseRole" sender:self];
+                } else {
+                    NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
+                    NSLog(@"%@", errorString);
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:errorString message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                }
+            }];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password doesn't match." message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password doesn't match." message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
+        /* UPDATE EXISTING USER (e.g. if user hit back from ChooseRoleVC */
+        if ([self passwordIsValid]) {
+            PFUser *user = [PFUser currentUser];
+            user.username = self.usernameTextField.text;
+            user.password = self.passwordTextField.text;
+            user[FULL_NAME] = self.nameTextField.text;
+            user[POINTS] = @0;
+            [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {   // Hooray! Let them use the app now.
+                    [self performSegueWithIdentifier:@"toChooseRole" sender:self];
+                } else {
+                    NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
+                    NSLog(@"%@", errorString);
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:errorString message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                }
+
+            }];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password doesn't match." message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"toChooseRole"]) {
-        ChooseRoleViewController *vc = segue.destinationViewController;
-        vc.username = self.usernameTextField.text;
-        vc.password = self.passwordTextField.text;
-        vc.fullName = self.nameTextField.text;
-    }
 }
 
 @end

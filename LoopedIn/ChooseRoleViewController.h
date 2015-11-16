@@ -9,7 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface ChooseRoleViewController : UIViewController
-@property NSString *username;
-@property NSString *password;
-@property NSString *fullName;
 @end

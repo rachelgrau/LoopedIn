@@ -37,18 +37,7 @@
     
     /* Set name label */
     NSString *fullName = [[PFUser currentUser] objectForKey:FULL_NAME];
-    NSMutableString *firstName = [NSMutableString stringWithString:@""];
-    NSMutableString *lastName = [NSMutableString stringWithString:@""];
-    BOOL readFirst = NO;
-    for (int i=0; i < fullName.length; i++) {
-        if ([fullName characterAtIndex:i] == ' ') {
-            readFirst = YES;
-        } else if (readFirst) {
-            [lastName appendString:[NSString stringWithFormat:@"%c", [fullName characterAtIndex:i]]];
-        } else {
-            [firstName appendString:[NSString stringWithFormat:@"%c", [fullName characterAtIndex:i]]];
-        }
-    }
+    NSString *firstName = [Common getFirstNameFromFullName:fullName];
     UIFont *boldFont = [UIFont fontWithName:@"Avenir-Heavy" size:32.0f];
     UIFont *normalFont = [UIFont fontWithName:@"Avenir-Book" size:32.0f];
 

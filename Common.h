@@ -12,4 +12,6 @@
 @interface Common : NSObject
 + (void)setBorder:(UIView *)view withColor:(UIColor *)color;
 + (void)setUpNavBar:(UIViewController *)vc;
++ (NSString *)getFirstNameFromFullName:(NSString *)fullName;
++ (NSString *)getLastNameFromFullName:(NSString *)fullName;
 @end

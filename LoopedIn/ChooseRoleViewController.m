@@ -8,6 +8,7 @@
 
 #import "ChooseRoleViewController.h"
 #import "DBKeys.h"
+#import "Common.h"
 #import <Parse/Parse.h>
 
 @interface ChooseRoleViewController ()
@@ -22,12 +23,6 @@
 @end
 
 @implementation ChooseRoleViewController
-
-- (void)setBorderOfView:(UIView *)view toColor:(UIColor *)color {
-    view.layer.masksToBounds = YES;
-    view.layer.borderColor = [[UIColor whiteColor]CGColor];
-    view.layer.borderWidth = 1.0f;
-}
 
 - (void)hideParenthoodTextfield:(BOOL)wasStudent {
     [self.parenthoodTextfield setHidden:YES];
@@ -167,9 +162,10 @@
     [[self navigationController] setNavigationBarHidden:YES];
     
     /* Set borders of buttons to white */
-    [self setBorderOfView:self.studentButton toColor:[UIColor whiteColor]];
-    [self setBorderOfView:self.teacherButton toColor:[UIColor whiteColor]];
-    [self setBorderOfView:self.parentButton toColor:[UIColor whiteColor]];
+    [Common setBorder:self.studentButton withColor:[UIColor whiteColor]];
+    [Common setBorder:self.teacherButton withColor:[UIColor whiteColor]];
+    [Common setBorder:self.parentButton withColor:[UIColor whiteColor]];
+    [Common setBorder:self.parenthoodTextfield withColor:[UIColor whiteColor]];
     
     if ([PFUser currentUser]) {
         self.username = [PFUser currentUser].username;

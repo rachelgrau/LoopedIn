@@ -12,7 +12,6 @@
 #import "DBKeys.h"
 
 @interface ParentHomeViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *myLabel;
 @end
 
 @implementation ParentHomeViewController
@@ -39,7 +38,6 @@
     PFUser *child = (PFUser *)[childQuery getFirstObject];
     NSString *firstName = [Common getFirstNameFromFullName:[child objectForKey:FULL_NAME]];
     NSString *lastName = [Common getLastNameFromFullName:[child objectForKey:FULL_NAME]];
-    self.myLabel.text = [NSString stringWithFormat:@"My kid: %@", lastName];
 }
 
 - (IBAction)logoutPressed:(id)sender {

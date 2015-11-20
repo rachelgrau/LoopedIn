@@ -8,6 +8,7 @@
 
 #import "LogInViewController.h"
 #import "DBKeys.h"
+#import "Common.h"
 #import <Parse/Parse.h>
 
 @interface LogInViewController ()
@@ -20,26 +21,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     /* Set border of text field to white */
-    self.usernameTextField.layer.masksToBounds = YES;
-    self.usernameTextField.layer.borderColor = [[UIColor whiteColor]CGColor];
-    self.usernameTextField.layer.borderWidth = 1.0f;
+    [Common setBorder:self.usernameTextField withColor:[UIColor whiteColor]];
     if ([self.usernameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor whiteColor];
         self.usernameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"email" attributes:@{NSForegroundColorAttributeName: color}];
     }
     
     /* Set border of text field to white */
-    self.passwordTextField.layer.masksToBounds = YES;
-    self.passwordTextField.layer.borderColor = [[UIColor whiteColor]CGColor];
-    self.passwordTextField.layer.borderWidth = 1.0f;
+    [Common setBorder:self.passwordTextField withColor:[UIColor whiteColor]];
     if ([self.passwordTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor whiteColor];
         self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"password" attributes:@{NSForegroundColorAttributeName: color}];
     }
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -71,7 +66,7 @@
     }
     if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
         UIColor *color = [UIColor whiteColor];
-        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"email" attributes:@{NSForegroundColorAttributeName: color}];
+        textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName: color}];
     } else {
         textField.placeholder = placeholder;
     }

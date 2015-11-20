@@ -15,13 +15,20 @@
 #define FULL_NAME @"fullName"
 #define POINTS @"points"
 #define PARENTHOOD_EMAIL @"parenthoodEmail"
+#define DESIRED_REWARD @"desiredReward"
 
 /* Role types */
 #define STUDENT_ROLE @"Student"
 #define PARENT_ROLE @"Parent"
 #define TEACHER_ROLE @"Teacher"
 
+/* Parenthood table name and keys */
 #define PARENTHOOD_CLASS_NAME @"Parenthood"
-/* Parenthood table keys */
 #define CHILD @"child"
 #define PARENT @"parent"
+
+/* Reward table name and keys */
+#define REWARD_CLASS_NAME @"Reward"
+#define REWARD_POINTS @"pointsRequired"
+#define REWARD_TITLE @"title"
+#define REWARD_DESCRIPTION @"description"

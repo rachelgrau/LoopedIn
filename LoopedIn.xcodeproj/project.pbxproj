@@ -12,6 +12,8 @@
 		CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE21BEBEFD800A13CA7 /* ChooseRoleViewController.m */; };
 		CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE41BEBF79900A13CA7 /* DBKeys.h */; };
 		CC00BAEA1BEBFB7700A13CA7 /* blurryClassroom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */; };
+		CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */; };
+		CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5D03B01BFF20AE00769C85 /* greenRing.png */; };
 		CC5F94C51BE74D65007353F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5F94C41BE74D65007353F7 /* main.m */; };
 		CC5F94C81BE74D65007353F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5F94C71BE74D65007353F7 /* AppDelegate.m */; };
 		CC5F94CB1BE74D65007353F7 /* LoopedIn.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC5F94C91BE74D65007353F7 /* LoopedIn.xcdatamodeld */; };
@@ -37,6 +39,7 @@
 		CC63E6C31BF17D3F0083736D /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CC63E6C21BF17D3F0083736D /* backButton.png */; };
 		CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC722A9C1BEBD7F20021D994 /* LogInViewController.m */; };
 		CC75E5831BF1D47D005976E2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CC75E5821BF1D47D005976E2 /* settings.png */; };
+		CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */; };
 		CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE04C71BF285A200BAE3C3 /* Common.m */; };
 		CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCE04C91BF28AA000BAE3C3 /* placeholder.png */; };
 		CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCE675451BEC329F00E7821B /* LoopedIn_Icon.jpg */; };
@@ -64,6 +67,9 @@
 		CC00BAE21BEBEFD800A13CA7 /* ChooseRoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseRoleViewController.m; sourceTree = "<group>"; };
 		CC00BAE41BEBF79900A13CA7 /* DBKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBKeys.h; sourceTree = "<group>"; };
 		CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blurryClassroom.jpg; sourceTree = "<group>"; };
+		CC34F22E1BFCF5A700826D90 /* SingleRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRewardViewController.h; sourceTree = "<group>"; };
+		CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRewardViewController.m; sourceTree = "<group>"; };
+		CC5D03B01BFF20AE00769C85 /* greenRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenRing.png; sourceTree = "<group>"; };
 		CC5F94BF1BE74D65007353F7 /* LoopedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoopedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5F94C31BE74D65007353F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC5F94C41BE74D65007353F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,6 +102,8 @@
 		CC722A9B1BEBD7F20021D994 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		CC722A9C1BEBD7F20021D994 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		CC75E5821BF1D47D005976E2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		CC95A9A11BFBBFF800F8D882 /* StudentRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentRewardViewController.h; sourceTree = "<group>"; };
+		CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentRewardViewController.m; sourceTree = "<group>"; };
 		CCCE04C61BF285A200BAE3C3 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CCCE04C71BF285A200BAE3C3 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		CCCE04C91BF28AA000BAE3C3 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -150,6 +158,7 @@
 		CC00BADC1BEBEB9C00A13CA7 /* Student */ = {
 			isa = PBXGroup;
 			children = (
+				CC34F2311BFCF5AC00826D90 /* Rewards */,
 				CC00BAD91BEBEB9700A13CA7 /* StudentHomeViewController.h */,
 				CC00BADA1BEBEB9700A13CA7 /* StudentHomeViewController.m */,
 			);
@@ -168,6 +177,7 @@
 		CC00BAE81BEBFB6800A13CA7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CC5D03B01BFF20AE00769C85 /* greenRing.png */,
 				CCCE04C91BF28AA000BAE3C3 /* placeholder.png */,
 				CC75E5821BF1D47D005976E2 /* settings.png */,
 				CC63E6C21BF17D3F0083736D /* backButton.png */,
@@ -177,6 +187,17 @@
 				CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		CC34F2311BFCF5AC00826D90 /* Rewards */ = {
+			isa = PBXGroup;
+			children = (
+				CC95A9A11BFBBFF800F8D882 /* StudentRewardViewController.h */,
+				CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */,
+				CC34F22E1BFCF5A700826D90 /* SingleRewardViewController.h */,
+				CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */,
+			);
+			name = Rewards;
 			sourceTree = "<group>";
 		};
 		CC5F94B61BE74D65007353F7 = {
@@ -368,6 +389,7 @@
 				CC5F94D31BE74D65007353F7 /* Images.xcassets in Resources */,
 				CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */,
 				CC63E6C31BF17D3F0083736D /* backButton.png in Resources */,
+				CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */,
 				CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */,
 				CC75E5831BF1D47D005976E2 /* settings.png in Resources */,
 			);
@@ -387,9 +409,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */,
 				CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */,
 				CC5F94C81BE74D65007353F7 /* AppDelegate.m in Sources */,
 				CC5F94C51BE74D65007353F7 /* main.m in Sources */,
+				CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */,
 				CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */,
 				CC00BADB1BEBEB9700A13CA7 /* StudentHomeViewController.m in Sources */,
 				CCEC54A41BE8488F007970FA /* TeacherHomeViewController.m in Sources */,

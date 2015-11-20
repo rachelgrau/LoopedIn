@@ -48,6 +48,7 @@
     [vc.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[UIFont fontWithName:@"Avenir Book" size:21]}];
+    vc.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 @end

@@ -160,6 +160,11 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"toLogIn"]) {
+        if ([PFUser currentUser]) {
+            [PFUser logOut];
+        }
+    }
 }
 
 @end

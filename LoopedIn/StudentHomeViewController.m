@@ -7,6 +7,7 @@
 //
 
 #import "StudentHomeViewController.h"
+#import "StudentRewardViewController.h"
 #import <Parse/Parse.h>
 #import "DBKeys.h"
 #import "Common.h"
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *myTasksButton;
 @property (strong, nonatomic) IBOutlet UIButton *myRewardsButton;
 @property (strong, nonatomic) IBOutlet UILabel *progressDescription;
+@property PFObject *desiredReward; // reward user currently is working towards; must be loaded
 @end
 
 @implementation StudentHomeViewController
@@ -38,6 +40,7 @@
     /* Set name label */
     NSString *fullName = [[PFUser currentUser] objectForKey:FULL_NAME];
     NSString *firstName = [Common getFirstNameFromFullName:fullName];
+    self.title = firstName;
     UIFont *boldFont = [UIFont fontWithName:@"Avenir-Heavy" size:32.0f];
     UIFont *normalFont = [UIFont fontWithName:@"Avenir-Book" size:32.0f];
 
@@ -59,12 +62,26 @@
     [Common setBorder:self.myTasksButton withColor:[UIColor blackColor]];
     [Common setBorder:self.myRewardsButton withColor:[UIColor blackColor]];
     
+}
+
+- (void) viewWillAppear:(BOOL)animated {
     /* Get points */
     NSNumber *pointsEarned = [[PFUser currentUser] objectForKey:POINTS];
-    NSNumber *pointsNeeded = @150;
-    NSString *rewardName = @"Ice Cream Party";
-    NSString *progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, pointsNeeded, rewardName];
-    self.progressDescription.text = progressDescText;
+    PFObject *reward = [[PFUser currentUser] objectForKey:DESIRED_REWARD];
+    if (!reward) {
+        self.progressDescription.text = @"No reward to work towards.";
+    }
+    [reward fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        NSString *progressDescText = @"No reward to work towards.";
+        if (object) {
+            self.desiredReward = object;
+            NSString *rewardTitle = [object objectForKey:REWARD_TITLE];
+            NSNumber *pointsNeeded = [object objectForKey:REWARD_POINTS];
+            progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, pointsNeeded, rewardTitle];
+        }
+        self.progressDescription.text = progressDescText;
+    }];
+
 }
 
 - (void)goToSettings:(id)sender {
@@ -90,14 +107,17 @@
     [self performSegueWithIdentifier:@"toLogIn" sender:self];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toRewards"]) {
+        StudentRewardViewController *dest = segue.destinationViewController;
+        if (self.desiredReward) {
+            dest.desiredReward = self.desiredReward;
+        }
+    }
 }
-*/
+
 
 @end

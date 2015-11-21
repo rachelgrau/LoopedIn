@@ -70,18 +70,18 @@
     PFObject *reward = [[PFUser currentUser] objectForKey:DESIRED_REWARD];
     if (!reward) {
         self.progressDescription.text = @"No reward to work towards.";
+    } else {
+        [reward fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            NSString *progressDescText = @"No reward to work towards.";
+            if (object) {
+                self.desiredReward = object;
+                NSString *rewardTitle = [object objectForKey:REWARD_TITLE];
+                NSNumber *pointsNeeded = [object objectForKey:REWARD_POINTS];
+                progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, pointsNeeded, rewardTitle];
+            }
+            self.progressDescription.text = progressDescText;
+        }];
     }
-    [reward fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        NSString *progressDescText = @"No reward to work towards.";
-        if (object) {
-            self.desiredReward = object;
-            NSString *rewardTitle = [object objectForKey:REWARD_TITLE];
-            NSNumber *pointsNeeded = [object objectForKey:REWARD_POINTS];
-            progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, pointsNeeded, rewardTitle];
-        }
-        self.progressDescription.text = progressDescText;
-    }];
-
 }
 
 - (void)goToSettings:(id)sender {

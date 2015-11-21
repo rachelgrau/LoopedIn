@@ -43,17 +43,19 @@
         PFObject *reward = [[PFUser currentUser] objectForKey:DESIRED_REWARD];
         if (!reward) {
             self.desiredRewardLabel.text = @"No reward to work towards.";
+        } else {
+            [reward fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (object) {
+                    self.desiredReward = object;
+                    [self removeDesiredRewardFromOtherRewards];
+                    NSString *rewardTitle = [object objectForKey:REWARD_TITLE];
+                    NSNumber *pointsNeeded = [object objectForKey:REWARD_POINTS];
+                    NSString *progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, pointsNeeded, rewardTitle];
+                    self.desiredRewardLabel.text = progressDescText;
+                }
+            }];
+
         }
-        [reward fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            if (object) {
-                self.desiredReward = object;
-                [self removeDesiredRewardFromOtherRewards];
-                NSString *rewardTitle = [object objectForKey:REWARD_TITLE];
-                NSNumber *pointsNeeded = [object objectForKey:REWARD_POINTS];
-                NSString *progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, pointsNeeded, rewardTitle];
-                self.desiredRewardLabel.text = progressDescText;
-            }
-        }];
     }
     
     /* TEMP */
@@ -81,9 +83,13 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    NSNumber *pointsEarned = [[PFUser currentUser] objectForKey:POINTS];
-    NSString *progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, [self.desiredReward objectForKey:REWARD_POINTS], [self.desiredReward objectForKey:REWARD_TITLE]];
-    self.desiredRewardLabel.text = progressDescText;
+    if (self.desiredReward) {
+        NSNumber *pointsEarned = [[PFUser currentUser] objectForKey:POINTS];
+        NSString *progressDescText = [NSString stringWithFormat:@"%@/%@ points earned towards %@!", pointsEarned, [self.desiredReward objectForKey:REWARD_POINTS], [self.desiredReward objectForKey:REWARD_TITLE]];
+        self.desiredRewardLabel.text = progressDescText;
+    } else {
+        self.desiredRewardLabel.text = @"No reward to work towards.";
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {

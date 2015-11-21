@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     /* Set border of text field to white */
     [Common setBorder:self.usernameTextField withColor:[UIColor whiteColor]];
     if ([self.usernameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
@@ -44,8 +44,10 @@
             [self performSegueWithIdentifier:@"toTeacherHome" sender:self];
         } else if ([role isEqualToString:STUDENT_ROLE]) {
             [self performSegueWithIdentifier:@"toStudentHome" sender:self];
-        } else {
+        } else if ([role isEqualToString:PARENT_ROLE]){
             [self performSegueWithIdentifier:@"toParentHome" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"toChooseRole" sender:self];
         }
     }
 }
@@ -89,8 +91,10 @@
                 segueIdentifier = @"toTeacherHome";
             } else if ([role isEqualToString:STUDENT_ROLE]) {
                 segueIdentifier = @"toStudentHome";
-            } else {
+            } else if ([role isEqualToString:PARENT_ROLE]) {
                 segueIdentifier = @"toParentHome";
+            } else {
+                [self performSegueWithIdentifier:@"toChooseRole" sender:self];
             }
             [self performSegueWithIdentifier:segueIdentifier sender:self];
         }

@@ -16,8 +16,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *parentButton;
 @property (strong, nonatomic) IBOutlet UIButton *teacherButton;
 @property (strong, nonatomic) IBOutlet UITextField *parenthoodTextfield;
-@property (strong, nonatomic) IBOutlet UIButton *backButtonLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *backButtonArrow;
 
 @property NSString *username;
 @end
@@ -30,24 +28,18 @@
     /* Move parenthood text field below student or parent text field */
     CGRect parenthoodTextFieldFrame = self.parenthoodTextfield.frame;
     
-    /* Move parent text field, teacher text field, and back button down */
+    /* Move parent text field and teacher text field down */
     CGRect parentTextFieldFrame = self.parentButton.frame;
     CGRect teacherTextFieldFrame = self.teacherButton.frame;
-    CGRect backButtonLabelFrame = self.backButtonLabel.frame;
-    CGRect backButtonArrowFrame = self.backButtonArrow.frame;
     
     CGFloat dy = parenthoodTextFieldFrame.size.height + 5;
     parentTextFieldFrame.origin.y -= dy;
     teacherTextFieldFrame.origin.y -= dy;
-    backButtonLabelFrame.origin.y -= dy;
-    backButtonArrowFrame.origin.y -= dy;
     
     if (wasStudent) {
         self.parentButton.frame = parentTextFieldFrame;
     }
     self.teacherButton.frame = teacherTextFieldFrame;
-    self.backButtonLabel.frame = backButtonLabelFrame;
-    self.backButtonArrow.frame = backButtonArrowFrame;
 }
 
 /* This method displays the parenthood text field (which asks a parent to type in their child's email, or a child to type in their parent's email) and adjusts other views accordingly. It also updates the placeholder text of the parenthood text field depending on |isStudent|  */
@@ -71,24 +63,18 @@
     }
     self.parenthoodTextfield.frame = parenthoodTextFieldFrame;
     
-    /* Move parent text field, teacher text field, and back button down */
+    /* Move parent text field and teacher text field down */
     CGRect parentTextFieldFrame = self.parentButton.frame;
     CGRect teacherTextFieldFrame = self.teacherButton.frame;
-    CGRect backButtonLabelFrame = self.backButtonLabel.frame;
-    CGRect backButtonArrowFrame = self.backButtonArrow.frame;
     
     CGFloat dy = parenthoodTextFieldFrame.size.height + 5;
     parentTextFieldFrame.origin.y += dy;
     teacherTextFieldFrame.origin.y += dy;
-    backButtonLabelFrame.origin.y += dy;
-    backButtonArrowFrame.origin.y += dy;
 
     if (isStudent) {
         self.parentButton.frame = parentTextFieldFrame;
     }
     self.teacherButton.frame = teacherTextFieldFrame;
-    self.backButtonLabel.frame = backButtonLabelFrame;
-    self.backButtonArrow.frame = backButtonArrowFrame;
 }
 
 - (IBAction)studentButtonPressed:(id)sender {
@@ -213,7 +199,7 @@
     }
 }
 
-- (IBAction)signUpPressed:(id)sender {
+- (IBAction)getStartedPressed:(id)sender {
     NSString *role = @"";
     if (self.studentButton.isSelected) {
         role = STUDENT_ROLE;
@@ -232,7 +218,6 @@
     if ([role isEqualToString:STUDENT_ROLE] || [role isEqualToString:PARENT_ROLE]) {
         [self createParenthoodRelation:currentUser];
     }
-    
     if ([role isEqualToString:STUDENT_ROLE]) {
         [self performSegueWithIdentifier:@"toStudentHome" sender:self];
     } else if ([role isEqualToString:TEACHER_ROLE]) {
@@ -240,10 +225,6 @@
     } else {
         [self performSegueWithIdentifier:@"toParentHome" sender:self];
     }
-}
-
-- (IBAction)backButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

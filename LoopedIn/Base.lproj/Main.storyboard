@@ -290,14 +290,18 @@
                             <constraint firstAttribute="centerX" secondItem="TGr-fj-pkK" secondAttribute="centerX" constant="5" id="HRp-XO-4er"/>
                             <constraint firstItem="TGr-fj-pkK" firstAttribute="top" secondItem="1sU-gl-tcw" secondAttribute="bottom" constant="32" id="L6R-no-Jeh"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="EGC-uD-JcF" secondAttribute="bottom" id="Lls-Ka-bO1"/>
+                            <constraint firstAttribute="centerY" secondItem="TGr-fj-pkK" secondAttribute="centerY" constant="-19.5" id="VKc-AB-XCy"/>
                             <constraint firstAttribute="centerX" secondItem="EGC-uD-JcF" secondAttribute="centerX" constant="4.5" id="bW7-oU-gUl"/>
                             <constraint firstAttribute="centerX" secondItem="1sU-gl-tcw" secondAttribute="centerX" id="cLL-DZ-nVH"/>
+                            <constraint firstItem="TGr-fj-pkK" firstAttribute="top" secondItem="1sU-gl-tcw" secondAttribute="bottom" constant="32" id="iFU-9Y-8li"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="sfn-Kx-BB9" secondAttribute="bottom" constant="8" id="oUv-EH-7OI"/>
                             <constraint firstAttribute="centerY" secondItem="sfn-Kx-BB9" secondAttribute="centerY" constant="-277" id="p7k-Wa-bNY"/>
                             <constraint firstItem="EGC-uD-JcF" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-64" id="ybL-sE-B94"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="1bd-ZB-9PO"/>
+                                <exclude reference="L6R-no-Jeh"/>
                                 <exclude reference="p7k-Wa-bNY"/>
                             </mask>
                         </variation>
@@ -305,6 +309,7 @@
                     <navigationItem key="navigationItem" id="5ak-nk-6pl"/>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="lRT-I7-CSi" id="OsC-76-JZG"/>
+                        <outlet property="containerView" destination="TGr-fj-pkK" id="kD9-bW-pM6"/>
                         <outlet property="nameTextField" destination="BhJ-XV-9hc" id="ssO-WR-8Fq"/>
                         <outlet property="passwordTextField" destination="vwp-PS-Zt8" id="WNi-DQ-uYx"/>
                         <outlet property="usernameTextField" destination="LcB-W2-01g" id="Xno-Yu-QwI"/>

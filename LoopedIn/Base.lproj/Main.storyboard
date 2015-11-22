@@ -404,10 +404,23 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class code: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SlV-PX-j6w">
+                                <rect key="frame" x="0.0" y="72" width="600" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="2Pw-5K-ZhU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="SlV-PX-j6w" secondAttribute="trailing" constant="-16" id="5sI-UK-OwS"/>
+                            <constraint firstItem="SlV-PX-j6w" firstAttribute="top" secondItem="vhU-4N-sO1" secondAttribute="bottom" constant="8" id="7xg-6f-C3b"/>
                             <constraint firstItem="wl5-3p-Pr9" firstAttribute="centerX" secondItem="qGH-Dc-g7x" secondAttribute="centerX" id="9I4-ve-0SY"/>
+                            <constraint firstItem="SlV-PX-j6w" firstAttribute="leading" secondItem="qGH-Dc-g7x" secondAttribute="leadingMargin" constant="-16" id="DU6-mm-5sR"/>
+                            <constraint firstAttribute="centerX" secondItem="SlV-PX-j6w" secondAttribute="centerX" id="dp5-vW-pwL"/>
                             <constraint firstAttribute="centerY" secondItem="GUu-oH-XTu" secondAttribute="centerY" id="fxr-5U-HCu"/>
                             <constraint firstItem="wl5-3p-Pr9" firstAttribute="leading" secondItem="AXe-PW-Ebo" secondAttribute="leading" id="gD5-gJ-5G9"/>
                             <constraint firstItem="wl5-3p-Pr9" firstAttribute="leading" secondItem="GUu-oH-XTu" secondAttribute="leading" id="tRL-cL-fqu"/>
@@ -417,6 +430,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="3UC-hs-tK7"/>
                     <connections>
+                        <outlet property="classCodeLabel" destination="SlV-PX-j6w" id="UfU-et-DrI"/>
                         <outlet property="rewardsButton" destination="AXe-PW-Ebo" id="OUj-5y-f0d"/>
                         <outlet property="studentsButton" destination="wl5-3p-Pr9" id="SxQ-Gw-GUu"/>
                         <outlet property="tasksButton" destination="GUu-oH-XTu" id="vyQ-j3-VDe"/>
@@ -808,7 +822,7 @@
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="1Uw-1u-3sk"/>
+                                            <outlet property="delegate" destination="b0L-3r-Cue" id="ykw-0i-xgu"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLa-AT-F7g">
@@ -1012,8 +1026,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="a0D-BV-2sW"/>
         <segue reference="lQz-hB-ncM"/>
+        <segue reference="Joa-oN-o26"/>
         <segue reference="Zbx-Pd-Phx"/>
         <segue reference="Kdf-mn-Gym"/>
-        <segue reference="0VB-5C-VJV"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface TeacherHomeViewController : UIViewController
-
+/* This teacher's class */
+@property PFObject *myClass;
 @end

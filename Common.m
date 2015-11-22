@@ -9,6 +9,18 @@
 #import "Common.h"
 
 @implementation Common
+NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+/* Returns a random string with the given length. */
++ (NSString *) randomStringWithLength: (int) len {
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return randomString;
+}
 
 /* Given a string that contains the full name of a user, returns the first name only */
 + (NSString *)getFirstNameFromFullName:(NSString *)fullName {

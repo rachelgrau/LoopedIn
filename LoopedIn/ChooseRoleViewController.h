@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChooseRoleViewController : UIViewController
+@interface ChooseRoleViewController : UIViewController<UITextFieldDelegate>
 @end

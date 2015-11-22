@@ -10,10 +10,12 @@
 #import "SignUpViewController.h"
 #import <Parse/Parse.h>
 #import "Common.h"
+#import "DBKeys.h"
 
 @interface TeacherHomeViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *studentsButton;
 @property (strong, nonatomic) IBOutlet UIButton *tasksButton;
+@property (strong, nonatomic) IBOutlet UILabel *classCodeLabel;
 @property (strong, nonatomic) IBOutlet UIButton *rewardsButton;
 @end
 
@@ -21,6 +23,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // TO DO: if !self.myClass, load it in 
+    
+    if (self.myClass) {
+        self.classCodeLabel.text = [NSString stringWithFormat:@"Class code: %@", [self.myClass objectForKey:CLASS_CODE]];
+    } else {
+        PFQuery *query = [PFQuery queryWithClassName:CLASS_CLASS_NAME];
+        [query whereKey:CLASS_TEACHER equalTo:[PFUser currentUser]];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
+            if (obj) {
+                self.myClass = obj;
+                self.classCodeLabel.text = [NSString stringWithFormat:@"Class code: %@", [self.myClass objectForKey:CLASS_CODE]];
+            }
+        }];
+    }
     
     /* Set navigation title */
     [Common setUpNavBar:self];

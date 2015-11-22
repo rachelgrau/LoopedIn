@@ -114,7 +114,7 @@
     if (![PFUser currentUser]) {
         /* CREATE NEW USER */
         if (self.nameTextField.text.length == 0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password must be of length 4 or greater." message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please enter your name." message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [alert show];
         } else if (self.passwordTextField.text.length < 4) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password must be of length 4 or greater." message:@"" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];

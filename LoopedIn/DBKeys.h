@@ -37,3 +37,4 @@
 #define CLASS_CLASS_NAME @"Class"
 #define CLASS_NAME @"name"
 #define CLASS_TEACHER @"teacher"
+#define CLASS_CODE @"classCode"

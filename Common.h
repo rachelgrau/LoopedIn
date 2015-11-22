@@ -14,4 +14,5 @@
 + (void)setUpNavBar:(UIViewController *)vc;
 + (NSString *)getFirstNameFromFullName:(NSString *)fullName;
 + (NSString *)getLastNameFromFullName:(NSString *)fullName;
++ (NSString *) randomStringWithLength: (int) len;
 @end

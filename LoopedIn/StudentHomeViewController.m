@@ -11,19 +11,34 @@
 #import <Parse/Parse.h>
 #import "DBKeys.h"
 #import "Common.h"
+#import "TextFieldPopUp.h"
 
 @interface StudentHomeViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *myTasksButton;
 @property (strong, nonatomic) IBOutlet UIButton *myRewardsButton;
 @property (strong, nonatomic) IBOutlet UILabel *progressDescription;
-@property PFObject *desiredReward; // reward user currently is working towards; must be loaded
+@property (strong, nonatomic) IBOutlet UIImageView *profilePicImageView;
+/* Reward user currently is working towards; must be loaded */
+@property PFObject *desiredReward;
+/* Invisible prof pic button which overlays the imageview */
+@property (strong, nonatomic) IBOutlet UIButton *flipProfilePicButton;
+@property UIImage *profilePicImage;
+/* YES when the user's profile picture (or ADD PROFILE PICTURE) is being displayed, NO when "CHANGE PROFILE PICTURE" is being displayed. */
+@property BOOL isDisplayingProfPic;
+/* YES when the user has already uploaded a profile picture; NO otherwise. */
+@property BOOL hasProfPic;
 @end
+
+#define CHANGE_PROFILE_PIC_TAG 1
 
 @implementation StudentHomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    /* Disable button until prof pic loads */
+    self.flipProfilePicButton.enabled = NO;
     
     /* Set navigation title */
     [Common setUpNavBar:self];
@@ -36,6 +51,9 @@
     settingsButton.frame = CGRectMake(0, 0, 30, 30);
     UIBarButtonItem *settingsNavButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
     self.navigationItem.rightBarButtonItem = settingsNavButton;
+    
+    /* Load profile picture */
+    [self loadAndDisplayProfilePic];
     
     /* Set name label */
     NSString *fullName = [[PFUser currentUser] objectForKey:FULL_NAME];
@@ -95,6 +113,12 @@
 - (IBAction)myRewardsPressed:(id)sender {
 }
 
+- (IBAction)joinClassPressed:(id)sender {
+    NSArray *arr = [NSArray arrayWithObjects:@"Join", nil];
+    TextFieldPopUp *alertView = [[TextFieldPopUp alloc] initWithPlaceholder:@"Enter a class code" delegate:self buttonTitles:arr];
+    [alertView showInView:self.view];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -105,6 +129,102 @@
         [PFUser logOut];
     }
     [self performSegueWithIdentifier:@"toLogIn" sender:self];
+}
+
+#pragma mark - Profile Pic stuff
+
+/* This method loads the current user's profile picture and displays it as a circle. If the user doesn't have a profile picture yet, then it uses the "ADD PROFILE PICTURE" image as the profile pic image. */
+- (void)loadAndDisplayProfilePic {
+    PFFile *imageFile = [[PFUser currentUser] objectForKey:PROFILE_PIC];
+    if (imageFile) {
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (data && !error) {
+                self.isDisplayingProfPic = YES;
+                self.hasProfPic = YES;
+                self.flipProfilePicButton.enabled = YES;
+                UIImage *profilePicture = [UIImage imageWithData:data];
+                self.profilePicImage = profilePicture;
+                [self.profilePicImageView setImage:profilePicture];
+                /* Crop to circle */
+                [self.profilePicImageView setImage:self.profilePicImage];
+                self.profilePicImageView.layer.cornerRadius = self.profilePicImageView.frame.size.width / 2;
+                self.profilePicImageView.clipsToBounds = YES;
+            }
+        }];
+    } else {
+        self.isDisplayingProfPic = NO;
+        self.hasProfPic = NO;
+        self.flipProfilePicButton.enabled = YES;
+        UIImage *defaultProfPic = [UIImage imageNamed:@"addProfPic.png"];
+        self.profilePicImage = defaultProfPic;
+        [self.profilePicImageView setImage:defaultProfPic];
+        /* Crop to circle */
+        [self.profilePicImageView setImage:self.profilePicImage];
+        self.profilePicImageView.layer.cornerRadius = self.profilePicImageView.frame.size.width / 2;
+        self.profilePicImageView.clipsToBounds = YES;
+    }
+}
+
+/* This method is called when the user clicks on the profile picture. If a profile picture is currently being displayed, it flips over and displays the "change profile picture" image. If the "change profile picture image" is currently being displayed, then it displays an alert asking if the user wants to upload a new profile picture. Lastly, if the user doesn't have a profile picture and the "add profile picture" image is currently being displayed, then this method shows an alert asking if the user wants to upload a profile picture. */
+- (IBAction)profilePicPressed:(id)sender {
+    if (self.isDisplayingProfPic && self.hasProfPic) {
+        /* They clicked on their profile picture */
+        self.isDisplayingProfPic = NO;
+        UIImage *destImage = [UIImage imageNamed:@"changeProfPic.png"];
+        self.flipProfilePicButton.enabled = NO;
+        [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+            self.profilePicImageView.image = destImage;
+            self.flipProfilePicButton.enabled = YES;
+        } completion:nil];
+    } else {
+        /* They clicked change prof pic */
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Change profile picture?" message:nil delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        alert.tag = CHANGE_PROFILE_PIC_TAG;
+        [alert show];
+    }
+}
+
+
+#pragma mark - Text Field Pop Up Delegate
+
+- (void)customAlertView:(TextFieldPopUp *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex withTextFieldText:(NSString *)text {
+    NSLog(@"%@", text);
+}
+
+#pragma mark - UIAlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == CHANGE_PROFILE_PIC_TAG) {
+        if (buttonIndex == 0) {
+            self.isDisplayingProfPic = YES;
+            // Change back to prof pic, or leave it as ADD PROFILE PIC pic if they don't have one
+            if (self.hasProfPic) {
+                self.flipProfilePicButton.enabled = NO;
+                [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+                    self.profilePicImageView.image = self.profilePicImage;
+                    self.flipProfilePicButton.enabled = YES;
+                } completion:nil];
+            }
+        } else if (buttonIndex == 1) {
+            self.isDisplayingProfPic = YES;
+            self.hasProfPic = YES;
+            UIImage *image = [UIImage imageNamed:@"rachel.jpeg"];
+            NSData *imageData = UIImagePNGRepresentation(image);
+            PFFile *imageFile = [PFFile fileWithName:@"rachel.jpeg.png" data:imageData];
+            [imageFile saveInBackground];
+            
+            PFUser *user = [PFUser currentUser];
+            [user setObject:imageFile forKey:PROFILE_PIC];
+            [user saveInBackground];
+            
+            self.flipProfilePicButton.enabled = NO;
+            [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+                self.profilePicImage = image;
+                self.profilePicImageView.image = image;
+                self.flipProfilePicButton.enabled = YES;
+            } completion:nil];
+        }
+    }
 }
 
 #pragma mark - Navigation

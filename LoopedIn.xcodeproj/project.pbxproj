@@ -37,6 +37,11 @@
 		CC5F95051BE74E27007353F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5F95041BE74E27007353F7 /* Accounts.framework */; };
 		CC5F95071BE74E2B007353F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5F95061BE74E2B007353F7 /* Social.framework */; };
 		CC63E6C31BF17D3F0083736D /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CC63E6C21BF17D3F0083736D /* backButton.png */; };
+		CC66D17B1C02464E0026FA26 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC66D17A1C02464E0026FA26 /* CustomAlertView.m */; };
+		CC66D17E1C0247D90026FA26 /* TextFieldPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CC66D17D1C0247D90026FA26 /* TextFieldPopUp.m */; };
+		CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1811C028AD50026FA26 /* rachel.jpeg */; };
+		CC66D1841C02942F0026FA26 /* changeProfPic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1831C02942F0026FA26 /* changeProfPic.png */; };
+		CC66D1861C0298030026FA26 /* addProfPic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1851C0298030026FA26 /* addProfPic.png */; };
 		CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC722A9C1BEBD7F20021D994 /* LogInViewController.m */; };
 		CC75E5831BF1D47D005976E2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CC75E5821BF1D47D005976E2 /* settings.png */; };
 		CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */; };
@@ -99,6 +104,13 @@
 		CC5F95041BE74E27007353F7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CC5F95061BE74E2B007353F7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CC63E6C21BF17D3F0083736D /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
+		CC66D1791C02464E0026FA26 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
+		CC66D17A1C02464E0026FA26 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
+		CC66D17C1C0247D90026FA26 /* TextFieldPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldPopUp.h; sourceTree = "<group>"; };
+		CC66D17D1C0247D90026FA26 /* TextFieldPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldPopUp.m; sourceTree = "<group>"; };
+		CC66D1811C028AD50026FA26 /* rachel.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rachel.jpeg; sourceTree = "<group>"; };
+		CC66D1831C02942F0026FA26 /* changeProfPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeProfPic.png; sourceTree = "<group>"; };
+		CC66D1851C0298030026FA26 /* addProfPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addProfPic.png; sourceTree = "<group>"; };
 		CC722A9B1BEBD7F20021D994 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		CC722A9C1BEBD7F20021D994 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		CC75E5821BF1D47D005976E2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -177,6 +189,9 @@
 		CC00BAE81BEBFB6800A13CA7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CC66D1851C0298030026FA26 /* addProfPic.png */,
+				CC66D1831C02942F0026FA26 /* changeProfPic.png */,
+				CC66D1811C028AD50026FA26 /* rachel.jpeg */,
 				CC5D03B01BFF20AE00769C85 /* greenRing.png */,
 				CCCE04C91BF28AA000BAE3C3 /* placeholder.png */,
 				CC75E5821BF1D47D005976E2 /* settings.png */,
@@ -233,6 +248,10 @@
 				CC5F94C61BE74D65007353F7 /* AppDelegate.h */,
 				CC5F94C71BE74D65007353F7 /* AppDelegate.m */,
 				CC5F94CF1BE74D65007353F7 /* Main.storyboard */,
+				CC66D1791C02464E0026FA26 /* CustomAlertView.h */,
+				CC66D17A1C02464E0026FA26 /* CustomAlertView.m */,
+				CC66D17C1C0247D90026FA26 /* TextFieldPopUp.h */,
+				CC66D17D1C0247D90026FA26 /* TextFieldPopUp.m */,
 				CC5F94D21BE74D65007353F7 /* Images.xcassets */,
 				CC5F94D41BE74D65007353F7 /* LaunchScreen.xib */,
 				CC5F94C91BE74D65007353F7 /* LoopedIn.xcdatamodeld */,
@@ -383,12 +402,15 @@
 			files = (
 				CCE6754C1BEC335600E7821B /* Icon.png in Resources */,
 				CC5F94D11BE74D65007353F7 /* Main.storyboard in Resources */,
+				CC66D1841C02942F0026FA26 /* changeProfPic.png in Resources */,
 				CC00BAEA1BEBFB7700A13CA7 /* blurryClassroom.jpg in Resources */,
 				CC5F94D61BE74D65007353F7 /* LaunchScreen.xib in Resources */,
 				CCE6754E1BEC388900E7821B /* Icon_thin.png in Resources */,
+				CC66D1861C0298030026FA26 /* addProfPic.png in Resources */,
 				CC5F94D31BE74D65007353F7 /* Images.xcassets in Resources */,
 				CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */,
 				CC63E6C31BF17D3F0083736D /* backButton.png in Resources */,
+				CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */,
 				CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */,
 				CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */,
 				CC75E5831BF1D47D005976E2 /* settings.png in Resources */,
@@ -409,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC66D17E1C0247D90026FA26 /* TextFieldPopUp.m in Sources */,
 				CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */,
 				CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */,
 				CC5F94C81BE74D65007353F7 /* AppDelegate.m in Sources */,
@@ -421,6 +444,7 @@
 				CC5F94CB1BE74D65007353F7 /* LoopedIn.xcdatamodeld in Sources */,
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,
+				CC66D17B1C02464E0026FA26 /* CustomAlertView.m in Sources */,
 				CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

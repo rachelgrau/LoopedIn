@@ -16,6 +16,7 @@
 #define POINTS @"points"
 #define PARENTHOOD_EMAIL @"parenthoodEmail"
 #define DESIRED_REWARD @"desiredReward"
+#define PROFILE_PIC @"profilePic"
 
 /* Role types */
 #define STUDENT_ROLE @"Student"

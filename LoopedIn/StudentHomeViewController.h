@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StudentHomeViewController : UIViewController 
+@interface StudentHomeViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate>
 
 @end

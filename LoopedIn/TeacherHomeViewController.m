@@ -8,6 +8,7 @@
 
 #import "TeacherHomeViewController.h"
 #import "SignUpViewController.h"
+#import "StudentListTableViewController.h"
 #import <Parse/Parse.h>
 #import "Common.h"
 #import "DBKeys.h"
@@ -24,11 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // TO DO: if !self.myClass, load it in 
-    
     if (self.myClass) {
         self.classCodeLabel.text = [NSString stringWithFormat:@"Class code: %@", [self.myClass objectForKey:CLASS_CODE]];
     } else {
+        self.studentsButton.enabled = NO;
         PFQuery *query = [PFQuery queryWithClassName:CLASS_CLASS_NAME];
         [query whereKey:CLASS_TEACHER equalTo:[PFUser currentUser]];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
@@ -36,6 +36,7 @@
                 self.myClass = obj;
                 self.classCodeLabel.text = [NSString stringWithFormat:@"Class code: %@", [self.myClass objectForKey:CLASS_CODE]];
             }
+            self.studentsButton.enabled = YES;
         }];
     }
     
@@ -74,14 +75,16 @@
     [self performSegueWithIdentifier:@"toLogIn" sender:self];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toStudentList"]) {
+        StudentListTableViewController *dest = segue.destinationViewController;
+        dest.myClass = self.myClass;
+    }
 }
-*/
+
 
 @end

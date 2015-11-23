@@ -7,6 +7,8 @@
 //
 
 #import "Common.h"
+#import <Parse/Parse.h>
+#import "DBKeys.h"
 
 @implementation Common
 NSString *letters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";

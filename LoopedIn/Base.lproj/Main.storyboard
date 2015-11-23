@@ -377,6 +377,9 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="0re-F1-DGD" kind="show" identifier="toStudentList" id="HhU-fN-r9C"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AXe-PW-Ebo">
                                 <rect key="frame" x="175" y="430" width="250" height="60"/>
@@ -410,7 +413,7 @@
                                     <constraint firstAttribute="height" constant="21" id="2Pw-5K-ZhU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -440,6 +443,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qjw-Mu-1jg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2022" y="-1770"/>
+        </scene>
+        <!--Student List Table View Controller-->
+        <scene sceneID="7nk-QH-EHV">
+            <objects>
+                <tableViewController id="0re-F1-DGD" customClass="StudentListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Zw7-00-sEI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentCell" id="67N-it-elH" customClass="StudentTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="67N-it-elH" id="Enj-FP-Jmc">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ork-dc-ErZ">
+                                            <rect key="frame" x="63" y="10" width="495" height="24"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="grayArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="4gN-eO-y5z">
+                                            <rect key="frame" x="575" y="10" width="17" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="Scd-8i-5IQ"/>
+                                                <constraint firstAttribute="width" constant="17" id="cam-7C-Pty"/>
+                                            </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="97q-Gf-Hmo">
+                                            <rect key="frame" x="12" y="4" width="35" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="BQf-Sv-NPY"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="J1T-e4-IXt"/>
+                                                <constraint firstAttribute="width" constant="35" id="r6I-qM-chW"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="tYx-Ic-zhq"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="4gN-eO-y5z" secondAttribute="centerY" id="02d-DO-WbY"/>
+                                        <constraint firstAttribute="centerY" secondItem="97q-Gf-Hmo" secondAttribute="centerY" id="Jzt-6A-O5V"/>
+                                        <constraint firstItem="ork-dc-ErZ" firstAttribute="leading" secondItem="Enj-FP-Jmc" secondAttribute="leadingMargin" constant="55" id="Pak-Vm-o3G"/>
+                                        <constraint firstItem="97q-Gf-Hmo" firstAttribute="leading" secondItem="Enj-FP-Jmc" secondAttribute="leadingMargin" constant="4" id="j0u-N5-Kbq"/>
+                                        <constraint firstAttribute="centerY" secondItem="ork-dc-ErZ" secondAttribute="centerY" id="pjw-db-97b"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ork-dc-ErZ" secondAttribute="trailing" constant="34" id="vJx-IH-KrJ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="4gN-eO-y5z" secondAttribute="trailing" id="zO9-8Y-kzA"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="arrowImageView" destination="4gN-eO-y5z" id="Rd8-tq-sXR"/>
+                                    <outlet property="nameLabel" destination="ork-dc-ErZ" id="gkA-lR-val"/>
+                                    <outlet property="profPicImageView" destination="97q-Gf-Hmo" id="yVn-TV-lWf"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0re-F1-DGD" id="To0-Nd-xvP"/>
+                            <outlet property="delegate" destination="0re-F1-DGD" id="cK4-x0-De8"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MyY-l5-QI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2750" y="-1780"/>
         </scene>
         <!--Student Home View Controller-->
         <scene sceneID="TtZ-Vt-Cpl">
@@ -727,11 +794,11 @@
                                             <constraint firstAttribute="height" constant="21" id="d8h-ZB-z05"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="3Gq-ho-Mva" firstAttribute="leading" secondItem="vRz-ju-LPa" secondAttribute="leading" constant="8" id="WXg-zS-THm"/>
                                     <constraint firstAttribute="height" constant="30" id="ada-tz-qHr"/>
@@ -746,7 +813,7 @@
                                     <constraint firstAttribute="height" constant="38" id="uvz-ic-PuF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="45"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqU-rD-wjx">
@@ -756,14 +823,14 @@
                                     <constraint firstAttribute="width" constant="69" id="irn-Wb-kzd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xoz-fw-CGt">
                                 <rect key="frame" x="9" y="276" width="583" height="47"/>
                                 <string key="text">After at least ten students have earned a field trip, we will take a class field trip to the Air and Space Museum in Redwood City!</string>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZe-IG-AUi">
@@ -1079,14 +1146,15 @@
         <image name="Icon_thin.png" width="311" height="300"/>
         <image name="addProfPic.png" width="455" height="455"/>
         <image name="blurryClassroom.jpg" width="900" height="600"/>
+        <image name="grayArrow.png" width="227" height="307"/>
         <image name="greenRing.png" width="306" height="306"/>
         <image name="placeholder.png" width="740" height="708"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dDW-Dw-IMZ"/>
+        <segue reference="Kdf-mn-Gym"/>
+        <segue reference="GzH-fq-R0a"/>
         <segue reference="a0D-BV-2sW"/>
         <segue reference="Zbx-Pd-Phx"/>
-        <segue reference="Kdf-mn-Gym"/>
         <segue reference="Joa-oN-o26"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,6 +13,10 @@
 		CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE41BEBF79900A13CA7 /* DBKeys.h */; };
 		CC00BAEA1BEBFB7700A13CA7 /* blurryClassroom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */; };
 		CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */; };
+		CC53C9921C03826B002FF627 /* StudentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC53C9911C03826B002FF627 /* StudentListTableViewController.m */; };
+		CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC53C9941C038311002FF627 /* StudentTableViewCell.m */; };
+		CC53C9971C03847B002FF627 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CC53C9961C03847B002FF627 /* grayArrow.png */; };
+		CC53C9991C038BF1002FF627 /* noProfPic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC53C9981C038BF1002FF627 /* noProfPic.png */; };
 		CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5D03B01BFF20AE00769C85 /* greenRing.png */; };
 		CC5F94C51BE74D65007353F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5F94C41BE74D65007353F7 /* main.m */; };
 		CC5F94C81BE74D65007353F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC5F94C71BE74D65007353F7 /* AppDelegate.m */; };
@@ -75,6 +79,12 @@
 		CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blurryClassroom.jpg; sourceTree = "<group>"; };
 		CC34F22E1BFCF5A700826D90 /* SingleRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRewardViewController.h; sourceTree = "<group>"; };
 		CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRewardViewController.m; sourceTree = "<group>"; };
+		CC53C9901C03826B002FF627 /* StudentListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentListTableViewController.h; sourceTree = "<group>"; };
+		CC53C9911C03826B002FF627 /* StudentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentListTableViewController.m; sourceTree = "<group>"; };
+		CC53C9931C038311002FF627 /* StudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentTableViewCell.h; sourceTree = "<group>"; };
+		CC53C9941C038311002FF627 /* StudentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentTableViewCell.m; sourceTree = "<group>"; };
+		CC53C9961C03847B002FF627 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		CC53C9981C038BF1002FF627 /* noProfPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noProfPic.png; sourceTree = "<group>"; };
 		CC5D03B01BFF20AE00769C85 /* greenRing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenRing.png; sourceTree = "<group>"; };
 		CC5F94BF1BE74D65007353F7 /* LoopedIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoopedIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5F94C31BE74D65007353F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -165,6 +175,10 @@
 			children = (
 				CCEC54A21BE8488F007970FA /* TeacherHomeViewController.h */,
 				CCEC54A31BE8488F007970FA /* TeacherHomeViewController.m */,
+				CC53C9901C03826B002FF627 /* StudentListTableViewController.h */,
+				CC53C9911C03826B002FF627 /* StudentListTableViewController.m */,
+				CC53C9931C038311002FF627 /* StudentTableViewCell.h */,
+				CC53C9941C038311002FF627 /* StudentTableViewCell.m */,
 			);
 			name = Teacher;
 			sourceTree = "<group>";
@@ -191,6 +205,7 @@
 		CC00BAE81BEBFB6800A13CA7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CC53C9981C038BF1002FF627 /* noProfPic.png */,
 				CC66D1851C0298030026FA26 /* addProfPic.png */,
 				CC66D1831C02942F0026FA26 /* changeProfPic.png */,
 				CC66D18C1C02E5430026FA26 /* checkBullitenBoard.png */,
@@ -203,6 +218,7 @@
 				CCE6754D1BEC388900E7821B /* Icon_thin.png */,
 				CCE675451BEC329F00E7821B /* LoopedIn_Icon.jpg */,
 				CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */,
+				CC53C9961C03847B002FF627 /* grayArrow.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -411,12 +427,14 @@
 				CCE6754E1BEC388900E7821B /* Icon_thin.png in Resources */,
 				CC66D1861C0298030026FA26 /* addProfPic.png in Resources */,
 				CC5F94D31BE74D65007353F7 /* Images.xcassets in Resources */,
+				CC53C9991C038BF1002FF627 /* noProfPic.png in Resources */,
 				CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */,
 				CC63E6C31BF17D3F0083736D /* backButton.png in Resources */,
 				CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */,
 				CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */,
 				CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */,
 				CC66D18D1C02E5430026FA26 /* checkBullitenBoard.png in Resources */,
+				CC53C9971C03847B002FF627 /* grayArrow.png in Resources */,
 				CC75E5831BF1D47D005976E2 /* settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -445,10 +463,12 @@
 				CC00BADB1BEBEB9700A13CA7 /* StudentHomeViewController.m in Sources */,
 				CCEC54A41BE8488F007970FA /* TeacherHomeViewController.m in Sources */,
 				CC5F94CE1BE74D65007353F7 /* SignUpViewController.m in Sources */,
+				CC53C9921C03826B002FF627 /* StudentListTableViewController.m in Sources */,
 				CC5F94CB1BE74D65007353F7 /* LoopedIn.xcdatamodeld in Sources */,
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,
 				CC66D17B1C02464E0026FA26 /* CustomAlertView.m in Sources */,
+				CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */,
 				CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

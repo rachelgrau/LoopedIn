@@ -184,11 +184,46 @@
     }
 }
 
+/* Flips the profile picture and displays the user's profile picture, if they have one. Does nothing if they don't. */
+- (void) showProfPic {
+    if (self.hasProfPic) {
+        self.flipProfilePicButton.enabled = NO;
+        [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+            self.profilePicImageView.image = self.profilePicImage;
+            self.flipProfilePicButton.enabled = YES;
+        } completion:nil];
+    }
+}
 
 #pragma mark - Text Field Pop Up Delegate
 
 - (void)customAlertView:(TextFieldPopUp *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex withTextFieldText:(NSString *)text {
-    NSLog(@"%@", text);
+    [alertView disableButton];
+    text = [text uppercaseString];
+    PFQuery *query = [PFQuery queryWithClassName:CLASS_CLASS_NAME];
+    [query whereKey:CLASS_CODE equalTo:text];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *class, NSError *error) {
+        if (class && !error) {
+            PFRelation *relation = [class relationForKey:CLASS_STUDENTS];
+            /* Check if user is already registered for this class */
+            PFQuery *query = [relation query];
+            [query whereKey:@"objectId" equalTo:[PFUser currentUser].objectId];
+            [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+                if (count == 0) {
+                    /* User hasn't yet registered for this class -- add him/her! */
+                    [relation addObject:[PFUser currentUser]];
+                    [class saveInBackground];
+                    [alertView displaySuccessAndDisappear];
+                } else {
+                    [alertView displayErrorMessage:@"You're already in that class!"];
+                    [alertView enableButton];
+                }
+            }];
+        } else {
+            [alertView displayErrorMessage:@"Enter a valid class code."];
+            [alertView enableButton];
+        }
+    }];
 }
 
 #pragma mark - UIAlertView Delegate
@@ -198,13 +233,7 @@
         if (buttonIndex == 0) {
             self.isDisplayingProfPic = YES;
             // Change back to prof pic, or leave it as ADD PROFILE PIC pic if they don't have one
-            if (self.hasProfPic) {
-                self.flipProfilePicButton.enabled = NO;
-                [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
-                    self.profilePicImageView.image = self.profilePicImage;
-                    self.flipProfilePicButton.enabled = YES;
-                } completion:nil];
-            }
+            [self showProfPic];
         } else if (buttonIndex == 1) {
             self.isDisplayingProfPic = YES;
             
@@ -242,18 +271,9 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     self.isDisplayingProfPic = YES;
-    if (self.hasProfPic) {
-        // Change back to prof pic, or leave it as ADD PROFILE PIC pic if they don't have one
-        self.flipProfilePicButton.enabled = NO;
-        [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
-            self.profilePicImageView.image = self.profilePicImage;
-            self.flipProfilePicButton.enabled = YES;
-        } completion:nil];
-    }
+    [self showProfPic];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
-
-
 
 #pragma mark - Navigation
 

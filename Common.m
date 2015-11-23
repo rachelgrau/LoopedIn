@@ -9,7 +9,7 @@
 #import "Common.h"
 
 @implementation Common
-NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+NSString *letters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 /* Returns a random string with the given length. */
 + (NSString *) randomStringWithLength: (int) len {

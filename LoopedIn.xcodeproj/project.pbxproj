@@ -42,6 +42,7 @@
 		CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1811C028AD50026FA26 /* rachel.jpeg */; };
 		CC66D1841C02942F0026FA26 /* changeProfPic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1831C02942F0026FA26 /* changeProfPic.png */; };
 		CC66D1861C0298030026FA26 /* addProfPic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1851C0298030026FA26 /* addProfPic.png */; };
+		CC66D18D1C02E5430026FA26 /* checkBullitenBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = CC66D18C1C02E5430026FA26 /* checkBullitenBoard.png */; };
 		CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC722A9C1BEBD7F20021D994 /* LogInViewController.m */; };
 		CC75E5831BF1D47D005976E2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CC75E5821BF1D47D005976E2 /* settings.png */; };
 		CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */; };
@@ -111,6 +112,7 @@
 		CC66D1811C028AD50026FA26 /* rachel.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rachel.jpeg; sourceTree = "<group>"; };
 		CC66D1831C02942F0026FA26 /* changeProfPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeProfPic.png; sourceTree = "<group>"; };
 		CC66D1851C0298030026FA26 /* addProfPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addProfPic.png; sourceTree = "<group>"; };
+		CC66D18C1C02E5430026FA26 /* checkBullitenBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBullitenBoard.png; sourceTree = "<group>"; };
 		CC722A9B1BEBD7F20021D994 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		CC722A9C1BEBD7F20021D994 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		CC75E5821BF1D47D005976E2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				CC66D1851C0298030026FA26 /* addProfPic.png */,
 				CC66D1831C02942F0026FA26 /* changeProfPic.png */,
+				CC66D18C1C02E5430026FA26 /* checkBullitenBoard.png */,
 				CC66D1811C028AD50026FA26 /* rachel.jpeg */,
 				CC5D03B01BFF20AE00769C85 /* greenRing.png */,
 				CCCE04C91BF28AA000BAE3C3 /* placeholder.png */,
@@ -413,6 +416,7 @@
 				CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */,
 				CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */,
 				CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */,
+				CC66D18D1C02E5430026FA26 /* checkBullitenBoard.png in Resources */,
 				CC75E5831BF1D47D005976E2 /* settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

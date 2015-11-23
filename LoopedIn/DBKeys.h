@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /* User table keys */
+#define USER_CLASS_NAME @"User"
 #define USERNAME @"username"
 #define PASSWORD @"password"
 #define ROLE @"role"
@@ -39,3 +40,4 @@
 #define CLASS_NAME @"name"
 #define CLASS_TEACHER @"teacher"
 #define CLASS_CODE @"classCode"
+#define CLASS_STUDENTS @"students"

@@ -28,6 +28,13 @@
     [super viewDidLoad];
     [[self navigationController] setNavigationBarHidden:YES];
     
+    /* Tap gesture recognizer for when we bring up keyboard; want a tap on view to dismiss the keyboard */
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     /* Set border of text field to white */
     self.usernameTextField.layer.masksToBounds = YES;
     self.usernameTextField.layer.borderColor = [[UIColor whiteColor]CGColor];
@@ -72,6 +79,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)dismissKeyboard {
+    [self.usernameTextField resignFirstResponder];
+    [self.nameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.confirmPasswordTextField resignFirstResponder];
+}
+
 
 /* Returns YES if password matches the confirmation password and NO otherwise. */
 - (BOOL) passwordIsValid {

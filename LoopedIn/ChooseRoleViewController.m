@@ -177,6 +177,13 @@
     [super viewDidLoad];
     [[self navigationController] setNavigationBarHidden:YES];
     
+    /* Tap gesture recognizer for when we bring up keyboard; want a tap on view to dismiss the keyboard */
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     /* Set borders of buttons to white */
     [Common setBorder:self.studentButton withColor:[UIColor whiteColor]];
     [Common setBorder:self.teacherButton withColor:[UIColor whiteColor]];
@@ -191,6 +198,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dismissKeyboard {
+    [self.parenthoodTextfield resignFirstResponder];
 }
 
 /* Creates a class object in the DB for this teacher with the name he/she typed in. */

@@ -207,25 +207,53 @@
             }
         } else if (buttonIndex == 1) {
             self.isDisplayingProfPic = YES;
-            self.hasProfPic = YES;
-            UIImage *image = [UIImage imageNamed:@"rachel.jpeg"];
-            NSData *imageData = UIImagePNGRepresentation(image);
-            PFFile *imageFile = [PFFile fileWithName:@"rachel.jpeg.png" data:imageData];
-            [imageFile saveInBackground];
             
-            PFUser *user = [PFUser currentUser];
-            [user setObject:imageFile forKey:PROFILE_PIC];
-            [user saveInBackground];
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             
-            self.flipProfilePicButton.enabled = NO;
-            [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
-                self.profilePicImage = image;
-                self.profilePicImageView.image = image;
-                self.flipProfilePicButton.enabled = YES;
-            } completion:nil];
+            [self presentViewController:picker animated:YES completion:NULL];
         }
     }
 }
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    self.hasProfPic = YES;
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    
+    [picker dismissViewControllerAnimated:NO completion:NULL];
+    
+    self.profilePicImage = chosenImage;
+    NSData *imageData = UIImagePNGRepresentation(chosenImage);
+    PFFile *imageFile = [PFFile fileWithName:@"profilePic" data:imageData];
+    [imageFile saveInBackground];
+    
+    PFUser *user = [PFUser currentUser];
+    [user setObject:imageFile forKey:PROFILE_PIC];
+    [user saveInBackground];
+    
+    [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+        self.profilePicImageView.image = chosenImage;
+        self.flipProfilePicButton.enabled = YES;
+    } completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    self.isDisplayingProfPic = YES;
+    if (self.hasProfPic) {
+        // Change back to prof pic, or leave it as ADD PROFILE PIC pic if they don't have one
+        self.flipProfilePicButton.enabled = NO;
+        [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+            self.profilePicImageView.image = self.profilePicImage;
+            self.flipProfilePicButton.enabled = YES;
+        } completion:nil];
+    }
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 
 #pragma mark - Navigation
 

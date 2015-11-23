@@ -22,6 +22,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /* Tap gesture recognizer for when we bring up keyboard; want a tap on view to dismiss the keyboard */
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     /* Set border of text field to white */
     [Common setBorder:self.usernameTextField withColor:[UIColor whiteColor]];
     if ([self.usernameTextField respondsToSelector:@selector(setAttributedPlaceholder:)]) {
@@ -51,6 +58,12 @@
         }
     }
 }
+
+-(void)dismissKeyboard {
+    [self.usernameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
+
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     /* Clear placeholder text */

@@ -12,4 +12,6 @@
 @interface StudentTableViewCell : UITableViewCell
 - (void)setUpCellWithUser:(PFUser *)user;
 - (void)setName:(NSString *)name setImage:(UIImage *)image;
+/* Sets up a cell with a label that says "Loading students..." */
+- (void)setUpLoadingCell;
 @end

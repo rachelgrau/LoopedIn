@@ -35,7 +35,6 @@
     NSString *formatedDate = [dateFormatter stringFromDate:self.datePicker.date];
     
     self.selectedDate = formatedDate;
-    NSLog(@"%@", self.selectedDate);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,8 +46,9 @@
     if (!self.task) {
         self.task = [PFObject objectWithClassName:TASK_CLASS_NAME];
     }
-    [self.task setObject:TASK_NAME forKey:self.nameTextField.text];
-    [self.task setObject:TASK_DESC forKey:self.descriptionTextField.text];
+    [self.task setObject:self.nameTextField.text forKey:TASK_NAME];
+    [self.task setObject:self.descriptionTextField.text forKey:TASK_DESC];
+    [self.task setObject:self.datePicker.date forKey:TASK_DUE_DATE];
     [self performSegueWithIdentifier:@"finishCreateTask" sender:self];
 }
 
@@ -60,6 +60,7 @@
     if ([segue.identifier isEqualToString:@"finishCreateTask"]) {
         FinishCreateTaskViewController *dest = segue.destinationViewController;
         dest.task = self.task;
+        dest.myClass = self.myClass;
     }
 }
 

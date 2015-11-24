@@ -48,3 +48,5 @@
 #define TASK_DESC @"description"
 #define TASK_DUE_DATE @"dueDate"
 #define TASK_POINTS @"points"
+#define TASK_TEACHER @"teacher"
+#define TASK_ASIGNEE @"asignee"

@@ -216,13 +216,14 @@
     self.myClass = class;
 }
 
-/* Creates an object in the Parenthood DB table connecting this child/parent with his/her child/parent */
+/* Creates an object in the Parenthood DB table connecting this child/parent (|user|) with his/her child/parent */
 - (void)createParenthoodRelation:(PFUser *)user {
     if (self.studentButton.isSelected) {
         NSString *parentEmail = self.parenthoodTextfield.text;
         PFQuery *query = [PFUser query];
         [query whereKey:@"username" equalTo:parentEmail];
-        PFObject *parent = [query getFirstObject];
+        PFObject *parentObj = [query getFirstObject];
+        PFUser *parent = (PFUser *)parentObj;
         if (parent) {
             NSString *studentEmail = [parent objectForKey:PARENTHOOD_EMAIL];
             if ([studentEmail isEqualToString:self.username]) {
@@ -238,18 +239,21 @@
         NSString *studentEmail = self.parenthoodTextfield.text;
         PFQuery *query = [PFUser query];
         [query whereKey:@"username" equalTo:studentEmail];
-        PFObject *student = [query getFirstObject];
+        PFUser *student = [query getFirstObject];
+        [student fetchIfNeeded];
         if (student) {
             NSString *parentEmail = [student objectForKey:PARENTHOOD_EMAIL];
             if ([parentEmail isEqualToString:self.username]) {
                 PFObject *parenthoodRelation = [PFObject objectWithClassName:PARENTHOOD_CLASS_NAME];
                 [parenthoodRelation setObject:user forKey:PARENT];
                 [parenthoodRelation setObject:student forKey:CHILD];
-                [parenthoodRelation saveInBackground];
+                [parenthoodRelation saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+                    if (success) {
+                    }
+                }];
             }
         }
         user[PARENTHOOD_EMAIL] = studentEmail;
-        [user saveInBackground];
     }
 }
 
@@ -296,7 +300,9 @@
         [alert show];
         alert.tag = 0;
     } else {
-        [self performSegueWithIdentifier:@"toParentHome" sender:self];
+        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [self performSegueWithIdentifier:@"toParentHome" sender:self];
+        }];
     }
 }
 

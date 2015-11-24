@@ -11,4 +11,5 @@
 
 @interface FinishCreateTaskViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 @property PFObject *task;
+@property PFObject *myClass;
 @end

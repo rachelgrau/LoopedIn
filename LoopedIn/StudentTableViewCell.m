@@ -73,6 +73,11 @@
     }
 }
 
+- (void) setUpLoadingCell {
+    self.profPicImageView.image = nil;
+    self.nameLabel.text = @"Loading users...";
+}
+
 - (void)setName:(NSString *)name setImage:(UIImage *)image {
     /* Set name label */
     NSString *firstName = [Common getFirstNameFromFullName:name];

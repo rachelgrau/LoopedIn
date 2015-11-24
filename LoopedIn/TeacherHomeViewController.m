@@ -8,6 +8,7 @@
 
 #import "TeacherHomeViewController.h"
 #import "SignUpViewController.h"
+#import "TasksTableViewController.h"
 #import "StudentListTableViewController.h"
 #import <Parse/Parse.h>
 #import "Common.h"
@@ -82,6 +83,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toStudentList"]) {
         StudentListTableViewController *dest = segue.destinationViewController;
+        dest.myClass = self.myClass;
+    } else if ([segue.identifier isEqualToString:@"toTaskList"]) {
+        TasksTableViewController *dest = segue.destinationViewController;
         dest.myClass = self.myClass;
     }
 }

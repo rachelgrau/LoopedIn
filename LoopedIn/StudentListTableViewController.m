@@ -13,11 +13,13 @@
 
 @interface StudentListTableViewController ()
 @property NSArray *students;
+@property BOOL hasLoadedStudents;
 @end
 
 @implementation StudentListTableViewController
 
 - (void)viewDidLoad {
+    self.hasLoadedStudents = NO;
     [super viewDidLoad];
     PFRelation *relation = [self.myClass relationForKey:CLASS_STUDENTS];
     PFQuery *query = [relation query];
@@ -25,6 +27,7 @@
         if (results) {
             self.students = results;
             [self sortStudentArray];
+            self.hasLoadedStudents = YES;
             [self.tableView reloadData];
         }
     }];
@@ -53,15 +56,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.students.count;
+    if (self.hasLoadedStudents) {
+        return self.students.count;
+    } else {
+        return 1;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     StudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"studentCell" forIndexPath:indexPath];
-    PFUser *student = [self.students objectAtIndex:indexPath.row];
-    [cell setUpCellWithUser:student];
-//    [cell setName:[self.students objectAtIndex:indexPath.row] setImage:[UIImage imageNamed:@"rachel.jpeg"]];
+    if (self.hasLoadedStudents) {
+        PFUser *student = [self.students objectAtIndex:indexPath.row];
+        [cell setUpCellWithUser:student];
+    } else {
+        [cell setUpLoadingCell];
+    }
     return cell;
 }
 

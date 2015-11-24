@@ -50,6 +50,10 @@
 		CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC722A9C1BEBD7F20021D994 /* LogInViewController.m */; };
 		CC75E5831BF1D47D005976E2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = CC75E5821BF1D47D005976E2 /* settings.png */; };
 		CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */; };
+		CCA205E81C0412B1007C97A3 /* TasksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA205E71C0412B1007C97A3 /* TasksTableViewController.m */; };
+		CCA205EF1C0428A0007C97A3 /* CreateTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA205EE1C0428A0007C97A3 /* CreateTaskViewController.m */; };
+		CCA205F11C042A1E007C97A3 /* gradBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CCA205F01C042A1E007C97A3 /* gradBackground.png */; };
+		CCA205F41C043C3F007C97A3 /* FinishCreateTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA205F31C043C3F007C97A3 /* FinishCreateTaskViewController.m */; };
 		CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE04C71BF285A200BAE3C3 /* Common.m */; };
 		CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCE04C91BF28AA000BAE3C3 /* placeholder.png */; };
 		CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCE675451BEC329F00E7821B /* LoopedIn_Icon.jpg */; };
@@ -128,6 +132,13 @@
 		CC75E5821BF1D47D005976E2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		CC95A9A11BFBBFF800F8D882 /* StudentRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentRewardViewController.h; sourceTree = "<group>"; };
 		CC95A9A21BFBBFF800F8D882 /* StudentRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentRewardViewController.m; sourceTree = "<group>"; };
+		CCA205E61C0412B1007C97A3 /* TasksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksTableViewController.h; sourceTree = "<group>"; };
+		CCA205E71C0412B1007C97A3 /* TasksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksTableViewController.m; sourceTree = "<group>"; };
+		CCA205ED1C0428A0007C97A3 /* CreateTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateTaskViewController.h; sourceTree = "<group>"; };
+		CCA205EE1C0428A0007C97A3 /* CreateTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateTaskViewController.m; sourceTree = "<group>"; };
+		CCA205F01C042A1E007C97A3 /* gradBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradBackground.png; sourceTree = "<group>"; };
+		CCA205F21C043C3F007C97A3 /* FinishCreateTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishCreateTaskViewController.h; sourceTree = "<group>"; };
+		CCA205F31C043C3F007C97A3 /* FinishCreateTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishCreateTaskViewController.m; sourceTree = "<group>"; };
 		CCCE04C61BF285A200BAE3C3 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CCCE04C71BF285A200BAE3C3 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		CCCE04C91BF28AA000BAE3C3 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -173,12 +184,8 @@
 		CC00BAD81BEBEA8600A13CA7 /* Teacher */ = {
 			isa = PBXGroup;
 			children = (
-				CCEC54A21BE8488F007970FA /* TeacherHomeViewController.h */,
-				CCEC54A31BE8488F007970FA /* TeacherHomeViewController.m */,
-				CC53C9901C03826B002FF627 /* StudentListTableViewController.h */,
-				CC53C9911C03826B002FF627 /* StudentListTableViewController.m */,
-				CC53C9931C038311002FF627 /* StudentTableViewCell.h */,
-				CC53C9941C038311002FF627 /* StudentTableViewCell.m */,
+				CCA205EC1C041EC3007C97A3 /* Students */,
+				CCA205EB1C041EBE007C97A3 /* Tasks */,
 			);
 			name = Teacher;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 		CC00BAE81BEBFB6800A13CA7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CCA205F01C042A1E007C97A3 /* gradBackground.png */,
 				CC53C9981C038BF1002FF627 /* noProfPic.png */,
 				CC66D1851C0298030026FA26 /* addProfPic.png */,
 				CC66D1831C02942F0026FA26 /* changeProfPic.png */,
@@ -339,6 +347,32 @@
 			name = "Log in / sign up";
 			sourceTree = "<group>";
 		};
+		CCA205EB1C041EBE007C97A3 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				CCEC54A21BE8488F007970FA /* TeacherHomeViewController.h */,
+				CCEC54A31BE8488F007970FA /* TeacherHomeViewController.m */,
+				CCA205E61C0412B1007C97A3 /* TasksTableViewController.h */,
+				CCA205E71C0412B1007C97A3 /* TasksTableViewController.m */,
+				CCA205ED1C0428A0007C97A3 /* CreateTaskViewController.h */,
+				CCA205EE1C0428A0007C97A3 /* CreateTaskViewController.m */,
+				CCA205F21C043C3F007C97A3 /* FinishCreateTaskViewController.h */,
+				CCA205F31C043C3F007C97A3 /* FinishCreateTaskViewController.m */,
+			);
+			name = Tasks;
+			sourceTree = "<group>";
+		};
+		CCA205EC1C041EC3007C97A3 /* Students */ = {
+			isa = PBXGroup;
+			children = (
+				CC53C9901C03826B002FF627 /* StudentListTableViewController.h */,
+				CC53C9911C03826B002FF627 /* StudentListTableViewController.m */,
+				CC53C9931C038311002FF627 /* StudentTableViewCell.h */,
+				CC53C9941C038311002FF627 /* StudentTableViewCell.m */,
+			);
+			name = Students;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -432,6 +466,7 @@
 				CC63E6C31BF17D3F0083736D /* backButton.png in Resources */,
 				CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */,
 				CC5D03B11BFF20AE00769C85 /* greenRing.png in Resources */,
+				CCA205F11C042A1E007C97A3 /* gradBackground.png in Resources */,
 				CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */,
 				CC66D18D1C02E5430026FA26 /* checkBullitenBoard.png in Resources */,
 				CC53C9971C03847B002FF627 /* grayArrow.png in Resources */,
@@ -457,16 +492,19 @@
 				CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */,
 				CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */,
 				CC5F94C81BE74D65007353F7 /* AppDelegate.m in Sources */,
+				CCA205F41C043C3F007C97A3 /* FinishCreateTaskViewController.m in Sources */,
 				CC5F94C51BE74D65007353F7 /* main.m in Sources */,
 				CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */,
 				CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */,
 				CC00BADB1BEBEB9700A13CA7 /* StudentHomeViewController.m in Sources */,
 				CCEC54A41BE8488F007970FA /* TeacherHomeViewController.m in Sources */,
 				CC5F94CE1BE74D65007353F7 /* SignUpViewController.m in Sources */,
+				CCA205E81C0412B1007C97A3 /* TasksTableViewController.m in Sources */,
 				CC53C9921C03826B002FF627 /* StudentListTableViewController.m in Sources */,
 				CC5F94CB1BE74D65007353F7 /* LoopedIn.xcdatamodeld in Sources */,
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,
+				CCA205EF1C0428A0007C97A3 /* CreateTaskViewController.m in Sources */,
 				CC66D17B1C02464E0026FA26 /* CustomAlertView.m in Sources */,
 				CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */,
 				CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */,

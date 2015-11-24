@@ -41,3 +41,10 @@
 #define CLASS_TEACHER @"teacher"
 #define CLASS_CODE @"classCode"
 #define CLASS_STUDENTS @"students"
+
+/* Task table */
+#define TASK_CLASS_NAME @"Task"
+#define TASK_NAME @"name"
+#define TASK_DESC @"description"
+#define TASK_DUE_DATE @"dueDate"
+#define TASK_POINTS @"points"

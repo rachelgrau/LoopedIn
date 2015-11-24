@@ -26,13 +26,13 @@
     self.pointPicker.dataSource = self;
 }
 
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
 }
 
 // The number of rows of data
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     return self.pointOptions.count;
 }
@@ -85,16 +85,16 @@
                     /* Find the parent of this student */
                     PFQuery *query = [PFQuery queryWithClassName:PARENTHOOD_CLASS_NAME];
                     [query whereKey:CHILD equalTo:student];
-                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *parentObj, NSError *error) {
-                        PFUser *parent = (PFUser *)parentObj;
+                    [query getFirstObjectInBackgroundWithBlock:^(PFObject *parenthood, NSError *error) {
+                        PFUser *parent = [parenthood objectForKey:PARENT];
                         PFObject *currTask = [PFObject objectWithClassName:TASK_CLASS_NAME];
                         [currTask setObject:name forKey:TASK_NAME];
                         [currTask setObject:description forKey:TASK_DESC];
                         [currTask setObject:dueDate forKey:TASK_DUE_DATE];
                         [currTask setObject:points forKey:TASK_POINTS];
-                        [currTask setObject:parent forKey:TASK_TEACHER];
+                        [currTask setObject:[PFUser currentUser] forKey:TASK_TEACHER];
                         [currTask setObject:parent forKey:TASK_ASIGNEE];
-                        [currTask saveInBackground];
+                        [currTask saveInBackground]
                     }];
                 }
             }

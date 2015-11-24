@@ -61,40 +61,40 @@
     NSString *description = [self.task objectForKey:TASK_DESC];
     NSDate *dueDate = [self.task objectForKey:TASK_DUE_DATE];
     
+    /* Create the task */
+    PFObject *currTask = [PFObject objectWithClassName:TASK_CLASS_NAME];
+    [currTask setObject:name forKey:TASK_NAME];
+    [currTask setObject:description forKey:TASK_DESC];
+    [currTask setObject:dueDate forKey:TASK_DUE_DATE];
+    [currTask setObject:points forKey:TASK_POINTS];
+    [currTask setObject:[PFUser currentUser] forKey:TASK_TEACHER];
+
     /* Get list of students */
     PFRelation *relation = [self.myClass relationForKey:CLASS_STUDENTS];
     PFQuery *query = [relation query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *students, NSError *err) {
         if (students) {
             if ([self.studentsSwitch isOn]) {
-                /* Create a task for each student */
+                /* Add student asignees to tasks's asignees */
                 for (PFUser *student in students) {
-                    PFObject *currTask = [PFObject objectWithClassName:TASK_CLASS_NAME];
-                    [currTask setObject:name forKey:TASK_NAME];
-                    [currTask setObject:description forKey:TASK_DESC];
-                    [currTask setObject:dueDate forKey:TASK_DUE_DATE];
-                    [currTask setObject:points forKey:TASK_POINTS];
-                    [currTask setObject:[PFUser currentUser] forKey:TASK_TEACHER];
-                    [currTask setObject:student forKey:TASK_ASIGNEE];
+                    PFRelation *relation = [currTask relationForKey:@"asignees"];
+                    [relation addObject:student];
+                }
+                if (![self.parentsSwitch isOn]) {
                     [currTask saveInBackground];
                 }
             }
             if ([self.parentsSwitch isOn]) {
-                /* TO DO: loop through student and create task for each parent*/
+                /* Add parent asignees to task's asignees */
                 for (PFUser *student in students) {
                     /* Find the parent of this student */
                     PFQuery *query = [PFQuery queryWithClassName:PARENTHOOD_CLASS_NAME];
                     [query whereKey:CHILD equalTo:student];
                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *parenthood, NSError *error) {
                         PFUser *parent = [parenthood objectForKey:PARENT];
-                        PFObject *currTask = [PFObject objectWithClassName:TASK_CLASS_NAME];
-                        [currTask setObject:name forKey:TASK_NAME];
-                        [currTask setObject:description forKey:TASK_DESC];
-                        [currTask setObject:dueDate forKey:TASK_DUE_DATE];
-                        [currTask setObject:points forKey:TASK_POINTS];
-                        [currTask setObject:[PFUser currentUser] forKey:TASK_TEACHER];
-                        [currTask setObject:parent forKey:TASK_ASIGNEE];
-                        [currTask saveInBackground]
+                        PFRelation *relation = [currTask relationForKey:@"asignees"];
+                        [relation addObject:parent];
+                        [currTask saveInBackground];
                     }];
                 }
             }

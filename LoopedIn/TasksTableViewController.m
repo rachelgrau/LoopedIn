@@ -7,6 +7,7 @@
 //
 
 #import "TasksTableViewController.h"
+#import "DBKeys.h"
 #import "CreateTaskViewController.h"
 
 @interface TasksTableViewController ()
@@ -18,11 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Tasks";
-    self.tasks = [NSArray arrayWithObjects:@"Task 1", @"Task 2", @"Task 3", @"Task 4", nil];
     
     UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)];
     
     self.navigationItem.rightBarButtonItem = plusButton;
+    
+    /* Load tasks that this teacher has assigned */
+    PFQuery *taskQuery = [PFQuery queryWithClassName:TASK_CLASS_NAME];
+    [taskQuery whereKey:TASK_TEACHER equalTo:[PFUser currentUser]];
+    [taskQuery findObjectsInBackgroundWithBlock:^(NSArray *tasks, NSError *error) {
+        self.tasks = tasks;
+        [self.tableView reloadData];
+    }];
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -49,8 +58,10 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myReuseId" forIndexPath:indexPath];
-    cell.textLabel.text = [self.tasks objectAtIndex:indexPath.row]; 
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskTableViewCell" forIndexPath:indexPath];
+    PFObject *task = [self.tasks objectAtIndex:indexPath.row];
+    cell.textLabel.text = [task objectForKey:TASK_NAME];
+    cell.detailTextLabel.text = @"07/06";
     return cell;
 }
 

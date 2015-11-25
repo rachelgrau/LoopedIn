@@ -64,12 +64,13 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if (!self.hasLoadedStudents) return 1;
+    else return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (!self.hasLoadedStudents) {
-        return 0;
+        return 1;
     } else if (section == INCOMPLETE_SECTION) {
         return self.incompleteStudents.count;
     } else if (section == COMPLETE_SECTION) {
@@ -79,7 +80,8 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == INCOMPLETE_SECTION) {
+    if (!self.hasLoadedStudents) return @"";
+    else if (section == INCOMPLETE_SECTION) {
         return @"Incomplete";
     } else if (section == COMPLETE_SECTION) {
         return @"Completed";

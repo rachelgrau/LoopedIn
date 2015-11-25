@@ -42,16 +42,15 @@
 #define CLASS_CODE @"classCode"
 #define CLASS_STUDENTS @"students"
 
-/* Task table */
+/* Task table -- for a task object (1 per task) */
 #define TASK_CLASS_NAME @"Task"
 #define TASK_NAME @"name"
 #define TASK_DESC @"description"
 #define TASK_DUE_DATE @"dueDate"
 #define TASK_POINTS @"points"
 #define TASK_TEACHER @"teacher"
-#define TASK_ASIGNEES @"asignees"
 
-/* Task Completion table */
+/* Task Completion join table b/t tasks and users (asignees) -- keeps track of individual tasks from student perspective (e.g. for each task, there is one TaskCompletion object for each person assigned to that task). Stores metadata like whether the task has been completed by the given user. */
 #define TASK_COMPLETION_CLASS_NAME @"TaskCompletion"
 #define TASK_IS_COMPLETED @"isCompleted"
 #define TASK_COMPLETION_TASK @"task"

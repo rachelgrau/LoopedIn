@@ -8,12 +8,14 @@
 
 #import "StudentListTableViewController.h"
 #import "StudentTableViewCell.h"
+#import "StudentTeacherViewController.h"
 #import "DBKeys.h"
 #import "Common.h"
 
 @interface StudentListTableViewController ()
 @property NSArray *students;
 @property BOOL hasLoadedStudents;
+@property PFObject *selectedStudent;
 @end
 
 @implementation StudentListTableViewController
@@ -63,6 +65,12 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.hasLoadedStudents) {
+        self.selectedStudent = [self.students objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"toStudentView" sender:self];
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     StudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"studentCell" forIndexPath:indexPath];
@@ -110,14 +118,16 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toStudentView"]) {
+        StudentTeacherViewController *dest = segue.destinationViewController;
+        dest.student = self.selectedStudent;
+    }
 }
-*/
+
 
 @end

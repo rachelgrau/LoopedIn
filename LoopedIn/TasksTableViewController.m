@@ -9,15 +9,19 @@
 #import "TasksTableViewController.h"
 #import "DBKeys.h"
 #import "CreateTaskViewController.h"
+#import "TaskViewController.h"
 
 @interface TasksTableViewController ()
 @property NSArray *tasks;
+@property BOOL hasLoadedTasks;
+@property PFObject *selectedTask;
 @end
 
 @implementation TasksTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.hasLoadedTasks = NO;
     self.title = @"Tasks";
     
     UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)];
@@ -29,6 +33,7 @@
     [taskQuery whereKey:TASK_TEACHER equalTo:[PFUser currentUser]];
     [taskQuery findObjectsInBackgroundWithBlock:^(NSArray *tasks, NSError *error) {
         self.tasks = tasks;
+        self.hasLoadedTasks = YES;
         [self.tableView reloadData];
     }];
     
@@ -52,19 +57,32 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return self.tasks.count;
+    if (self.hasLoadedTasks) {
+        return self.tasks.count;
+    } else {
+        return 1;
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskTableViewCell" forIndexPath:indexPath];
-    PFObject *task = [self.tasks objectAtIndex:indexPath.row];
-    cell.textLabel.text = [task objectForKey:TASK_NAME];
-    cell.detailTextLabel.text = @"07/06";
+    if (self.hasLoadedTasks) {
+        PFObject *task = [self.tasks objectAtIndex:indexPath.row];
+        cell.textLabel.text = [task objectForKey:TASK_NAME];
+        cell.detailTextLabel.text = @"07/06";
+    } else {
+        cell.textLabel.text = @"Loading tasks...";
+    }
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.hasLoadedTasks) {
+        self.selectedTask = [self.tasks objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"toSingleTask" sender:self];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -108,6 +126,9 @@
     if ([segue.identifier isEqualToString:@"toCreateTask"]) {
         CreateTaskViewController *dest = segue.destinationViewController;
         dest.myClass = self.myClass;
+    } else if ([segue.identifier isEqualToString:@"toSingleTask"]) {
+        TaskViewController *dest = segue.destinationViewController;
+        dest.task = self.selectedTask;
     }
 }
 

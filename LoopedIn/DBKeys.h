@@ -49,4 +49,10 @@
 #define TASK_DUE_DATE @"dueDate"
 #define TASK_POINTS @"points"
 #define TASK_TEACHER @"teacher"
-#define TASK_ASIGNEE @"asignee"
+#define TASK_ASIGNEES @"asignees"
+
+/* Task Completion table */
+#define TASK_COMPLETION_CLASS_NAME @"TaskCompletion"
+#define TASK_IS_COMPLETED @"isCompleted"
+#define TASK_COMPLETION_TASK @"task"
+#define TASK_COMPLETION_ASIGNEE @"asignee"

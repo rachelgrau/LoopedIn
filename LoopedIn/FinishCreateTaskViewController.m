@@ -67,6 +67,7 @@
     [currTask setObject:description forKey:TASK_DESC];
     [currTask setObject:dueDate forKey:TASK_DUE_DATE];
     [currTask setObject:points forKey:TASK_POINTS];
+    [currTask setObject:@NO forKey:TASK_IS_COMPLETED];
     [currTask setObject:[PFUser currentUser] forKey:TASK_TEACHER];
 
     /* Get list of students */
@@ -75,13 +76,14 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *students, NSError *err) {
         if (students) {
             if ([self.studentsSwitch isOn]) {
-                /* Add student asignees to tasks's asignees */
+                /* Create TaskCompletion object for each student */
                 for (PFUser *student in students) {
-                    PFRelation *relation = [currTask relationForKey:@"asignees"];
-                    [relation addObject:student];
-                }
-                if (![self.parentsSwitch isOn]) {
-                    [currTask saveInBackground];
+                    /* Task completion object keeps track of whether this task is completed */
+                    PFObject *taskCompletion = [PFObject objectWithClassName:TASK_COMPLETION_CLASS_NAME];
+                    [taskCompletion setObject:currTask forKey:TASK_COMPLETION_TASK];
+                    [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
+                    [taskCompletion setObject:student forKey:TASK_COMPLETION_ASIGNEE];
+                    [taskCompletion saveInBackground];
                 }
             }
             if ([self.parentsSwitch isOn]) {
@@ -92,9 +94,13 @@
                     [query whereKey:CHILD equalTo:student];
                     [query getFirstObjectInBackgroundWithBlock:^(PFObject *parenthood, NSError *error) {
                         PFUser *parent = [parenthood objectForKey:PARENT];
-                        PFRelation *relation = [currTask relationForKey:@"asignees"];
-                        [relation addObject:parent];
-                        [currTask saveInBackground];
+
+                        /* Task completion object keeps track of whether this task is completed */
+                        PFObject *taskCompletion = [PFObject objectWithClassName:TASK_COMPLETION_CLASS_NAME];
+                        [taskCompletion setObject:currTask forKey:TASK_COMPLETION_TASK];
+                        [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
+                        [taskCompletion setObject:parent forKey:TASK_COMPLETION_ASIGNEE];
+                        [taskCompletion saveInBackground];
                     }];
                 }
             }

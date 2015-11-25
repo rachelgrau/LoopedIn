@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface CreateTaskViewController : UIViewController
+@interface CreateTaskViewController : UIViewController <UIAlertViewDelegate>
+/* This view can be used for creating OR editing a task */
+@property BOOL isEditing;
 @property PFObject *myClass;
+@property PFObject *task;
 @end

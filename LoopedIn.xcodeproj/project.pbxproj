@@ -41,7 +41,6 @@
 		CC5F95051BE74E27007353F7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5F95041BE74E27007353F7 /* Accounts.framework */; };
 		CC5F95071BE74E2B007353F7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC5F95061BE74E2B007353F7 /* Social.framework */; };
 		CC63E6C31BF17D3F0083736D /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CC63E6C21BF17D3F0083736D /* backButton.png */; };
-		CC66D17B1C02464E0026FA26 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CC66D17A1C02464E0026FA26 /* CustomAlertView.m */; };
 		CC66D17E1C0247D90026FA26 /* TextFieldPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = CC66D17D1C0247D90026FA26 /* TextFieldPopUp.m */; };
 		CC66D1821C028AD50026FA26 /* rachel.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1811C028AD50026FA26 /* rachel.jpeg */; };
 		CC66D1841C02942F0026FA26 /* changeProfPic.png in Resources */ = {isa = PBXBuildFile; fileRef = CC66D1831C02942F0026FA26 /* changeProfPic.png */; };
@@ -56,6 +55,7 @@
 		CCA205F41C043C3F007C97A3 /* FinishCreateTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA205F31C043C3F007C97A3 /* FinishCreateTaskViewController.m */; };
 		CCA20AFF1C05529600C0789C /* StudentTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */; };
 		CCA20B021C0558F900C0789C /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA20B011C0558F900C0789C /* TaskViewController.m */; };
+		CCC46E2A1C0671080098908A /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E291C0671080098908A /* LoadingView.m */; };
 		CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE04C71BF285A200BAE3C3 /* Common.m */; };
 		CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCE04C91BF28AA000BAE3C3 /* placeholder.png */; };
 		CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCE675451BEC329F00E7821B /* LoopedIn_Icon.jpg */; };
@@ -121,8 +121,6 @@
 		CC5F95041BE74E27007353F7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		CC5F95061BE74E2B007353F7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CC63E6C21BF17D3F0083736D /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
-		CC66D1791C02464E0026FA26 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
-		CC66D17A1C02464E0026FA26 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		CC66D17C1C0247D90026FA26 /* TextFieldPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldPopUp.h; sourceTree = "<group>"; };
 		CC66D17D1C0247D90026FA26 /* TextFieldPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldPopUp.m; sourceTree = "<group>"; };
 		CC66D1811C028AD50026FA26 /* rachel.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rachel.jpeg; sourceTree = "<group>"; };
@@ -145,6 +143,8 @@
 		CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentTeacherViewController.m; sourceTree = "<group>"; };
 		CCA20B001C0558F900C0789C /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
 		CCA20B011C0558F900C0789C /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		CCC46E281C0671080098908A /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		CCC46E291C0671080098908A /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		CCCE04C61BF285A200BAE3C3 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CCCE04C71BF285A200BAE3C3 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		CCCE04C91BF28AA000BAE3C3 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -281,10 +281,10 @@
 				CC5F94C61BE74D65007353F7 /* AppDelegate.h */,
 				CC5F94C71BE74D65007353F7 /* AppDelegate.m */,
 				CC5F94CF1BE74D65007353F7 /* Main.storyboard */,
-				CC66D1791C02464E0026FA26 /* CustomAlertView.h */,
-				CC66D17A1C02464E0026FA26 /* CustomAlertView.m */,
 				CC66D17C1C0247D90026FA26 /* TextFieldPopUp.h */,
 				CC66D17D1C0247D90026FA26 /* TextFieldPopUp.m */,
+				CCC46E281C0671080098908A /* LoadingView.h */,
+				CCC46E291C0671080098908A /* LoadingView.m */,
 				CC5F94D21BE74D65007353F7 /* Images.xcassets */,
 				CC5F94D41BE74D65007353F7 /* LaunchScreen.xib */,
 				CC5F94C91BE74D65007353F7 /* LoopedIn.xcdatamodeld */,
@@ -516,9 +516,9 @@
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,
 				CCA205EF1C0428A0007C97A3 /* CreateTaskViewController.m in Sources */,
-				CC66D17B1C02464E0026FA26 /* CustomAlertView.m in Sources */,
 				CCA20AFF1C05529600C0789C /* StudentTeacherViewController.m in Sources */,
 				CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */,
+				CCC46E2A1C0671080098908A /* LoadingView.m in Sources */,
 				CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

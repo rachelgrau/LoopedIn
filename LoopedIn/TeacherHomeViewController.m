@@ -10,6 +10,7 @@
 #import "SignUpViewController.h"
 #import "TasksTableViewController.h"
 #import "StudentListTableViewController.h"
+#import "LoadingView.h"
 #import <Parse/Parse.h>
 #import "Common.h"
 #import "DBKeys.h"

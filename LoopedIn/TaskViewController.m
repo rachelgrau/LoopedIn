@@ -8,10 +8,13 @@
 
 #import "TaskViewController.h"
 #import "StudentTeacherViewController.h"
+#import "CreateTaskViewController.h"
 #import "DBKeys.h"
 
 #define INCOMPLETE_SECTION 0
 #define COMPLETE_SECTION 1
+
+#define DELETE_TASK_TAG 0
 
 @interface TaskViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *taskDescriptionLabel;
@@ -32,12 +35,9 @@
     self.title = [self.task objectForKey:TASK_NAME];
     self.taskDescriptionLabel.text = [self.task objectForKey:TASK_DESC];
     [self.taskDescriptionLabel sizeToFit];
-    self.numPointsLabel.text = [[self.task objectForKey:TASK_POINTS] stringValue];
+    self.numPointsLabel.text = [self.task objectForKey:TASK_POINTS];
     self.incompleteStudents = [[NSMutableArray alloc] init];
     self.completedStudents = [[NSMutableArray alloc] init];
-    
-    /* Edit button */
-    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTask)];
     
     /* Load students */
     PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
@@ -57,10 +57,19 @@
         [self.tableView reloadData];
     }];
 
+    /* Edit button */
+    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editTask)];
     self.navigationItem.rightBarButtonItem = plusButton;
 }
 
+- (IBAction)deleteTask:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Task" message:@"Are you sure you want to delete this task? Students and parents will no longer see it." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = DELETE_TASK_TAG;
+    [alert show];
+}
+
 - (void)editTask {
+    [self performSegueWithIdentifier:@"toEditTask" sender:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -136,6 +145,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == DELETE_TASK_TAG) {
+        if (buttonIndex == 1) {
+            /* Delete all task completion objects associated with this task */
+            PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
+            [query whereKey:TASK_COMPLETION_TASK equalTo:self.task];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                for (PFObject *obj in objects) {
+                    [obj deleteInBackground];
+                }
+                /* Delete the task itself */
+                [self.task deleteInBackgroundWithBlock:^(BOOL success, NSError *error) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            }];
+        }
+    }
+}
+
 
 #pragma mark - Navigation
 
@@ -148,6 +178,10 @@
         } else if (self.selectedIndexPath.section == COMPLETE_SECTION) {
             dest.student = [self.completedStudents objectAtIndex:self.selectedIndexPath.row];
         }
+    } else if ([segue.identifier isEqualToString:@"toEditTask"]) {
+        CreateTaskViewController *dest = segue.destinationViewController;
+        dest.isEditing = YES;
+        dest.task = self.task;
     }
 }
 

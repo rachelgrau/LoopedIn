@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface TaskViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TaskViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property PFObject *task;
 @end

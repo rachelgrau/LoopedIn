@@ -12,4 +12,5 @@
 @interface FinishCreateTaskViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 @property PFObject *task;
 @property PFObject *myClass;
+@property BOOL isEditing;
 @end

@@ -33,6 +33,7 @@
     /* Load tasks that this teacher has assigned */
     PFQuery *taskQuery = [PFQuery queryWithClassName:TASK_CLASS_NAME];
     [taskQuery whereKey:TASK_TEACHER equalTo:[PFUser currentUser]];
+    [taskQuery orderByAscending:TASK_DUE_DATE];
     [taskQuery findObjectsInBackgroundWithBlock:^(NSArray *tasks, NSError *error) {
         self.tasks = tasks;
         self.hasLoadedTasks = YES;
@@ -70,7 +71,11 @@
     if (self.hasLoadedTasks) {
         PFObject *task = [self.tasks objectAtIndex:indexPath.row];
         cell.textLabel.text = [task objectForKey:TASK_NAME];
-        cell.detailTextLabel.text = @"07/06";
+        NSDate *date = [task objectForKey:TASK_DUE_DATE];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"MM/dd"];
+        NSString *theDate = [NSString stringWithFormat:@"Due: %@", [dateFormat stringFromDate:date]];
+        cell.detailTextLabel.text = theDate;
     } else {
         cell.textLabel.text = @"Loading tasks...";
     }
@@ -125,6 +130,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toCreateTask"]) {
         CreateTaskViewController *dest = segue.destinationViewController;
+        dest.isEditing = NO;
         dest.myClass = self.myClass;
     } else if ([segue.identifier isEqualToString:@"toSingleTask"]) {
         TaskViewController *dest = segue.destinationViewController;

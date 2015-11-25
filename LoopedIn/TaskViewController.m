@@ -7,6 +7,7 @@
 //
 
 #import "TaskViewController.h"
+#import "StudentTeacherViewController.h"
 #import "DBKeys.h"
 
 #define INCOMPLETE_SECTION 0
@@ -20,6 +21,7 @@
 @property NSMutableArray *incompleteStudents;
 @property NSMutableArray *completedStudents;
 @property BOOL hasLoadedStudents;
+@property NSIndexPath *selectedIndexPath;
 @end
 
 @implementation TaskViewController
@@ -59,6 +61,10 @@
 }
 
 - (void)editTask {
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.tableView deselectRowAtIndexPath:self.selectedIndexPath animated:YES];
 }
 
 #pragma mark - Table view data source
@@ -104,10 +110,22 @@
     return cell;
 }
 
+/* If you select a student, segue to the student's profile. If you select a parent, do nothing. */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.hasLoadedStudents) {
-//        self.selectedTask = [self.tasks objectAtIndex:indexPath.row];
-//        [self performSegueWithIdentifier:@"toSingleTask" sender:self];
+        self.selectedIndexPath = indexPath;
+        PFUser *selectedUser;
+        if (self.selectedIndexPath.section == INCOMPLETE_SECTION) {
+            selectedUser = [self.incompleteStudents objectAtIndex:indexPath.row];
+        } else if (self.selectedIndexPath.section == COMPLETE_SECTION) {
+            selectedUser = [self.completedStudents objectAtIndex:indexPath.row];
+        }
+        if ([[selectedUser objectForKey:ROLE] isEqualToString: PARENT_ROLE]) {
+            /* Parents don't have profiles */
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        } else {
+            [self performSegueWithIdentifier:@"toStudentView" sender:self];
+        }
     }
 }
 
@@ -118,14 +136,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toStudentView"]) {
+        StudentTeacherViewController *dest = segue.destinationViewController;
+        if (self.selectedIndexPath.section == INCOMPLETE_SECTION) {
+            dest.student = [self.incompleteStudents objectAtIndex:self.selectedIndexPath.row];
+        } else if (self.selectedIndexPath.section == COMPLETE_SECTION) {
+            dest.student = [self.completedStudents objectAtIndex:self.selectedIndexPath.row];
+        }
+    }
 }
-*/
+
 
 @end

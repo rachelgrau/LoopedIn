@@ -7,6 +7,7 @@
 //
 
 #import "FinishCreateTaskViewController.h"
+#import "TasksTableViewController.h"
 #import "DBKeys.h"
 
 @interface FinishCreateTaskViewController ()
@@ -49,6 +50,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/* Create a single Task object for the task just created, and pop back to the list of all tasks once it's done saving. Create a TaskCompletion object that pairs this task with each asignee (one for each asignee) in the background. */
 - (IBAction)createTask:(id)sender {
     /* TO DO: Loading icon / disable buttons while we store this stuff */
     NSString *pointsStr = [self pickerView:self.pointPicker titleForRow:[self.pointPicker selectedRowInComponent:0] forComponent:0];
@@ -69,6 +71,11 @@
     [currTask setObject:points forKey:TASK_POINTS];
     [currTask setObject:@NO forKey:TASK_IS_COMPLETED];
     [currTask setObject:[PFUser currentUser] forKey:TASK_TEACHER];
+    [currTask saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+        /* Once it's done loading, go back to list of all tasks */
+        TasksTableViewController *tasksVc = [[self.navigationController viewControllers] objectAtIndex:1];
+        [self.navigationController popToViewController:tasksVc animated:YES];
+    }];
 
     /* Get list of students */
     PFRelation *relation = [self.myClass relationForKey:CLASS_STUDENTS];

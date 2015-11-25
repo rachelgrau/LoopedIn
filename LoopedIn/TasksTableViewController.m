@@ -21,13 +21,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.hasLoadedTasks = NO;
     self.title = @"Tasks";
     
     UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTask)];
     
     self.navigationItem.rightBarButtonItem = plusButton;
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.hasLoadedTasks = NO;
     /* Load tasks that this teacher has assigned */
     PFQuery *taskQuery = [PFQuery queryWithClassName:TASK_CLASS_NAME];
     [taskQuery whereKey:TASK_TEACHER equalTo:[PFUser currentUser]];
@@ -36,9 +38,7 @@
         self.hasLoadedTasks = YES;
         [self.tableView reloadData];
     }];
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
 - (void)didReceiveMemoryWarning {

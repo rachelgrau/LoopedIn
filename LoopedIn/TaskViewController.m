@@ -99,7 +99,7 @@
         }
         cell.textLabel.text = student.username;
     } else {
-        cell.textLabel.text = @"Loading tasks...";
+        cell.textLabel.text = @"Loading task asignees...";
     }
     return cell;
 }

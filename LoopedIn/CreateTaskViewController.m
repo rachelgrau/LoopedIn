@@ -9,6 +9,7 @@
 #import "CreateTaskViewController.h"
 #import <Parse/Parse.h>
 #import "FinishCreateTaskViewController.h"
+#import "LoadingView.h"
 #import "DBKeys.h"
 
 #define DELETE_TASK_TAG 0
@@ -84,6 +85,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == DELETE_TASK_TAG) {
         if (buttonIndex == 1) {
+            LoadingView *loadingView = [[LoadingView alloc] initWithLoadingText:@"Deleting..." hasNavBar:YES];
+            [self.view addSubview:loadingView];
+            [loadingView startLoading];
             /* They actually are deleting */
             if (self.isEditing) {
                 /* Delete all task completion objects associated with this task */
@@ -96,11 +100,15 @@
                     /* Delete the task itself */
                     [self.task deleteInBackgroundWithBlock:^(BOOL success, NSError *error) {
                         UIViewController *dest = [self.navigationController.viewControllers objectAtIndex:1];
-                        [self.navigationController popToViewController:dest animated:YES];
+                        [loadingView displayDoneAndPopToViewController:^{
+                            [self.navigationController popToViewController:dest animated:YES];
+                        }];
                     }];
                 }];
             } else {
-                [self.navigationController popViewControllerAnimated:YES];
+                [loadingView displayDoneAndPopToViewController:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
             }
         }
     }

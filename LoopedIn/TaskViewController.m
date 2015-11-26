@@ -10,6 +10,7 @@
 #import "StudentTeacherViewController.h"
 #import "CreateTaskViewController.h"
 #import "DBKeys.h"
+#import "LoadingView.h"
 
 #define INCOMPLETE_SECTION 0
 #define COMPLETE_SECTION 1
@@ -150,6 +151,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == DELETE_TASK_TAG) {
         if (buttonIndex == 1) {
+            LoadingView *loadingView = [[LoadingView alloc] initWithLoadingText:@"Deleting..." hasNavBar:YES];
+            [self.view addSubview:loadingView];
+            [loadingView startLoading];
             /* Delete all task completion objects associated with this task */
             PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
             [query whereKey:TASK_COMPLETION_TASK equalTo:self.task];
@@ -159,7 +163,9 @@
                 }
                 /* Delete the task itself */
                 [self.task deleteInBackgroundWithBlock:^(BOOL success, NSError *error) {
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [loadingView displayDoneAndPopToViewController:^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }];
                 }];
             }];
         }

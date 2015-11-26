@@ -56,6 +56,8 @@
 		CCA20AFF1C05529600C0789C /* StudentTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */; };
 		CCA20B021C0558F900C0789C /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA20B011C0558F900C0789C /* TaskViewController.m */; };
 		CCC46E2A1C0671080098908A /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E291C0671080098908A /* LoadingView.m */; };
+		CCC46E311C069F360098908A /* RewardsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E301C069F360098908A /* RewardsTableViewController.m */; };
+		CCC46E341C06A3DC0098908A /* CreateRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */; };
 		CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE04C71BF285A200BAE3C3 /* Common.m */; };
 		CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCE04C91BF28AA000BAE3C3 /* placeholder.png */; };
 		CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCE675451BEC329F00E7821B /* LoopedIn_Icon.jpg */; };
@@ -145,6 +147,10 @@
 		CCA20B011C0558F900C0789C /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
 		CCC46E281C0671080098908A /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		CCC46E291C0671080098908A /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		CCC46E2F1C069F360098908A /* RewardsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardsTableViewController.h; sourceTree = "<group>"; };
+		CCC46E301C069F360098908A /* RewardsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardsTableViewController.m; sourceTree = "<group>"; };
+		CCC46E321C06A3DC0098908A /* CreateRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRewardViewController.h; sourceTree = "<group>"; };
+		CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRewardViewController.m; sourceTree = "<group>"; };
 		CCCE04C61BF285A200BAE3C3 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CCCE04C71BF285A200BAE3C3 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		CCCE04C91BF28AA000BAE3C3 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -190,8 +196,11 @@
 		CC00BAD81BEBEA8600A13CA7 /* Teacher */ = {
 			isa = PBXGroup;
 			children = (
+				CCEC54A21BE8488F007970FA /* TeacherHomeViewController.h */,
+				CCEC54A31BE8488F007970FA /* TeacherHomeViewController.m */,
 				CCA205EC1C041EC3007C97A3 /* Students */,
 				CCA205EB1C041EBE007C97A3 /* Tasks */,
+				CCC46E2B1C069D0C0098908A /* Rewards */,
 			);
 			name = Teacher;
 			sourceTree = "<group>";
@@ -356,8 +365,6 @@
 		CCA205EB1C041EBE007C97A3 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				CCEC54A21BE8488F007970FA /* TeacherHomeViewController.h */,
-				CCEC54A31BE8488F007970FA /* TeacherHomeViewController.m */,
 				CCA205E61C0412B1007C97A3 /* TasksTableViewController.h */,
 				CCA205E71C0412B1007C97A3 /* TasksTableViewController.m */,
 				CCA205ED1C0428A0007C97A3 /* CreateTaskViewController.h */,
@@ -381,6 +388,17 @@
 				CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */,
 			);
 			name = Students;
+			sourceTree = "<group>";
+		};
+		CCC46E2B1C069D0C0098908A /* Rewards */ = {
+			isa = PBXGroup;
+			children = (
+				CCC46E2F1C069F360098908A /* RewardsTableViewController.h */,
+				CCC46E301C069F360098908A /* RewardsTableViewController.m */,
+				CCC46E321C06A3DC0098908A /* CreateRewardViewController.h */,
+				CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */,
+			);
+			name = Rewards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -508,10 +526,12 @@
 				CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */,
 				CC00BADB1BEBEB9700A13CA7 /* StudentHomeViewController.m in Sources */,
 				CCEC54A41BE8488F007970FA /* TeacherHomeViewController.m in Sources */,
+				CCC46E311C069F360098908A /* RewardsTableViewController.m in Sources */,
 				CC5F94CE1BE74D65007353F7 /* SignUpViewController.m in Sources */,
 				CCA20B021C0558F900C0789C /* TaskViewController.m in Sources */,
 				CCA205E81C0412B1007C97A3 /* TasksTableViewController.m in Sources */,
 				CC53C9921C03826B002FF627 /* StudentListTableViewController.m in Sources */,
+				CCC46E341C06A3DC0098908A /* CreateRewardViewController.m in Sources */,
 				CC5F94CB1BE74D65007353F7 /* LoopedIn.xcdatamodeld in Sources */,
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,

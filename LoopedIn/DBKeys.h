@@ -34,6 +34,7 @@
 #define REWARD_POINTS @"pointsRequired"
 #define REWARD_TITLE @"title"
 #define REWARD_DESCRIPTION @"description"
+#define REWARD_CLASS @"class"
 
 /* Class table */
 #define CLASS_CLASS_NAME @"Class"

@@ -10,6 +10,7 @@
 #import "SignUpViewController.h"
 #import "TasksTableViewController.h"
 #import "StudentListTableViewController.h"
+#import "RewardsTableViewController.h"
 #import "LoadingView.h"
 #import <Parse/Parse.h>
 #import "Common.h"
@@ -87,6 +88,9 @@
         dest.myClass = self.myClass;
     } else if ([segue.identifier isEqualToString:@"toTaskList"]) {
         TasksTableViewController *dest = segue.destinationViewController;
+        dest.myClass = self.myClass;
+    } else if ([segue.identifier isEqualToString:@"toRewardsList"]) {
+        RewardsTableViewController *dest = segue.destinationViewController;
         dest.myClass = self.myClass;
     }
 }

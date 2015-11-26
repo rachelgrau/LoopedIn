@@ -39,7 +39,6 @@
         self.hasLoadedTasks = YES;
         [self.tableView reloadData];
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {

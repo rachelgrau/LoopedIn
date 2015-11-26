@@ -58,6 +58,7 @@
 		CCC46E2A1C0671080098908A /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E291C0671080098908A /* LoadingView.m */; };
 		CCC46E311C069F360098908A /* RewardsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E301C069F360098908A /* RewardsTableViewController.m */; };
 		CCC46E341C06A3DC0098908A /* CreateRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */; };
+		CCC46E371C06CB5E0098908A /* RewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E361C06CB5E0098908A /* RewardViewController.m */; };
 		CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = CCCE04C71BF285A200BAE3C3 /* Common.m */; };
 		CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CCCE04C91BF28AA000BAE3C3 /* placeholder.png */; };
 		CCE675461BEC329F00E7821B /* LoopedIn_Icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CCE675451BEC329F00E7821B /* LoopedIn_Icon.jpg */; };
@@ -151,6 +152,8 @@
 		CCC46E301C069F360098908A /* RewardsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardsTableViewController.m; sourceTree = "<group>"; };
 		CCC46E321C06A3DC0098908A /* CreateRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRewardViewController.h; sourceTree = "<group>"; };
 		CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRewardViewController.m; sourceTree = "<group>"; };
+		CCC46E351C06CB5E0098908A /* RewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardViewController.h; sourceTree = "<group>"; };
+		CCC46E361C06CB5E0098908A /* RewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardViewController.m; sourceTree = "<group>"; };
 		CCCE04C61BF285A200BAE3C3 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		CCCE04C71BF285A200BAE3C3 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		CCCE04C91BF28AA000BAE3C3 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -397,6 +400,8 @@
 				CCC46E301C069F360098908A /* RewardsTableViewController.m */,
 				CCC46E321C06A3DC0098908A /* CreateRewardViewController.h */,
 				CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */,
+				CCC46E351C06CB5E0098908A /* RewardViewController.h */,
+				CCC46E361C06CB5E0098908A /* RewardViewController.m */,
 			);
 			name = Rewards;
 			sourceTree = "<group>";
@@ -533,6 +538,7 @@
 				CC53C9921C03826B002FF627 /* StudentListTableViewController.m in Sources */,
 				CCC46E341C06A3DC0098908A /* CreateRewardViewController.m in Sources */,
 				CC5F94CB1BE74D65007353F7 /* LoopedIn.xcdatamodeld in Sources */,
+				CCC46E371C06CB5E0098908A /* RewardViewController.m in Sources */,
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,
 				CCA205EF1C0428A0007C97A3 /* CreateTaskViewController.m in Sources */,

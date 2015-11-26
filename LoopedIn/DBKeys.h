@@ -18,6 +18,7 @@
 #define PARENTHOOD_EMAIL @"parenthoodEmail"
 #define DESIRED_REWARD @"desiredReward"
 #define PROFILE_PIC @"profilePic"
+#define BOUGHT_REWARD @"boughtDesiredReward"
 
 /* Role types */
 #define STUDENT_ROLE @"Student"

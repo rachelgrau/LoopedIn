@@ -8,11 +8,13 @@
 
 #import "RewardsTableViewController.h"
 #import "CreateRewardViewController.h"
+#import "RewardViewController.h"
 #import "DBKeys.h"
 
 @interface RewardsTableViewController ()
 @property BOOL hasLoadedRewards;
 @property NSArray *rewards;
+@property PFObject *selectedReward;
 @end
 
 @implementation RewardsTableViewController
@@ -70,6 +72,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.hasLoadedRewards) {
+        self.selectedReward = [self.rewards objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"toReward" sender:self];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -113,6 +121,9 @@
     if ([segue.identifier isEqualToString:@"toCreateReward"]) {
         CreateRewardViewController *dest = segue.destinationViewController;
         dest.myClass = self.myClass;
+    } else if ([segue.identifier isEqualToString:@"toReward"]) {
+        RewardViewController *dest = segue.destinationViewController;
+        dest.reward = self.selectedReward;
     }
 }
 

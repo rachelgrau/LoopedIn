@@ -8,6 +8,8 @@
 
 #import "RewardViewController.h"
 #import "DBKeys.h"
+#import "StudentTeacherViewController.h"
+#import "LoadingView.h"
 #import <Parse/Parse.h>
 
 @interface RewardViewController ()
@@ -17,10 +19,13 @@
 @property BOOL hasLoadedStudents;
 @property NSMutableArray *earnedStudents;
 @property NSMutableArray *wantsStudents;
+@property NSIndexPath *selectedIndexPath;
 @end
 
 #define EARNED_REWARD_SECTION 0
 #define WANTS_REWARD_SECTION 1
+
+#define DELETE_TASK_TAG 6
 
 @implementation RewardViewController
 
@@ -49,6 +54,20 @@
         self.hasLoadedStudents = YES;
         [self.tableView reloadData];
     }];
+    
+    /* Delete button */
+    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteReward)];
+    self.navigationItem.rightBarButtonItem = plusButton;
+}
+
+- (void)deleteReward {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete Reward" message:@"Are you sure you want to delete this reward? Students and parents will no longer see it." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = DELETE_TASK_TAG;
+    [alert show];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.tableView deselectRowAtIndexPath:self.selectedIndexPath animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,7 +119,7 @@
         } else if (indexPath.section == WANTS_REWARD_SECTION) {
             user = [self.wantsStudents objectAtIndex:indexPath.row];
         }
-        cell.textLabel.text = user.username;
+        cell.textLabel.text = [user objectForKey:FULL_NAME];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ pts", [[user objectForKey:POINTS] stringValue]];
     } else {
         cell.textLabel.text = @"Loading students...";
@@ -108,19 +127,68 @@
     return cell;
 }
 
+/* If you select a student, segue to the student's profile. If you select a parent, do nothing. */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    if (self.hasLoadedStudents) {
+        self.selectedIndexPath = indexPath;
+        PFUser *selectedUser;
+        if (self.selectedIndexPath.section == WANTS_REWARD_SECTION) {
+            selectedUser = [self.wantsStudents objectAtIndex:indexPath.row];
+        } else if (self.selectedIndexPath.section == EARNED_REWARD_SECTION) {
+            selectedUser = [self.earnedStudents objectAtIndex:indexPath.row];
+        }
+        if ([[selectedUser objectForKey:ROLE] isEqualToString: PARENT_ROLE]) {
+            /* Parents don't have profiles */
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        } else {
+            [self performSegueWithIdentifier:@"toStudentView" sender:self];
+        }
+    }
 }
 
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toStudentView"]) {
+        StudentTeacherViewController *dest = segue.destinationViewController;
+        if (self.selectedIndexPath.section == WANTS_REWARD_SECTION) {
+            dest.student = [self.wantsStudents objectAtIndex:self.selectedIndexPath.row];
+        } else if (self.selectedIndexPath.section == EARNED_REWARD_SECTION) {
+            dest.student = [self.earnedStudents objectAtIndex:self.selectedIndexPath.row];
+        }
+    }
 }
-*/
+
+#pragma mark - UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == DELETE_TASK_TAG) {
+        if (buttonIndex == 1) {
+            LoadingView *loadingView = [[LoadingView alloc] initWithLoadingText:@"Deleting..." hasNavBar:YES];
+            [self.view addSubview:loadingView];
+            [loadingView startLoading];
+            /* Delete all task completion objects associated with this task */
+            /* Make sure any users who are working towards this reward are no longer doing so */
+            PFQuery *userQuery = [PFUser query];
+            [userQuery whereKey:DESIRED_REWARD equalTo:self.reward];
+            [userQuery findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+                if (!error) {
+                    for (PFUser *user in users) {
+                        [user setObject:[NSNull null] forKey:DESIRED_REWARD];
+                        [user saveInBackground];
+                    }
+                }
+            }];
+            /* Delete reward */
+            [self.reward deleteInBackgroundWithBlock:^(BOOL success, NSError *error) {
+                [loadingView displayDoneAndPopToViewController:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                }];
+            }];
+        }
+    }
+}
 
 @end

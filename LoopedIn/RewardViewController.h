@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface RewardViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RewardViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property PFObject *reward;
 @end

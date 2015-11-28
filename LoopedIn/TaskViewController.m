@@ -113,7 +113,7 @@
         } else if (indexPath.section == COMPLETE_SECTION) {
             student = [self.completedStudents objectAtIndex:indexPath.row];
         }
-        cell.textLabel.text = student.username;
+        cell.textLabel.text = [student objectForKey:FULL_NAME];
     } else {
         cell.textLabel.text = @"Loading task asignees...";
     }

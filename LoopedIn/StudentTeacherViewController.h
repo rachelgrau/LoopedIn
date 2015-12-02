@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface StudentTeacherViewController : UIViewController
-@property PFObject *student;
+@interface StudentTeacherViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property PFUser *student;
 @end

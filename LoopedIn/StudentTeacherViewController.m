@@ -7,18 +7,45 @@
 //
 
 #import "StudentTeacherViewController.h"
+#import "TaskViewController.h"
 #import "Common.h"
 #import "DBKeys.h"
+#import <Parse/Parse.h>
 
 @interface StudentTeacherViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *profPic;
+@property NSMutableArray *uncompletedTasks;
+@property BOOL tasksLoaded;
+@property NSIndexPath *selectedIndexPath;
 @end
 
 @implementation StudentTeacherViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tasksLoaded = NO;
+    self.uncompletedTasks = [[NSMutableArray alloc] init];
+    PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
+    [query whereKey:TASK_COMPLETION_ASIGNEE equalTo:self.student];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        for (PFObject *taskCompletion in objects) {
+            PFObject *task = [taskCompletion objectForKey:TASK_COMPLETION_TASK];
+            [task fetchInBackgroundWithBlock:^(PFObject *fetchedTask, NSError *error) {
+                if (![[task objectForKey:TASK_IS_COMPLETED] boolValue]) {
+                    [self.uncompletedTasks addObject:fetchedTask];
+                }
+                if (self.uncompletedTasks.count == objects.count) {
+                    self.tasksLoaded = YES;
+                }
+                [self.tableView reloadData];
+            }];
+        }
+        if (objects.count == 0) {
+            self.tasksLoaded = YES;
+        }
+    }];
     
     /* Set up profile picture */
     [self loadProfPic];
@@ -67,14 +94,57 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Incomplete Tasks";
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.tasksLoaded) {
+        return self.uncompletedTasks.count;
+    } else {
+        return 1;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tasksLoaded) {
+        self.selectedIndexPath = indexPath;
+        [self performSegueWithIdentifier:@"toTask" sender:self];
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"studentCell" forIndexPath:indexPath];
+    if (self.tasksLoaded) {
+        PFObject *task = [self.uncompletedTasks objectAtIndex:indexPath.row];
+        cell.textLabel.text = [task objectForKey:TASK_NAME];
+        NSDate *date = [task objectForKey:TASK_DUE_DATE];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"MM/dd"];
+        NSString *theDate = [NSString stringWithFormat:@"Due: %@", [dateFormat stringFromDate:date]];
+        cell.detailTextLabel.text = theDate;
+    } else {
+        cell.textLabel.text = @"Loading tasks...";
+    }
+    return cell;
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"toTask"]) {
+        TaskViewController *dest = segue.destinationViewController;
+        dest.task = [self.uncompletedTasks objectAtIndex:self.selectedIndexPath.row];
+    }
 }
-*/
+
 
 @end

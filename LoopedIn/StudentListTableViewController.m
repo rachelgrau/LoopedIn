@@ -15,7 +15,7 @@
 @interface StudentListTableViewController ()
 @property NSArray *students;
 @property BOOL hasLoadedStudents;
-@property PFObject *selectedStudent;
+@property PFUser *selectedStudent;
 @end
 
 @implementation StudentListTableViewController

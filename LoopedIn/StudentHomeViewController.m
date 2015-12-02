@@ -8,6 +8,7 @@
 
 #import "StudentHomeViewController.h"
 #import "StudentRewardViewController.h"
+#import "StudentTasksViewController.h"
 #import <Parse/Parse.h>
 #import "DBKeys.h"
 #import "Common.h"
@@ -284,6 +285,9 @@
         if (self.desiredReward) {
             dest.desiredReward = self.desiredReward;
         }
+    } else if ([segue.identifier isEqualToString:@"toTasks"]) {
+        StudentTasksViewController *dest = segue.destinationViewController;
+        dest.student = [PFUser currentUser];
     }
 }
 

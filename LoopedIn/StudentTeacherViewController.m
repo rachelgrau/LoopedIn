@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIImageView *profPic;
 @property NSMutableArray *uncompletedTasks;
+@property NSMutableArray *completedTasks;
 @property BOOL tasksLoaded;
 @property NSIndexPath *selectedIndexPath;
 @end
@@ -27,23 +28,27 @@
     [super viewDidLoad];
     self.tasksLoaded = NO;
     self.uncompletedTasks = [[NSMutableArray alloc] init];
+    self.completedTasks = [[NSMutableArray alloc] init];
     PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
     [query whereKey:TASK_COMPLETION_ASIGNEE equalTo:self.student];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         for (PFObject *taskCompletion in objects) {
             PFObject *task = [taskCompletion objectForKey:TASK_COMPLETION_TASK];
             [task fetchInBackgroundWithBlock:^(PFObject *fetchedTask, NSError *error) {
-                if (![[task objectForKey:TASK_IS_COMPLETED] boolValue]) {
+                if (![[taskCompletion objectForKey:TASK_IS_COMPLETED] boolValue]) {
                     [self.uncompletedTasks addObject:fetchedTask];
+                } else {
+                    [self.completedTasks addObject:fetchedTask];
                 }
-                if (self.uncompletedTasks.count == objects.count) {
+                if ((self.uncompletedTasks.count + self.completedTasks.count) == objects.count) {
                     self.tasksLoaded = YES;
+                    [self.tableView reloadData];
                 }
-                [self.tableView reloadData];
             }];
         }
         if (objects.count == 0) {
             self.tasksLoaded = YES;
+            [self.tableView reloadData];
         }
     }];
     
@@ -71,6 +76,12 @@
     [attributedText setAttributes:boldAttr range:range];
     [self.nameLabel setAttributedText:attributedText];
 
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    if (self.selectedIndexPath) {
+        [self.tableView deselectRowAtIndexPath:self.selectedIndexPath animated:YES];
+    }
 }
 
 - (void)loadProfPic {
@@ -131,6 +142,7 @@
         cell.detailTextLabel.text = theDate;
     } else {
         cell.textLabel.text = @"Loading tasks...";
+        cell.detailTextLabel.text = @"";
     }
     return cell;
 }

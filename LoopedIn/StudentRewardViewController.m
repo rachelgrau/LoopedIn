@@ -109,7 +109,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.rewards.count;
+    if (self.rewards.count == 0) {
+        return 1;
+    } else {
+        return self.rewards.count;
+    }
 }
 
 
@@ -118,7 +122,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView == self.tableView) {
+    if (self.rewards.count == 0) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    } else if (tableView == self.tableView) {
         [self performSegueWithIdentifier:@"showReward" sender:indexPath];
         self.selectedRowIndexPath = indexPath;
     }
@@ -130,9 +136,14 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
     }
-    PFObject *reward = [self.rewards objectAtIndex:indexPath.row];
-    cell.textLabel.text = [reward objectForKey:REWARD_TITLE];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@ pts >", [[PFUser currentUser] objectForKey:POINTS], [reward objectForKey:REWARD_POINTS]];
+    if (self.rewards.count == 0) {
+        cell.textLabel.text = @"No rewards to choose from.";
+        cell.detailTextLabel.text = @"";
+    } else {
+        PFObject *reward = [self.rewards objectAtIndex:indexPath.row];
+        cell.textLabel.text = [reward objectForKey:REWARD_TITLE];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@ pts >", [[PFUser currentUser] objectForKey:POINTS], [reward objectForKey:REWARD_POINTS]];
+    }
     return cell;
 }
 

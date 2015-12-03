@@ -12,6 +12,7 @@
 		CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE21BEBEFD800A13CA7 /* ChooseRoleViewController.m */; };
 		CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE41BEBF79900A13CA7 /* DBKeys.h */; };
 		CC00BAEA1BEBFB7700A13CA7 /* blurryClassroom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */; };
+		CC2E324A1C10B8120041036D /* addClass.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2E32491C10B8120041036D /* addClass.png */; };
 		CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */; };
 		CC4BEDF71C0F64C2005A9ADA /* StudentTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BEDF61C0F64C2005A9ADA /* StudentTaskViewController.m */; };
 		CC4BEDFA1C0FCE7C005A9ADA /* ClassCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BEDF91C0FCE7C005A9ADA /* ClassCollectionViewCell.m */; };
@@ -97,6 +98,7 @@
 		CC00BAE21BEBEFD800A13CA7 /* ChooseRoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseRoleViewController.m; sourceTree = "<group>"; };
 		CC00BAE41BEBF79900A13CA7 /* DBKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBKeys.h; sourceTree = "<group>"; };
 		CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blurryClassroom.jpg; sourceTree = "<group>"; };
+		CC2E32491C10B8120041036D /* addClass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addClass.png; sourceTree = "<group>"; };
 		CC34F22E1BFCF5A700826D90 /* SingleRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRewardViewController.h; sourceTree = "<group>"; };
 		CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRewardViewController.m; sourceTree = "<group>"; };
 		CC4BEDF51C0F64C2005A9ADA /* StudentTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentTaskViewController.h; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		CC00BAE81BEBFB6800A13CA7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CC2E32491C10B8120041036D /* addClass.png */,
 				CC4BEDFB1C101BF1005A9ADA /* science.png */,
 				CC4BEDFC1C101BF1005A9ADA /* art.png */,
 				CC4BEDFD1C101BF1005A9ADA /* history.png */,
@@ -545,6 +548,7 @@
 				CC4BEE031C101BF1005A9ADA /* history.png in Resources */,
 				CC66D1861C0298030026FA26 /* addProfPic.png in Resources */,
 				CC4BEE011C101BF1005A9ADA /* science.png in Resources */,
+				CC2E324A1C10B8120041036D /* addClass.png in Resources */,
 				CC5F94D31BE74D65007353F7 /* Images.xcassets in Resources */,
 				CC4BEE021C101BF1005A9ADA /* art.png in Resources */,
 				CC4BEE041C101BF1005A9ADA /* math.png in Resources */,

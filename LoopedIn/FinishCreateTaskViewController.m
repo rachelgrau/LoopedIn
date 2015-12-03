@@ -108,6 +108,16 @@
     [taskToSave setObject:dueDate forKey:TASK_DUE_DATE];
     [taskToSave setObject:points forKey:TASK_POINTS];
     [taskToSave setObject:@NO forKey:TASK_IS_COMPLETED];
+    if (self.studentsSwitch.isOn) {
+        [taskToSave setObject:@YES forKey:TASK_FOR_STUDENTS];
+    } else {
+        [taskToSave setObject:@NO forKey:TASK_FOR_STUDENTS];
+    }
+    if (self.parentsSwitch.isOn) {
+        [taskToSave setObject:@YES forKey:TASK_FOR_PARENTS];
+    } else {
+        [taskToSave setObject:@NO forKey:TASK_FOR_PARENTS];
+    }
     [taskToSave setObject:[PFUser currentUser] forKey:TASK_TEACHER];
     [taskToSave setObject:self.myClass forKey:TASK_CLASS];
     [taskToSave saveInBackgroundWithBlock:^(BOOL success, NSError *error) {

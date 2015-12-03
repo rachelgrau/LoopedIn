@@ -54,6 +54,8 @@
 #define TASK_POINTS @"points"
 #define TASK_TEACHER @"teacher"
 #define TASK_CLASS @"myClass"
+#define TASK_FOR_STUDENTS @"forStudents"
+#define TASK_FOR_PARENTS @"forParents"
 
 /* Task Completion join table b/t tasks and users (asignees) -- keeps track of individual tasks from student perspective (e.g. for each task, there is one TaskCompletion object for each person assigned to that task). Stores metadata like whether the task has been completed by the given user. */
 #define TASK_COMPLETION_CLASS_NAME @"TaskCompletion"

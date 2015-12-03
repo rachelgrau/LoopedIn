@@ -217,13 +217,39 @@
     [taskQuery whereKey:TASK_CLASS equalTo:newClass];
     [taskQuery findObjectsInBackgroundWithBlock:^(NSArray *tasks, NSError *err) {
         for (PFObject *task in tasks) {
-            PFObject *taskCompletion = [PFObject objectWithClassName:TASK_COMPLETION_CLASS_NAME];
-            [taskCompletion setObject:task forKey:TASK_COMPLETION_TASK];
-            [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
-            [taskCompletion setObject:[PFUser currentUser] forKey:TASK_COMPLETION_ASIGNEE];
-            [taskCompletion saveInBackground];
+            BOOL forStudents = [[task objectForKey:TASK_FOR_STUDENTS] boolValue];
+            BOOL forParents = [[task objectForKey:TASK_FOR_PARENTS] boolValue];
+            
+            /* If this task is for students, make task completion object for student */
+            if (forStudents) {
+                PFObject *taskCompletion = [PFObject objectWithClassName:TASK_COMPLETION_CLASS_NAME];
+                [taskCompletion setObject:task forKey:TASK_COMPLETION_TASK];
+                [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
+                [taskCompletion setObject:[PFUser currentUser] forKey:TASK_COMPLETION_ASIGNEE];
+                [taskCompletion saveInBackground];
+            }
+            
+            /* If this task is for parents, make task completion object for this student's parent */
+            if (forParents) {
+                PFQuery *parenthoodQuery = [PFQuery queryWithClassName:PARENTHOOD_CLASS_NAME];
+                [parenthoodQuery whereKey:CHILD equalTo:[PFUser currentUser]];
+                [parenthoodQuery getFirstObjectInBackgroundWithBlock:^(PFObject *parenthood, NSError *error) {
+                    if (!error) {
+                        PFUser *parent = [parenthood objectForKey:PARENT];
+                        if (parent) {
+                            PFObject *taskCompletion = [PFObject objectWithClassName:TASK_COMPLETION_CLASS_NAME];
+                            [taskCompletion setObject:task forKey:TASK_COMPLETION_TASK];
+                            [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
+                            [taskCompletion setObject:parent forKey:TASK_COMPLETION_ASIGNEE];
+                            [taskCompletion saveInBackground];
+                        }
+                    }
+                }];
+            }
         }
     }];
+    
+    
 }
 
 #pragma mark - Text Field Pop Up Delegate
@@ -319,9 +345,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
     if (self.classesLoaded) {
-        return self.myClasses.count;
+        return self.myClasses.count + 1;
     } else {
-        return 0;
+        return 1;
     }
 }
 
@@ -331,14 +357,23 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ClassCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"classCell" forIndexPath:indexPath];
-    [cell setUpCellWithClass:[self.myClasses objectAtIndex:indexPath.row]];
+    if (indexPath.row == self.myClasses.count) {
+        /* "Add class" cell */
+        [cell setUpCellWithClass:nil];
+    } else {
+        [cell setUpCellWithClass:[self.myClasses objectAtIndex:indexPath.row]];
+    }
     cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.classesLoaded) {
+    if (indexPath.row == self.myClasses.count) {
+        NSArray *arr = [NSArray arrayWithObjects:@"Join", nil];
+        TextFieldPopUp *alertView = [[TextFieldPopUp alloc] initWithPlaceholder:@"Enter a class code" delegate:self buttonTitles:arr];
+        [alertView showInView:self.view];
+    } else if (self.classesLoaded) {
         self.selectedClass = [self.myClasses objectAtIndex:indexPath.row];
         [self performSegueWithIdentifier:@"toTasks" sender:self];
     }

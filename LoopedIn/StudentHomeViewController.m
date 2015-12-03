@@ -9,6 +9,7 @@
 #import "StudentHomeViewController.h"
 #import "StudentRewardViewController.h"
 #import "StudentTasksViewController.h"
+#import "ClassCollectionViewCell.h"
 #import <Parse/Parse.h>
 #import "DBKeys.h"
 #import "Common.h"
@@ -29,6 +30,10 @@
 @property BOOL isDisplayingProfPic;
 /* YES when the user has already uploaded a profile picture; NO otherwise. */
 @property BOOL hasProfPic;
+/* List of classes this student is */
+@property NSArray *myClasses;
+@property BOOL classesLoaded;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
 
 #define CHANGE_PROFILE_PIC_TAG 1
@@ -37,6 +42,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    /* Load my classes */
+    PFRelation *classesRelation = [[PFUser currentUser] relationForKey:MY_CLASSES];
+    PFQuery *relationQuery = [classesRelation query];
+    [relationQuery findObjectsInBackgroundWithBlock:^(NSArray *objs, NSError *error) {
+        self.myClasses = objs;
+        self.classesLoaded = YES;
+        [self.collectionView reloadData];
+    }];
     
     /* Disable button until prof pic loads */
     self.flipProfilePicButton.enabled = NO;
@@ -214,7 +228,15 @@
                     /* User hasn't yet registered for this class -- add him/her! */
                     [relation addObject:[PFUser currentUser]];
                     [class saveInBackground];
-                    [alertView displaySuccessAndDisappear];
+                    PFRelation *myClasses = [[PFUser currentUser] relationForKey:MY_CLASSES];
+                    [myClasses addObject:class];
+                    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+                        NSMutableArray *newClasses = [self.myClasses mutableCopy];
+                        [newClasses addObject:class];
+                        self.myClasses = [NSArray arrayWithArray:newClasses];
+                        [self.collectionView reloadData];
+                        [alertView displaySuccessAndDisappear];
+                    }];
                 } else {
                     [alertView displayErrorMessage:@"You're already in that class!"];
                     [alertView enableButton];
@@ -274,6 +296,32 @@
     self.isDisplayingProfPic = YES;
     [self showProfPic];
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - Collection View
+
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    if (self.classesLoaded) {
+        return self.myClasses.count;
+    } else {
+        return 0;
+    }
+}
+
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ClassCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"classCell" forIndexPath:indexPath];
+    [cell setUpCellWithClass:[self.myClasses objectAtIndex:indexPath.row]];
+    cell.backgroundColor = [UIColor whiteColor];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"HERE");
 }
 
 #pragma mark - Navigation

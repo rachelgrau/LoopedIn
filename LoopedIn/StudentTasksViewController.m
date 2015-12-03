@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"My Tasks";
     self.hasLoadedTasks = NO;
     
     [Common setBorder:self.completedTasksButton withColor:[UIColor blackColor]];
@@ -80,28 +81,35 @@
     PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
     [query whereKey:TASK_COMPLETION_ASIGNEE equalTo:self.student];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objs, NSError *error) {
-        for (PFObject *taskCompletion in objs) {
-            PFObject *task = [taskCompletion objectForKey:TASK_COMPLETION_TASK];
-            [task fetchIfNeededInBackgroundWithBlock:^(PFObject *taskFetched, NSError *error) {
-                if ([[taskCompletion objectForKey:TASK_IS_COMPLETED] boolValue]) {
-                    [self.completedTasks addObject:task];
-                } else {
-                    NSDate *dueDate = [task objectForKey:TASK_DUE_DATE];
-                    NSDate *now = [NSDate date];
-                    if ([dueDate compare:now] == NSOrderedAscending) {
-                        [self.overdueTasks addObject:task];
+        if ((objs.count == 0) || error) {
+            self.hasLoadedTasks = YES;
+            [self.completedTasksButton setEnabled:YES];
+            [self.tableView reloadData];
+        } else {
+            for (PFObject *taskCompletion in objs) {
+                PFObject *task = [taskCompletion objectForKey:TASK_COMPLETION_TASK];
+                [task fetchIfNeededInBackgroundWithBlock:^(PFObject *taskFetched, NSError *error) {
+                    if ([[taskCompletion objectForKey:TASK_IS_COMPLETED] boolValue]) {
+                        [self.completedTasks addObject:task];
                     } else {
-                        [self.uncompletedTasks addObject:task];
+                        NSDate *dueDate = [task objectForKey:TASK_DUE_DATE];
+                        NSDate *now = [NSDate date];
+                        if ([dueDate compare:now] == NSOrderedAscending) {
+                            [self.overdueTasks addObject:task];
+                        } else {
+                            [self.uncompletedTasks addObject:task];
+                        }
                     }
-                }
-                NSInteger totalTasks = self.completedTasks.count + self.overdueTasks.count + self.uncompletedTasks.count;
-                if (totalTasks >= objs.count) {
-                    [self sortTaskArrays];
-                    self.hasLoadedTasks = YES;
-                    [self.completedTasksButton setEnabled:YES];
-                    [self.tableView reloadData];
-                }
-            }];
+                    NSInteger totalTasks = self.completedTasks.count + self.overdueTasks.count + self.uncompletedTasks.count;
+                    if (totalTasks >= objs.count) {
+                        [self sortTaskArrays];
+                        self.hasLoadedTasks = YES;
+                        [self.completedTasksButton setEnabled:YES];
+                        [self.tableView reloadData];
+                    }
+                }];
+            }
+
         }
     }];
 
@@ -131,9 +139,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.hasLoadedTasks) {
         if (section == OVERDUE_SECTION) {
-            return self.overdueTasks.count;
+            if (self.overdueTasks.count == 0) return 1; // Cell that says "none"
+            else return self.overdueTasks.count;
         } else if (section == UNCOMPLETED_SECTION) {
-            return self.uncompletedTasks.count;
+            if (self.uncompletedTasks.count == 0) return 1; // Cell that says "none"
+            else return self.uncompletedTasks.count;
         } else {
             return 0;
         }
@@ -144,28 +154,47 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.hasLoadedTasks) {
-        self.selectedIndexPath = indexPath;
-        [self performSegueWithIdentifier:@"toTask" sender:self];
+        if ((indexPath.section == OVERDUE_SECTION && self.overdueTasks.count == 0) || (indexPath.section == UNCOMPLETED_SECTION && self.uncompletedTasks.count == 0)) {
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+        } else {
+            self.selectedIndexPath = indexPath;
+            [self performSegueWithIdentifier:@"toTask" sender:self];
+        }
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
     if (self.hasLoadedTasks) {
-        PFObject *task;
         if (indexPath.section == OVERDUE_SECTION) {
-            task = [self.overdueTasks objectAtIndex:indexPath.row];
-            cell.detailTextLabel.textColor = [UIColor redColor];
+            if (self.overdueTasks.count == 0) {
+                cell.textLabel.text = @"None";
+                cell.detailTextLabel.text = @"";
+            } else {
+                PFObject *task = [self.overdueTasks objectAtIndex:indexPath.row];
+                cell.detailTextLabel.textColor = [UIColor redColor];
+                cell.textLabel.text = [task objectForKey:TASK_NAME];
+                NSDate *date = [task objectForKey:TASK_DUE_DATE];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"MM/dd"];
+                NSString *theDate = [NSString stringWithFormat:@"Due: %@", [dateFormat stringFromDate:date]];
+                cell.detailTextLabel.text = theDate;
+            }
         } else if (indexPath.section == UNCOMPLETED_SECTION) {
-            task = [self.uncompletedTasks objectAtIndex:indexPath.row];
-            cell.detailTextLabel.textColor = [UIColor grayColor];
+            if (self.uncompletedTasks.count == 0) {
+                cell.textLabel.text = @"None";
+                cell.detailTextLabel.text = @"";
+            } else {
+                PFObject *task = [self.uncompletedTasks objectAtIndex:indexPath.row];
+                cell.detailTextLabel.textColor = [UIColor grayColor];
+                cell.textLabel.text = [task objectForKey:TASK_NAME];
+                NSDate *date = [task objectForKey:TASK_DUE_DATE];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"MM/dd"];
+                NSString *theDate = [NSString stringWithFormat:@"Due: %@", [dateFormat stringFromDate:date]];
+                cell.detailTextLabel.text = theDate;
+            }
         }
-        cell.textLabel.text = [task objectForKey:TASK_NAME];
-        NSDate *date = [task objectForKey:TASK_DUE_DATE];
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"MM/dd"];
-        NSString *theDate = [NSString stringWithFormat:@"Due: %@", [dateFormat stringFromDate:date]];
-        cell.detailTextLabel.text = theDate;
     } else {
         cell.textLabel.text = @"Loading tasks...";
         cell.detailTextLabel.text = @"";
@@ -183,6 +212,7 @@
         dest.completedTasks = self.completedTasks;
     } else if ([segue.identifier isEqualToString:@"toTask"]) {
         StudentTaskViewController *dest = segue.destinationViewController;
+        dest.isCompleted = NO;
         if (self.selectedIndexPath.section == OVERDUE_SECTION) {
             dest.task = [self.overdueTasks objectAtIndex:self.selectedIndexPath.row];
         } else if (self.selectedIndexPath.section == UNCOMPLETED_SECTION) {

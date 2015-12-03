@@ -109,6 +109,7 @@
     [taskToSave setObject:points forKey:TASK_POINTS];
     [taskToSave setObject:@NO forKey:TASK_IS_COMPLETED];
     [taskToSave setObject:[PFUser currentUser] forKey:TASK_TEACHER];
+    [taskToSave setObject:self.myClass forKey:TASK_CLASS];
     [taskToSave saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
         /* Once it's done loading, display the done loading popup thing and go back to the list of all tasks */
         [loadingView displayDoneAndPopToViewController:^ {

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface StudentTaskViewController : UIViewController
+@interface StudentTaskViewController : UIViewController <UIAlertViewDelegate>
 @property PFObject *task;
+@property BOOL isCompleted;
 @end

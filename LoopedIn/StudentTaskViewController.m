@@ -10,10 +10,13 @@
 #import "DBKeys.h"
 #import "LoadingView.h"
 
+#define MARK_COMPLETE_ALERT_TAG 1
+
 @interface StudentTaskViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *pointsLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UIButton *markCompleteButton;
 @end
 
 @implementation StudentTaskViewController
@@ -21,6 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [self.task objectForKey:TASK_NAME];
+    if (self.isCompleted) {
+        [self.markCompleteButton setTitle:@"Mark Incomplete" forState:UIControlStateNormal];
+    } else {
+        [self.markCompleteButton setTitle:@"Mark Complete" forState:UIControlStateNormal];
+    }
     
     /* Description */
     NSString *descText = [self.task objectForKey:TASK_DESC];
@@ -44,26 +52,60 @@
 }
 
 - (IBAction)markCompleted:(id)sender {
-    LoadingView *loader = [[LoadingView alloc] initWithLoadingText:@"Marking complete..." hasNavBar:YES];
-    [self.view addSubview:loader];
-    [loader startLoading];
-    PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
-    [query whereKey:TASK_COMPLETION_TASK equalTo:self.task];
-    [query whereKey:TASK_COMPLETION_ASIGNEE equalTo:[PFUser currentUser]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
-        if (obj && !error) {
-            [obj setObject:[NSNumber numberWithBool:YES] forKey:TASK_IS_COMPLETED];
-            [obj saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
-                [loader displayDoneAndPopToViewController:^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
-            }];
-        } else {
-            [loader displayDoneAndPopToViewController:^{
-                [self.navigationController popViewControllerAnimated:YES];
+    NSString *title;
+    NSString *message;
+    if (self.isCompleted) {
+        title = @"Mark Incomplete?";
+        message = @"You previously marked this task as complete. Are you sure you want to mark it as incomplete now?";
+    } else {
+        title = @"Mark Complete?";
+        message = @"Are you sure you want to mark this task as complete?";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = MARK_COMPLETE_ALERT_TAG;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == MARK_COMPLETE_ALERT_TAG) {
+        if (buttonIndex == 1) {
+            /* Marking assignment as complete */
+            LoadingView *loader = [[LoadingView alloc] initWithLoadingText:@"Marking complete..." hasNavBar:YES];
+            [self.view addSubview:loader];
+            [loader startLoading];
+            PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
+            [query whereKey:TASK_COMPLETION_TASK equalTo:self.task];
+            [query whereKey:TASK_COMPLETION_ASIGNEE equalTo:[PFUser currentUser]];
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
+                if (obj && !error) {
+                    [obj setObject:[NSNumber numberWithBool:(!self.isCompleted)] forKey:TASK_IS_COMPLETED];
+                    [obj saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+                        [loader displayDoneAndPopToViewController:^{
+                            if (self.isCompleted) {
+                                // pop back to my tasks page (not completed tasks page)
+                                UIViewController *tasksViewController = [self.navigationController.viewControllers objectAtIndex:1];
+                                [self.navigationController popToViewController:tasksViewController animated:YES];
+                            } else {
+                                // pop back to my tasks page
+                                [self.navigationController popViewControllerAnimated:YES];
+                            }
+                        }];
+                    }];
+                } else {
+                    [loader displayDoneAndPopToViewController:^{
+                        if (self.isCompleted) {
+                            // pop back to my tasks page (not completed tasks page)
+                            UIViewController *tasksViewController = [self.navigationController.viewControllers objectAtIndex:1];
+                            [self.navigationController popToViewController:tasksViewController animated:YES];
+                        } else {
+                            // pop back to my tasks page
+                            [self.navigationController popViewControllerAnimated:YES];
+                        }
+                    }];
+                }
             }];
         }
-    }];
+    }
 }
 
 /*

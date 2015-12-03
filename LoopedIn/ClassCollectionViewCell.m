@@ -33,6 +33,8 @@
         [self.classIconImageView setImage:[UIImage imageNamed:@"math.png"]];
     } else if ([classType isEqualToString:CLASS_TYPE_SCIENCE]) {
         [self.classIconImageView setImage:[UIImage imageNamed:@"art.png"]];
+    } else {
+        [self.classIconImageView setImage:[UIImage imageNamed:@"other.png"]];
     }
 }
 @end

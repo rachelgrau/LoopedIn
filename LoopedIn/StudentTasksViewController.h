@@ -11,4 +11,6 @@
 
 @interface StudentTasksViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property PFUser *student;
+/* If you only want to show tasks for a given class, set classToShow to that class. Otherwise set it to nil. */
+@property PFObject *classToShow;
 @end

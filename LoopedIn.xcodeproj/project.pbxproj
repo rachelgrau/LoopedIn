@@ -21,6 +21,7 @@
 		CC4BEE041C101BF1005A9ADA /* math.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4BEDFE1C101BF1005A9ADA /* math.png */; };
 		CC4BEE051C101BF1005A9ADA /* language.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4BEDFF1C101BF1005A9ADA /* language.png */; };
 		CC4BEE061C101BF1005A9ADA /* english.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4BEE001C101BF1005A9ADA /* english.png */; };
+		CC4BEE081C102880005A9ADA /* other.png in Resources */ = {isa = PBXBuildFile; fileRef = CC4BEE071C102880005A9ADA /* other.png */; };
 		CC53C9921C03826B002FF627 /* StudentListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC53C9911C03826B002FF627 /* StudentListTableViewController.m */; };
 		CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC53C9941C038311002FF627 /* StudentTableViewCell.m */; };
 		CC53C9971C03847B002FF627 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CC53C9961C03847B002FF627 /* grayArrow.png */; };
@@ -108,6 +109,7 @@
 		CC4BEDFE1C101BF1005A9ADA /* math.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = math.png; sourceTree = "<group>"; };
 		CC4BEDFF1C101BF1005A9ADA /* language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = language.png; sourceTree = "<group>"; };
 		CC4BEE001C101BF1005A9ADA /* english.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = english.png; sourceTree = "<group>"; };
+		CC4BEE071C102880005A9ADA /* other.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other.png; sourceTree = "<group>"; };
 		CC53C9901C03826B002FF627 /* StudentListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentListTableViewController.h; sourceTree = "<group>"; };
 		CC53C9911C03826B002FF627 /* StudentListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentListTableViewController.m; sourceTree = "<group>"; };
 		CC53C9931C038311002FF627 /* StudentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentTableViewCell.h; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				CC4BEDFE1C101BF1005A9ADA /* math.png */,
 				CC4BEDFF1C101BF1005A9ADA /* language.png */,
 				CC4BEE001C101BF1005A9ADA /* english.png */,
+				CC4BEE071C102880005A9ADA /* other.png */,
 				CCA205F01C042A1E007C97A3 /* gradBackground.png */,
 				CC53C9981C038BF1002FF627 /* noProfPic.png */,
 				CC66D1851C0298030026FA26 /* addProfPic.png */,
@@ -546,6 +549,7 @@
 				CC4BEE021C101BF1005A9ADA /* art.png in Resources */,
 				CC4BEE041C101BF1005A9ADA /* math.png in Resources */,
 				CC53C9991C038BF1002FF627 /* noProfPic.png in Resources */,
+				CC4BEE081C102880005A9ADA /* other.png in Resources */,
 				CCCE04CA1BF28AA000BAE3C3 /* placeholder.png in Resources */,
 				CC63E6C31BF17D3F0083736D /* backButton.png in Resources */,
 				CC4BEE051C101BF1005A9ADA /* language.png in Resources */,

@@ -33,6 +33,7 @@
 /* List of classes this student is */
 @property NSArray *myClasses;
 @property BOOL classesLoaded;
+@property PFObject *selectedClass;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
 
@@ -210,6 +211,21 @@
     }
 }
 
+/* Adds task completion objects for this user and the given class */
+- (void)addTasksForClass:(PFObject *)newClass {
+    PFQuery *taskQuery = [PFQuery queryWithClassName:TASK_CLASS_NAME];
+    [taskQuery whereKey:TASK_CLASS equalTo:newClass];
+    [taskQuery findObjectsInBackgroundWithBlock:^(NSArray *tasks, NSError *err) {
+        for (PFObject *task in tasks) {
+            PFObject *taskCompletion = [PFObject objectWithClassName:TASK_COMPLETION_CLASS_NAME];
+            [taskCompletion setObject:task forKey:TASK_COMPLETION_TASK];
+            [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
+            [taskCompletion setObject:[PFUser currentUser] forKey:TASK_COMPLETION_ASIGNEE];
+            [taskCompletion saveInBackground];
+        }
+    }];
+}
+
 #pragma mark - Text Field Pop Up Delegate
 
 - (void)customAlertView:(TextFieldPopUp *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex withTextFieldText:(NSString *)text {
@@ -227,6 +243,7 @@
                 if (count == 0) {
                     /* User hasn't yet registered for this class -- add him/her! */
                     [relation addObject:[PFUser currentUser]];
+                    [self addTasksForClass:class];
                     [class saveInBackground];
                     PFRelation *myClasses = [[PFUser currentUser] relationForKey:MY_CLASSES];
                     [myClasses addObject:class];
@@ -321,7 +338,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"HERE");
+    if (self.classesLoaded) {
+        self.selectedClass = [self.myClasses objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"toTasks" sender:self];
+    }
 }
 
 #pragma mark - Navigation
@@ -336,6 +356,12 @@
     } else if ([segue.identifier isEqualToString:@"toTasks"]) {
         StudentTasksViewController *dest = segue.destinationViewController;
         dest.student = [PFUser currentUser];
+        if (self.selectedClass) {
+            dest.classToShow = self.selectedClass;
+        } else {
+            dest.classToShow = nil;
+        }
+        self.selectedClass = nil;
     }
 }
 

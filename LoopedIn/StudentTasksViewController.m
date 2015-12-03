@@ -17,6 +17,7 @@
 @property NSMutableArray *overdueTasks; // tasks that are uncompleted and overdue
 @property NSMutableArray *uncompletedTasks; // tasks that are uncompleted but not overdue
 @property NSMutableArray *completedTasks; // tasks that are completed
+@property NSMutableArray *other; // used for keeping track of # of tasks
 @property BOOL hasLoadedTasks;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property NSIndexPath *selectedIndexPath;
@@ -30,7 +31,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"My Tasks";
+    
+    if (self.classToShow) {
+        self.title = [self.classToShow objectForKey:CLASS_NAME];
+    } else {
+        self.title = @"My Tasks";
+    }
+    
     self.hasLoadedTasks = NO;
     
     [Common setBorder:self.completedTasksButton withColor:[UIColor blackColor]];
@@ -39,7 +46,7 @@
     self.overdueTasks = [[NSMutableArray alloc] init];
     self.uncompletedTasks = [[NSMutableArray alloc] init];
     self.completedTasks = [[NSMutableArray alloc] init];
-    
+    self.other = [[NSMutableArray alloc] init];
 }
 
 /* Sorts the task arrays by due date */
@@ -76,6 +83,7 @@
     [self.overdueTasks removeAllObjects];
     [self.uncompletedTasks removeAllObjects];
     [self.completedTasks removeAllObjects];
+    [self.other removeAllObjects];
     
     self.hasLoadedTasks = NO;
     PFQuery *query = [PFQuery queryWithClassName:TASK_COMPLETION_CLASS_NAME];
@@ -89,18 +97,23 @@
             for (PFObject *taskCompletion in objs) {
                 PFObject *task = [taskCompletion objectForKey:TASK_COMPLETION_TASK];
                 [task fetchIfNeededInBackgroundWithBlock:^(PFObject *taskFetched, NSError *error) {
-                    if ([[taskCompletion objectForKey:TASK_IS_COMPLETED] boolValue]) {
-                        [self.completedTasks addObject:task];
-                    } else {
-                        NSDate *dueDate = [task objectForKey:TASK_DUE_DATE];
-                        NSDate *now = [NSDate date];
-                        if ([dueDate compare:now] == NSOrderedAscending) {
-                            [self.overdueTasks addObject:task];
+                    PFObject *thisTaskClass = [taskFetched objectForKey:TASK_CLASS];
+                    if ((thisTaskClass == self.classToShow) || (self.classToShow == nil)) {
+                        if ([[taskCompletion objectForKey:TASK_IS_COMPLETED] boolValue]) {
+                            [self.completedTasks addObject:task];
                         } else {
-                            [self.uncompletedTasks addObject:task];
+                            NSDate *dueDate = [task objectForKey:TASK_DUE_DATE];
+                            NSDate *now = [NSDate date];
+                            if ([dueDate compare:now] == NSOrderedAscending) {
+                                [self.overdueTasks addObject:task];
+                            } else {
+                                [self.uncompletedTasks addObject:task];
+                            }
                         }
+                    } else {
+                        [self.other addObject:task];
                     }
-                    NSInteger totalTasks = self.completedTasks.count + self.overdueTasks.count + self.uncompletedTasks.count;
+                    NSInteger totalTasks = self.completedTasks.count + self.overdueTasks.count + self.uncompletedTasks.count + self.other.count;
                     if (totalTasks >= objs.count) {
                         [self sortTaskArrays];
                         self.hasLoadedTasks = YES;

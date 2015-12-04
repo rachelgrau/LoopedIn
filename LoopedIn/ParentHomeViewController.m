@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property BOOL myChildrenLoaded;
 @property (strong, nonatomic) IBOutlet UILabel *parentNameLabel;
+@property NSIndexPath *selectedClassIndexPath;
 @end
 
 @implementation ParentHomeViewController
@@ -161,8 +162,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toTasks"]) {
         StudentTasksViewController *dest = segue.destinationViewController;
-        dest.classToShow = nil;
-        dest.student = [PFUser currentUser];
+        if (self.selectedClassIndexPath) {
+            dest.classToShow = nil;
+            dest.student = [PFUser currentUser];
+            self.selectedClassIndexPath = nil;
+        } else {
+            dest.classToShow = [self.myChildren objectAtIndex:self.selectedClassIndexPath.row];
+            
+            dest.student = [PFUser currentUser];
+        }
     }
 }
 

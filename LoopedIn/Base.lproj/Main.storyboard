@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NaA-6e-aXe">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -2510,7 +2511,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gl4-xU-flg">
-                                <rect key="frame" x="168" y="545" width="250" height="35"/>
+                                <rect key="frame" x="175" y="545" width="250" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="Dcl-6T-PRZ"/>
@@ -2535,23 +2536,244 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gba-8S-6JX" userLabel="type of class">
+                                <rect key="frame" x="197" y="205" width="205" height="190"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gj8-gV-ag0">
+                                        <rect key="frame" x="19" y="40" width="44" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="5Pi-1X-gnU"/>
+                                            <constraint firstAttribute="width" constant="44" id="xWZ-i0-hT5"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="english.png"/>
+                                        <connections>
+                                            <action selector="englishClicked:" destination="b0L-3r-Cue" eventType="touchUpInside" id="lOL-YR-sKS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXn-5Z-nR8">
+                                        <rect key="frame" x="80" y="40" width="44" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="hnR-Ss-4zj"/>
+                                            <constraint firstAttribute="height" constant="48" id="tvp-E4-Zhb"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="science.png"/>
+                                        <connections>
+                                            <action selector="scienceClicked:" destination="b0L-3r-Cue" eventType="touchUpInside" id="vxG-t6-CmB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RNP-DZ-g1s">
+                                        <rect key="frame" x="143" y="44" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="A8s-Q8-lVD"/>
+                                            <constraint firstAttribute="height" constant="40" id="Ynx-Ks-pGA"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="math.png"/>
+                                        <connections>
+                                            <action selector="mathClicked:" destination="b0L-3r-Cue" eventType="touchUpInside" id="M11-RV-v0O"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4F-aU-uqG">
+                                        <rect key="frame" x="19" y="112" width="44" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="LJ9-Ox-1I0"/>
+                                            <constraint firstAttribute="height" constant="48" id="xQS-Gf-q47"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="history.png"/>
+                                        <connections>
+                                            <action selector="historyClicked:" destination="b0L-3r-Cue" eventType="touchUpInside" id="trj-iE-HH0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xw-0b-aWD">
+                                        <rect key="frame" x="80" y="109" width="44" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="e33-yl-kcZ"/>
+                                            <constraint firstAttribute="width" constant="44" id="sjN-6h-cpu"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="art.png"/>
+                                        <connections>
+                                            <action selector="artClicked:" destination="b0L-3r-Cue" eventType="touchUpInside" id="6SW-be-dgK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTc-oR-Qpi">
+                                        <rect key="frame" x="141" y="109" width="44" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="13O-Lt-7Mr"/>
+                                            <constraint firstAttribute="height" constant="48" id="LJV-9q-me1"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="other.png"/>
+                                        <connections>
+                                            <action selector="otherClicked:" destination="b0L-3r-Cue" eventType="touchUpInside" id="iaG-Wl-05j"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What subject is your class?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x81-Aw-Gmi">
+                                        <rect key="frame" x="0.0" y="8" width="205" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="1KE-OC-JEf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xos-Sq-UIQ">
+                                        <rect key="frame" x="20" y="85" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="GiL-q9-tOi"/>
+                                            <constraint firstAttribute="width" constant="42" id="b0e-VQ-yUr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Science" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-GL-ohH">
+                                        <rect key="frame" x="81" y="85" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="T3y-Te-HyC"/>
+                                            <constraint firstAttribute="width" constant="42" id="hwj-Wb-has"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Math" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T5-NW-mx4">
+                                        <rect key="frame" x="142" y="85" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="2iv-4d-Uor"/>
+                                            <constraint firstAttribute="width" constant="42" id="lQU-wJ-W6d"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gi0-kN-OYe">
+                                        <rect key="frame" x="141" y="156" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="0e5-Wf-CBy"/>
+                                            <constraint firstAttribute="height" constant="21" id="2ed-WI-g4Q"/>
+                                            <constraint firstAttribute="width" constant="42" id="R7h-wb-oqM"/>
+                                            <constraint firstAttribute="height" constant="21" id="Wol-qk-0cI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="0e5-Wf-CBy"/>
+                                                <exclude reference="Wol-qk-0cI"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Art" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbB-Bn-JD7">
+                                        <rect key="frame" x="81" y="157" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="1GS-wi-FPX"/>
+                                            <constraint firstAttribute="width" constant="42" id="2Os-nC-Bfv"/>
+                                            <constraint firstAttribute="width" constant="42" id="OlY-V6-mrH"/>
+                                            <constraint firstAttribute="height" constant="21" id="wQb-Si-Fdu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="2Os-nC-Bfv"/>
+                                                <exclude reference="wQb-Si-Fdu"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CY3-KZ-Nu7">
+                                        <rect key="frame" x="19" y="156" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="DcS-8h-uNT"/>
+                                            <constraint firstAttribute="height" constant="21" id="SMw-l4-LuZ"/>
+                                            <constraint firstAttribute="width" constant="42" id="a0n-BD-VV6"/>
+                                            <constraint firstAttribute="height" constant="21" id="n59-8V-f2w"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="a0n-BD-VV6"/>
+                                                <exclude reference="n59-8V-f2w"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="CbB-Bn-JD7" firstAttribute="centerX" secondItem="1xw-0b-aWD" secondAttribute="centerX" id="1Xc-D9-7A5"/>
+                                    <constraint firstAttribute="width" constant="205" id="2m8-Gz-GQ6"/>
+                                    <constraint firstItem="1xw-0b-aWD" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="109" id="38b-Ah-i9k"/>
+                                    <constraint firstItem="CY3-KZ-Nu7" firstAttribute="leading" secondItem="gba-8S-6JX" secondAttribute="leading" constant="19" id="55n-lX-R72"/>
+                                    <constraint firstItem="sTc-oR-Qpi" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="109" id="5W1-Of-NqX"/>
+                                    <constraint firstItem="Xos-Sq-UIQ" firstAttribute="centerX" secondItem="Gj8-gV-ag0" secondAttribute="centerX" id="6w3-KG-c5A"/>
+                                    <constraint firstItem="x81-Aw-Gmi" firstAttribute="leading" secondItem="gba-8S-6JX" secondAttribute="leading" id="7zY-gI-lQP"/>
+                                    <constraint firstAttribute="trailing" secondItem="gi0-kN-OYe" secondAttribute="trailing" constant="22" id="9Cc-5D-O9z"/>
+                                    <constraint firstItem="1xw-0b-aWD" firstAttribute="firstBaseline" secondItem="sTc-oR-Qpi" secondAttribute="firstBaseline" id="Btu-vW-QsK"/>
+                                    <constraint firstItem="uk4-GL-ohH" firstAttribute="top" secondItem="cXn-5Z-nR8" secondAttribute="top" id="Fk6-tq-0Qr"/>
+                                    <constraint firstItem="Xos-Sq-UIQ" firstAttribute="top" secondItem="Gj8-gV-ag0" secondAttribute="bottom" constant="-3" id="IMw-UA-frB"/>
+                                    <constraint firstItem="x81-Aw-Gmi" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="8" id="KPC-EO-Phm"/>
+                                    <constraint firstItem="CY3-KZ-Nu7" firstAttribute="top" secondItem="h4F-aU-uqG" secondAttribute="bottom" constant="-4" id="KfW-Wu-8Zd"/>
+                                    <constraint firstItem="Gj8-gV-ag0" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="40" id="NRf-5S-FeN"/>
+                                    <constraint firstAttribute="trailing" secondItem="x81-Aw-Gmi" secondAttribute="trailing" id="NuI-8K-p7a"/>
+                                    <constraint firstItem="Gj8-gV-ag0" firstAttribute="firstBaseline" secondItem="cXn-5Z-nR8" secondAttribute="firstBaseline" id="Nyl-h5-Nd8"/>
+                                    <constraint firstItem="h4F-aU-uqG" firstAttribute="leading" secondItem="gba-8S-6JX" secondAttribute="leading" constant="19" id="RFk-c2-ZG8"/>
+                                    <constraint firstItem="uk4-GL-ohH" firstAttribute="top" secondItem="cXn-5Z-nR8" secondAttribute="bottom" constant="-3" id="RVr-Ew-6zy"/>
+                                    <constraint firstAttribute="height" constant="190" id="S0n-nM-VVE"/>
+                                    <constraint firstAttribute="trailing" secondItem="RNP-DZ-g1s" secondAttribute="trailing" constant="22" id="TjS-ef-ttV"/>
+                                    <constraint firstItem="CbB-Bn-JD7" firstAttribute="top" secondItem="1xw-0b-aWD" secondAttribute="bottom" id="U25-H6-7rH"/>
+                                    <constraint firstItem="Gj8-gV-ag0" firstAttribute="baseline" secondItem="cXn-5Z-nR8" secondAttribute="baseline" id="Z4Z-sq-8Ob"/>
+                                    <constraint firstItem="cXn-5Z-nR8" firstAttribute="centerX" secondItem="gba-8S-6JX" secondAttribute="centerX" id="ZzO-8c-lkz"/>
+                                    <constraint firstItem="1xw-0b-aWD" firstAttribute="centerX" secondItem="gba-8S-6JX" secondAttribute="centerX" id="duR-i5-oVe"/>
+                                    <constraint firstItem="gi0-kN-OYe" firstAttribute="top" secondItem="sTc-oR-Qpi" secondAttribute="bottom" constant="-1" id="eCM-lA-Ap8"/>
+                                    <constraint firstItem="RNP-DZ-g1s" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="44" id="fCY-ty-abb"/>
+                                    <constraint firstAttribute="trailing" secondItem="sTc-oR-Qpi" secondAttribute="trailing" constant="20" id="jiJ-FA-YlG"/>
+                                    <constraint firstItem="Gj8-gV-ag0" firstAttribute="leading" secondItem="gba-8S-6JX" secondAttribute="leading" constant="19" id="kFe-5W-Oz8"/>
+                                    <constraint firstItem="1xw-0b-aWD" firstAttribute="baseline" secondItem="sTc-oR-Qpi" secondAttribute="baseline" id="lRw-k3-zqv"/>
+                                    <constraint firstItem="cXn-5Z-nR8" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="40" id="lzH-lY-uEv"/>
+                                    <constraint firstItem="h4F-aU-uqG" firstAttribute="top" secondItem="gba-8S-6JX" secondAttribute="top" constant="112" id="uLo-1v-HBF"/>
+                                    <constraint firstItem="uk4-GL-ohH" firstAttribute="centerX" secondItem="cXn-5Z-nR8" secondAttribute="centerX" id="uUa-Df-uqE"/>
+                                    <constraint firstItem="5T5-NW-mx4" firstAttribute="top" secondItem="RNP-DZ-g1s" secondAttribute="bottom" constant="1" id="wvT-g1-3xk"/>
+                                    <constraint firstItem="5T5-NW-mx4" firstAttribute="centerX" secondItem="RNP-DZ-g1s" secondAttribute="centerX" id="xNC-88-Mg0"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Fk6-tq-0Qr"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jhp-LQ-UoR" firstAttribute="top" secondItem="D40-IW-EIV" secondAttribute="bottom" constant="85" id="1XO-gJ-nnd"/>
+                            <constraint firstItem="gba-8S-6JX" firstAttribute="centerY" secondItem="okp-nd-fjo" secondAttribute="centerY" id="FGb-vO-jHj"/>
                             <constraint firstAttribute="centerY" secondItem="rNo-tb-9QR" secondAttribute="centerY" constant="-38" id="HRh-Z2-M2t"/>
                             <constraint firstItem="p4S-hX-12v" firstAttribute="leading" secondItem="okp-nd-fjo" secondAttribute="leading" constant="-157" id="Ie6-F9-de8"/>
                             <constraint firstAttribute="centerX" secondItem="rNo-tb-9QR" secondAttribute="centerX" id="dgX-He-tHW"/>
                             <constraint firstItem="Ofs-3o-woj" firstAttribute="top" secondItem="gl4-xU-flg" secondAttribute="bottom" constant="20" id="eP8-FU-tOS"/>
-                            <constraint firstAttribute="centerX" secondItem="gl4-xU-flg" secondAttribute="centerX" constant="7" id="nYi-3j-HsD"/>
+                            <constraint firstItem="gba-8S-6JX" firstAttribute="top" secondItem="D40-IW-EIV" secondAttribute="bottom" constant="133" id="iEf-JL-14Q"/>
+                            <constraint firstItem="gba-8S-6JX" firstAttribute="centerX" secondItem="okp-nd-fjo" secondAttribute="centerX" id="jcQ-Gr-dam"/>
+                            <constraint firstAttribute="centerX" secondItem="gl4-xU-flg" secondAttribute="centerX" id="nYi-3j-HsD"/>
+                            <constraint firstItem="gba-8S-6JX" firstAttribute="centerX" secondItem="p4S-hX-12v" secondAttribute="centerX" id="qNA-ur-u3A"/>
                             <constraint firstAttribute="centerX" secondItem="jhp-LQ-UoR" secondAttribute="centerX" id="rho-qc-ceI"/>
+                            <constraint firstItem="gba-8S-6JX" firstAttribute="centerX" secondItem="p4S-hX-12v" secondAttribute="centerX" id="sgr-02-ica"/>
+                            <constraint firstItem="gba-8S-6JX" firstAttribute="centerY" secondItem="p4S-hX-12v" secondAttribute="centerY" constant="44" id="uT8-Sh-jnQ"/>
                             <constraint firstItem="p4S-hX-12v" firstAttribute="top" secondItem="D40-IW-EIV" secondAttribute="bottom" constant="-64" id="woo-ly-uKK"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="iEf-JL-14Q"/>
+                                <exclude reference="qNA-ur-u3A"/>
+                                <exclude reference="sgr-02-ica"/>
+                                <exclude reference="uT8-Sh-jnQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="parentButton" destination="I7z-3Y-OhU" id="dEI-7b-NQi"/>
                         <outlet property="parenthoodTextfield" destination="Aui-U1-up9" id="vGd-gD-vYb"/>
                         <outlet property="studentButton" destination="PjH-ic-mIz" id="ubc-ue-KMQ"/>
+                        <outlet property="subjectTypeView" destination="gba-8S-6JX" id="Nc1-uq-tQd"/>
                         <outlet property="teacherButton" destination="CLa-AT-F7g" id="Sns-10-L75"/>
                         <segue destination="c3P-HG-bMI" kind="presentation" identifier="toTeacherHome" id="bgc-QE-arN"/>
                         <segue destination="IOv-yK-oYw" kind="presentation" identifier="toStudentHome" id="sxB-3K-Tg7"/>
@@ -2846,26 +3068,32 @@
     <resources>
         <image name="Icon_thin.png" width="311" height="300"/>
         <image name="addProfPic.png" width="455" height="455"/>
+        <image name="art.png" width="726" height="742"/>
         <image name="blurryClassroom.jpg" width="900" height="600"/>
+        <image name="english.png" width="738" height="704"/>
         <image name="gradBackground.png" width="1200" height="800"/>
         <image name="grayArrow.png" width="227" height="307"/>
         <image name="greenRing.png" width="306" height="306"/>
+        <image name="history.png" width="770" height="680"/>
+        <image name="math.png" width="480" height="472"/>
         <image name="noProfPic.png" width="464" height="460"/>
+        <image name="other.png" width="536" height="536"/>
         <image name="rewardsIcon.png" width="238" height="238"/>
+        <image name="science.png" width="702" height="706"/>
         <image name="studentsIcon.png" width="238" height="238"/>
         <image name="tasksIcon.png" width="238" height="238"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a0D-BV-2sW"/>
+        <segue reference="sxB-3K-Tg7"/>
+        <segue reference="Joa-oN-o26"/>
         <segue reference="GzH-fq-R0a"/>
-        <segue reference="Kdf-mn-Gym"/>
+        <segue reference="bgc-QE-arN"/>
         <segue reference="Jka-Tb-vId"/>
         <segue reference="RO5-Jy-yOM"/>
         <segue reference="YDE-vC-2ye"/>
         <segue reference="rvC-Qd-CMx"/>
-        <segue reference="Zbx-Pd-Phx"/>
+        <segue reference="2OL-7p-KLm"/>
         <segue reference="Cmf-uM-4JL"/>
         <segue reference="Rji-7q-Arx"/>
-        <segue reference="Joa-oN-o26"/>
     </inferredMetricsTieBreakers>
 </document>

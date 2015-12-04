@@ -19,10 +19,14 @@
 /* If student selected, this will prompt user to type in parent's email; if parent selected, this will prompt user to type in child's email; if teacher is selected, it will prompt user to type in their class name. */
 @property (strong, nonatomic) IBOutlet UITextField *parenthoodTextfield;
 @property NSString *username;
+@property (strong, nonatomic) IBOutlet UIView *subjectTypeView;
 
 /* used to store a class that the teacher creates, if user chooses the teacher role */
 @property PFObject *myClass;
 @end
+
+#define SELECT_ROLE_TAG 0
+#define CLASS_CODE_TAG 1
 
 @implementation ChooseRoleViewController
 
@@ -175,6 +179,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.subjectTypeView setHidden:YES];
     [[self navigationController] setNavigationBarHidden:YES];
     
     /* Tap gesture recognizer for when we bring up keyboard; want a tap on view to dismiss the keyboard */
@@ -205,13 +210,14 @@
 }
 
 /* Creates a class object in the DB for this teacher with the name he/she typed in. */
-- (void)createClass {
+- (void)createClassWithSubjectType:(NSString *)subjectType {
     PFObject *class = [PFObject objectWithClassName:CLASS_CLASS_NAME];
     NSString *classCode = [Common randomStringWithLength:5];
     NSLog(@"%@", classCode);
     [class setObject:self.parenthoodTextfield.text forKey:CLASS_NAME];
     [class setObject:[PFUser currentUser] forKey:CLASS_TEACHER];
     [class setObject:classCode forKey:CLASS_CODE];
+    [class setObject:subjectType forKey:CLASS_TYPE];
     [class saveInBackground];
     self.myClass = class;
 }
@@ -267,6 +273,7 @@
         role = PARENT_ROLE;
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please select a role." message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        alert.tag = SELECT_ROLE_TAG;
         [alert show];
         return;
     }
@@ -281,6 +288,7 @@
             title = @"Please enter your class name.";
         }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        alert.tag = SELECT_ROLE_TAG;
         [alert show];
         return;
     }
@@ -289,16 +297,15 @@
     currentUser[ROLE] = role;
     if ([role isEqualToString:STUDENT_ROLE] || [role isEqualToString:PARENT_ROLE]) {
         [self createParenthoodRelation:currentUser];
-    } else {
-        [self createClass];
     }
     if ([role isEqualToString:STUDENT_ROLE]) {
         [self performSegueWithIdentifier:@"toStudentHome" sender:self];
     } else if ([role isEqualToString:TEACHER_ROLE]) {
-        NSString *title = [NSString stringWithFormat:@"Your class code: %@", [self.myClass objectForKey:CLASS_CODE]];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        [alert show];
-        alert.tag = 0;
+        UIView *background = [[UIView alloc] initWithFrame:self.view.frame];
+        [background setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.6]];
+        [self.view addSubview:background];
+        [self.subjectTypeView setHidden:NO];
+        [self.view bringSubviewToFront:self.subjectTypeView];
     } else {
         [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             [self performSegueWithIdentifier:@"toParentHome" sender:self];
@@ -309,7 +316,7 @@
 #pragma mark - UIAlertView
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == 0) {
+    if (alertView.tag == CLASS_CODE_TAG) {
         [self performSegueWithIdentifier:@"toTeacherHome" sender:self];
     }
 }
@@ -343,6 +350,38 @@
     }
 }
 
+- (void)setUpClassWithSubject:(NSString *)subject {
+    [self createClassWithSubjectType:subject];
+    [self.subjectTypeView setHidden:YES];
+    NSString *title = [NSString stringWithFormat:@"Your class code: %@", [self.myClass objectForKey:CLASS_CODE]];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    alert.tag = CLASS_CODE_TAG;
+    [alert show];
+}
+
+- (IBAction)englishClicked:(id)sender {
+    [self setUpClassWithSubject:CLASS_TYPE_ENGLISH];
+}
+
+- (IBAction)scienceClicked:(id)sender {
+    [self setUpClassWithSubject:CLASS_TYPE_SCIENCE];
+}
+
+- (IBAction)mathClicked:(id)sender {
+    [self setUpClassWithSubject:CLASS_TYPE_MATH];
+}
+
+- (IBAction)historyClicked:(id)sender {
+    [self setUpClassWithSubject:CLASS_TYPE_HISTORY];
+}
+
+- (IBAction)artClicked:(id)sender {
+    [self setUpClassWithSubject:CLASS_TYPE_ART];
+}
+
+- (IBAction)otherClicked:(id)sender {
+    [self setUpClassWithSubject:@"Other"];
+}
 
 #pragma mark - Navigation
 

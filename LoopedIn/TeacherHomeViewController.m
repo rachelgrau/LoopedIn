@@ -53,6 +53,14 @@
     
     /* Set navigation title */
     [Common setUpNavBar:self];
+    PFQuery *classQuery = [PFQuery queryWithClassName:CLASS_CLASS_NAME];
+    [classQuery whereKey:CLASS_TEACHER equalTo:[PFUser currentUser]];
+    [classQuery getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
+        if (obj) {
+            self.myClass = obj;
+            self.title = [obj objectForKey:CLASS_NAME];
+        }
+    }];
     
     /* Add settings button */
     UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];

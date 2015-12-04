@@ -159,6 +159,7 @@
                             [taskCompletion setObject:taskToSave forKey:TASK_COMPLETION_TASK];
                             [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
                             [taskCompletion setObject:parent forKey:TASK_COMPLETION_ASIGNEE];
+                            [taskCompletion setObject:student forKey:TASK_THE_STUDENT];
                             [taskCompletion saveInBackground];
                         }];
                     }

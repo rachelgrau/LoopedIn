@@ -17,9 +17,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property BOOL hasLoadedStudents;
-@property NSMutableArray *earnedStudents;
+@property NSArray *earnedStudents;
 @property NSMutableArray *wantsStudents;
 @property NSIndexPath *selectedIndexPath;
+@property BOOL earnedLoaded;
+@property BOOL wantsLoaded;
 @end
 
 #define EARNED_REWARD_SECTION 0
@@ -40,19 +42,50 @@
     self.earnedStudents = [[NSMutableArray alloc] init];
     self.wantsStudents = [[NSMutableArray alloc] init];
     
-    PFQuery *query = [PFUser query];
-    [query whereKey:DESIRED_REWARD equalTo:self.reward];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-        for (PFObject *user in users) {
-            BOOL hasEarned = [[user objectForKey:BOUGHT_REWARD] boolValue];
-            if (hasEarned) {
-                [self.earnedStudents addObject:user];
-            } else {
-                [self.wantsStudents addObject:user];
+    self.earnedLoaded = NO;
+    self.wantsLoaded = NO;
+    
+    PFRelation *earnedStudents = [self.reward relationForKey:REWARD_USERS_WHO_EANRED];
+    PFQuery *relationQuery = [earnedStudents query];
+    [relationQuery findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *error) {
+        self.earnedStudents = results;
+        self.earnedLoaded = YES;
+        if (self.wantsLoaded) {
+            self.hasLoadedStudents = YES;
+            self.hasLoadedStudents = YES;
+            [self.tableView reloadData];
+        }
+    }];
+    
+    PFQuery *query = [PFQuery queryWithClassName:CLASS_MEMBER_CLASS_NAME];
+    [query whereKey:CLASS_MEMBER_CLASS equalTo:self.myClass];
+    [query whereKey:CLASS_MEMBER_DESIRED_REWARD equalTo:self.reward];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *classMembers, NSError *error) {
+        for (PFObject *classMember in classMembers) {
+            PFUser *user = [classMember objectForKey:CLASS_MEMBER_STUDENT];
+            [user fetchInBackgroundWithBlock:^(PFObject *fetched, NSError *error) {
+                PFUser *fetchedUser = (PFUser *)fetched;
+                [fetchedUser setObject:[classMember objectForKey:CLASS_MEMBER_POINTS_EARNED] forKey:POINTS];
+                [self.wantsStudents addObject:fetchedUser];
+                
+                if (self.wantsStudents.count == classMembers.count) {
+                    self.wantsLoaded = YES;
+                    if (self.earnedLoaded) {
+                        self.hasLoadedStudents = YES;
+                        self.hasLoadedStudents = YES;
+                        [self.tableView reloadData];
+                    }
+                }
+            }];
+        }
+        if (classMembers.count == 0) {
+            self.wantsLoaded = YES;
+            if (self.earnedLoaded) {
+                self.hasLoadedStudents = YES;
+                self.hasLoadedStudents = YES;
+                [self.tableView reloadData];
             }
         }
-        self.hasLoadedStudents = YES;
-        [self.tableView reloadData];
     }];
     
     /* Delete button */
@@ -115,12 +148,13 @@
                 return cell;
             } else {
                 user = [self.earnedStudents objectAtIndex:indexPath.row];
+                cell.detailTextLabel.text = @"";
             }
         } else if (indexPath.section == WANTS_REWARD_SECTION) {
             user = [self.wantsStudents objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ pts", [[user objectForKey:POINTS] stringValue]];
         }
         cell.textLabel.text = [user objectForKey:FULL_NAME];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ pts", [[user objectForKey:POINTS] stringValue]];
     } else {
         cell.textLabel.text = @"Loading students...";
     }

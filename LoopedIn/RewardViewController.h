@@ -11,4 +11,5 @@
 
 @interface RewardViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property PFObject *reward;
+@property PFObject *myClass;
 @end

@@ -11,4 +11,5 @@
 
 @interface SingleRewardViewController : UIViewController <UIAlertViewDelegate> 
 @property PFObject *reward;
+@property PFObject *classMember;
 @end

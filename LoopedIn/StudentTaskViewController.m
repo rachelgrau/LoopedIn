@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [self.task objectForKey:TASK_NAME];
+    self.pointsLabel.text = [self.task objectForKey:TASK_POINTS];
     if (self.isCompleted) {
         [self.markCompleteButton setTitle:@"Mark Incomplete" forState:UIControlStateNormal];
     } else {
@@ -72,9 +73,9 @@
             /* Marking assignment as complete */
             NSString *loadingText;
             if (self.isCompleted) {
-                loadingText = @"Marking complete...";
-            } else {
                 loadingText = @"Marking incomplete...";
+            } else {
+                loadingText = @"Marking complete...";
             }
             LoadingView *loader = [[LoadingView alloc] initWithLoadingText:loadingText hasNavBar:YES];
             [self.view addSubview:loader];
@@ -88,14 +89,27 @@
                     [obj saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
                         /* Load ClassMember object to update points */
                         PFQuery *classMemberQuery = [PFQuery queryWithClassName:CLASS_MEMBER_CLASS_NAME];
+                        PFUser *theStudent;
+                        NSString *role = [[PFUser currentUser] objectForKey:ROLE];
+                        if ([role isEqualToString:STUDENT_ROLE]) {
+                            theStudent = [PFUser currentUser];
+                        } else {
+                            theStudent = [obj objectForKey:TASK_THE_STUDENT];
+                        }
                         [classMemberQuery whereKey:CLASS_MEMBER_CLASS equalTo:[self.task objectForKey:TASK_CLASS]];
-                        [classMemberQuery whereKey:CLASS_MEMBER_STUDENT equalTo:[PFUser currentUser]];
+                        [classMemberQuery whereKey:CLASS_MEMBER_STUDENT equalTo:theStudent];
                         [classMemberQuery getFirstObjectInBackgroundWithBlock:^(PFObject *classMember, NSError *err) {
                             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                             f.numberStyle = NSNumberFormatterDecimalStyle;
                             NSNumber *taskPoints = [f numberFromString:[self.task objectForKey:TASK_POINTS]];
                             NSNumber *points = [classMember objectForKey:CLASS_MEMBER_POINTS_EARNED];
-                            NSNumber *newPoints =  [NSNumber numberWithInt:([taskPoints intValue] + [points intValue])];
+                            NSNumber *newPoints;
+                            if (self.isCompleted) {
+                                newPoints = [NSNumber numberWithInt:([points intValue] - [taskPoints intValue])];
+                                if ([newPoints intValue] < 0) newPoints = @0;
+                            } else {
+                                newPoints = [NSNumber numberWithInt:([taskPoints intValue] + [points intValue])];
+                            }
                             [classMember setObject:newPoints forKey:CLASS_MEMBER_POINTS_EARNED];
                             [classMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                                 [loader displayDoneAndPopToViewController:^{

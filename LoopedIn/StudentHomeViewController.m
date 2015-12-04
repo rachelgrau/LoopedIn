@@ -10,6 +10,7 @@
 #import "StudentRewardViewController.h"
 #import "StudentTasksViewController.h"
 #import "ClassCollectionViewCell.h"
+#import "SingleClassTaskViewController.h"
 #import <Parse/Parse.h>
 #import "DBKeys.h"
 #import "Common.h"
@@ -18,7 +19,6 @@
 @interface StudentHomeViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *myTasksButton;
-@property (strong, nonatomic) IBOutlet UIButton *myRewardsButton;
 @property (strong, nonatomic) IBOutlet UILabel *progressDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *profilePicImageView;
 /* Reward user currently is working towards; must be loaded */
@@ -92,11 +92,6 @@
                                            attributes:normalAttr];
     [attributedText setAttributes:boldAttr range:range];
     [self.nameLabel setAttributedText:attributedText];
-    
-    /* Set border of tasks and rewards button */
-    [Common setBorder:self.myTasksButton withColor:[UIColor blackColor]];
-    [Common setBorder:self.myRewardsButton withColor:[UIColor blackColor]];
-    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -244,6 +239,7 @@
                             [taskCompletion setObject:task forKey:TASK_COMPLETION_TASK];
                             [taskCompletion setObject:@NO forKey:TASK_IS_COMPLETED];
                             [taskCompletion setObject:parent forKey:TASK_COMPLETION_ASIGNEE];
+                            [taskCompletion setObject:[PFUser currentUser] forKey:TASK_THE_STUDENT];
                             [taskCompletion saveInBackground];
                         }
                     }
@@ -418,7 +414,7 @@
         [alertView showInView:self.view];
     } else if (self.classesLoaded) {
         self.selectedClass = [self.myClasses objectAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"toTasks" sender:self];
+        [self performSegueWithIdentifier:@"toClassTasks" sender:self];
     }
 }
 
@@ -434,12 +430,11 @@
     } else if ([segue.identifier isEqualToString:@"toTasks"]) {
         StudentTasksViewController *dest = segue.destinationViewController;
         dest.student = [PFUser currentUser];
-        if (self.selectedClass) {
-            dest.classToShow = self.selectedClass;
-        } else {
-            dest.classToShow = nil;
-        }
-        self.selectedClass = nil;
+    } else if ([segue.identifier isEqualToString:@"toClassTasks"]) {
+        SingleClassTaskViewController *dest = segue.destinationViewController;
+        dest.student = [PFUser currentUser];
+        dest.classToShow = self.selectedClass;
+
     }
 }
 

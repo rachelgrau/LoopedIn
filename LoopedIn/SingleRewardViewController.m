@@ -8,6 +8,7 @@
 
 #import "SingleRewardViewController.h"
 #import "StudentRewardViewController.h"
+#import "SingleClassTaskViewController.h"
 #import "Common.h"
 #import "DBKeys.h"
 
@@ -34,14 +35,11 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        /* Clicked yes -- change reward */
-        PFUser *currentUser = [PFUser currentUser];
-        [currentUser setObject:self.reward forKey:DESIRED_REWARD];
-        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            /* Update the Student Reward View controller to show our newly chosen reward and pop */
-            StudentRewardViewController *parent = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-            [parent desiredRewardChangedTo:self.reward];
-            [self.navigationController popViewControllerAnimated:YES];
+        /* Save reward, then set change reward button to be enabled */
+        [self.classMember setObject:self.reward forKey:CLASS_MEMBER_DESIRED_REWARD];
+        [self.classMember saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            SingleClassTaskViewController *popTo = [self.navigationController.viewControllers objectAtIndex:1];
+            [self.navigationController popToViewController:popTo animated:YES];
         }];
     }
 }

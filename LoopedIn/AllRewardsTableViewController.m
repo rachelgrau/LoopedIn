@@ -1,45 +1,44 @@
 //
-//  RewardsTableViewController.m
-//  
+//  AllRewardsTableViewController.m
+//  LoopedIn
 //
-//  Created by Rachel on 11/25/15.
-//
+//  Created by Rachel on 12/4/15.
+//  Copyright © 2015 Rachel. All rights reserved.
 //
 
-#import "RewardsTableViewController.h"
-#import "CreateRewardViewController.h"
-#import "RewardViewController.h"
+#import "AllRewardsTableViewController.h"
+#import "SingleRewardViewController.h"
 #import "DBKeys.h"
 
-@interface RewardsTableViewController ()
+@interface AllRewardsTableViewController ()
+@property NSMutableArray *rewards;
+@property NSIndexPath *selectedRowIndexPath;
 @property BOOL hasLoadedRewards;
-@property NSArray *rewards;
-@property PFObject *selectedReward;
+@property NSIndexPath *selectedIndexPath;
 @end
 
-@implementation RewardsTableViewController
+@implementation AllRewardsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Rewards";
-    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addReward)];
-    self.navigationItem.rightBarButtonItem = plusButton;
+    self.hasLoadedRewards = NO;
+    self.rewards = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.hasLoadedRewards = NO;
-    /* Load tasks that this teacher has assigned */
-    PFQuery *rewardQuery = [PFQuery queryWithClassName:REWARD_CLASS_NAME];
-    [rewardQuery whereKey:REWARD_CLASS equalTo:self.myClass];
-    [rewardQuery findObjectsInBackgroundWithBlock:^(NSArray *rewards, NSError *error) {
-        self.rewards = rewards;
+    [self.rewards removeAllObjects];
+    PFQuery *query = [PFQuery queryWithClassName:REWARD_CLASS_NAME];
+    [query whereKey:REWARD_CLASS equalTo:self.theClass];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *rewards, NSError *error) {
+        for (PFObject *reward in rewards) {
+            if (reward != self.desiredReward) {
+                [self.rewards addObject:reward];
+            }
+        }
         self.hasLoadedRewards = YES;
         [self.tableView reloadData];
     }];
-}
-
-- (void)addReward {
-    [self performSegueWithIdentifier:@"toCreateReward" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,22 +60,25 @@
     }
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"rewardCell" forIndexPath:indexPath];
     if (self.hasLoadedRewards) {
         PFObject *reward = [self.rewards objectAtIndex:indexPath.row];
         cell.textLabel.text = [reward objectForKey:REWARD_TITLE];
-        cell.detailTextLabel.text = [[reward objectForKey:POINTS] stringValue];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@/%@ pts >", self.studentsCurrentPoints, [reward objectForKey:REWARD_POINTS]];
     } else {
-        cell.textLabel.text = @"Loading rewards...";
+        cell.textLabel.text = @"Loading...";
+        cell.detailTextLabel.text = @"";
     }
+    
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (self.hasLoadedRewards) {
-        self.selectedReward = [self.rewards objectAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"toReward" sender:self];
+        self.selectedIndexPath = indexPath;
+        [self performSegueWithIdentifier:@"toSingleReward" sender:self];
     }
 }
 
@@ -119,13 +121,10 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"toCreateReward"]) {
-        CreateRewardViewController *dest = segue.destinationViewController;
-        dest.myClass = self.myClass;
-    } else if ([segue.identifier isEqualToString:@"toReward"]) {
-        RewardViewController *dest = segue.destinationViewController;
-        dest.reward = self.selectedReward;
-        dest.myClass = self.myClass;
+    if ([segue.identifier isEqualToString:@"toSingleReward"]) {
+        SingleRewardViewController *dest = segue.destinationViewController;
+        dest.reward = [self.rewards objectAtIndex:self.selectedIndexPath.row];
+        dest.classMember = self.classMember;
     }
 }
 

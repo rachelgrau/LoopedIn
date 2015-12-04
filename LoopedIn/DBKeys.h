@@ -37,6 +37,7 @@
 #define REWARD_TITLE @"title"
 #define REWARD_DESCRIPTION @"description"
 #define REWARD_CLASS @"class"
+#define REWARD_USERS_WHO_EANRED @"usersWhoEarned"
 
 /* Class table */
 #define CLASS_CLASS_NAME @"Class"
@@ -52,6 +53,8 @@
 #define CLASS_MEMBER_STUDENT @"theStudent"
 #define CLASS_MEMBER_PARENT @"theParent"
 #define CLASS_MEMBER_POINTS_EARNED @"pointsEarned"
+#define CLASS_MEMBER_DESIRED_REWARD @"desiredReward"
+#define CLASS_MEMBER_BOUGHT_REWARD @"boughtDesiredReward"
 
 /* Task table -- for a task object (1 per task) */
 #define TASK_CLASS_NAME @"Task"
@@ -69,6 +72,7 @@
 #define TASK_IS_COMPLETED @"isCompleted"
 #define TASK_COMPLETION_TASK @"task"
 #define TASK_COMPLETION_ASIGNEE @"asignee"
+#define TASK_THE_STUDENT @"theStudent"
 
 /* Class types */
 #define CLASS_TYPE_SCIENCE @"Science"

@@ -2533,6 +2533,7 @@
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cPf-rC-eqG">
                                 <rect key="frame" x="16" y="205" width="568" height="380"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gYW-2x-AtS">
                                     <size key="itemSize" width="104" height="107"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2540,27 +2541,55 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wb7-tI-HRY">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="childCell" id="wb7-tI-HRY" customClass="ClassCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="104" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-va-gpd">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9V4-va-gpd">
                                                     <rect key="frame" x="15" y="7" width="75" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="75" id="VVX-jv-hOa"/>
+                                                        <constraint firstAttribute="height" constant="75" id="YKm-QY-Q71"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh6-OA-sGG">
-                                                    <rect key="frame" x="31" y="86" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh6-OA-sGG">
+                                                    <rect key="frame" x="0.0" y="86" width="104" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="KPQ-27-vBy"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="qh6-OA-sGG" secondAttribute="bottom" constant="-8" id="7Oz-cQ-2Q7"/>
+                                            <constraint firstAttribute="centerX" secondItem="qh6-OA-sGG" secondAttribute="centerX" id="KPo-TJ-XJF"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="qh6-OA-sGG" secondAttribute="trailing" constant="-8" id="NY5-Xg-PGK"/>
+                                            <constraint firstItem="qh6-OA-sGG" firstAttribute="leading" secondItem="wb7-tI-HRY" secondAttribute="leadingMargin" constant="-8" id="RSy-tf-r72"/>
+                                            <constraint firstAttribute="centerX" secondItem="9V4-va-gpd" secondAttribute="centerX" constant="-0.5" id="So8-y3-tum"/>
+                                            <constraint firstItem="9V4-va-gpd" firstAttribute="top" secondItem="wb7-tI-HRY" secondAttribute="topMargin" constant="-1" id="ywz-Qe-WEu"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="KPo-TJ-XJF"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="classIconImageView" destination="9V4-va-gpd" id="OjE-TA-a0R"/>
+                                            <outlet property="classNameLabel" destination="qh6-OA-sGG" id="luq-yG-dHO"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="XaM-2z-dbt" id="BPv-Iq-rBo"/>
+                                    <outlet property="delegate" destination="XaM-2z-dbt" id="XB1-Xy-yp5"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2584,6 +2613,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9ha-Sl-TQF"/>
                     <connections>
+                        <outlet property="collectionView" destination="cPf-rC-eqG" id="Hqo-ie-wXp"/>
                         <segue destination="NaA-6e-aXe" kind="presentation" identifier="toLogIn" id="RmS-tu-8y8"/>
                     </connections>
                 </viewController>

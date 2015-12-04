@@ -44,4 +44,16 @@
         [self.classIconImageView setImage:[UIImage imageNamed:@"addClass.png"]];
     }
 }
+
+- (void)setUpCellWithLabelText:(NSString *)labelText image:(UIImage *)image withTextColor:(UIColor *)textColor circular:(BOOL)isCircular {
+    self.classNameLabel.text = labelText;
+    self.classNameLabel.textColor = textColor;
+    [self.classIconImageView setImage:image];
+    if (isCircular) {
+        /* Crop to circle */
+        self.classIconImageView.layer.cornerRadius = self.classIconImageView.frame.size.width / 2;
+        self.classIconImageView.clipsToBounds = YES;
+    }
+}
+
 @end

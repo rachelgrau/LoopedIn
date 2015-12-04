@@ -11,4 +11,5 @@
 
 @interface ClassCollectionViewCell : UICollectionViewCell
 - (void)setUpCellWithClass:(PFObject *)theClass;
+- (void)setUpCellWithLabelText:(NSString *)labelText image:(UIImage *)image withTextColor:(UIColor *)textColor circular:(BOOL)isCircular;
 @end

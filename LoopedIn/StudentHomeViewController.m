@@ -323,11 +323,11 @@
     self.profilePicImage = chosenImage;
     NSData *imageData = UIImagePNGRepresentation(chosenImage);
     PFFile *imageFile = [PFFile fileWithName:@"profilePic" data:imageData];
-    [imageFile saveInBackground];
-    
-    PFUser *user = [PFUser currentUser];
-    [user setObject:imageFile forKey:PROFILE_PIC];
-    [user saveInBackground];
+    [imageFile saveInBackgroundWithBlock:^(BOOL success, NSError *err) {
+        PFUser *user = [PFUser currentUser];
+        [user setObject:imageFile forKey:PROFILE_PIC];
+        [user saveInBackground];
+    }];
     
     [UIView transitionWithView:self.profilePicImageView duration:.5 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         self.profilePicImageView.image = chosenImage;

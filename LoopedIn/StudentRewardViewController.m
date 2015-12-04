@@ -8,12 +8,14 @@
 
 #import "StudentRewardViewController.h"
 #import "SingleRewardViewController.h"
+#import "MCPercentageDoughnutView.h"
 #import "DBKeys.h"
 #import <Parse/Parse.h>
 
 @interface StudentRewardViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *desiredRewardLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *progressBarFrameView;
 @property NSArray *rewards;
 @property NSIndexPath *selectedRowIndexPath;
 @end
@@ -33,9 +35,13 @@
 }
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     self.title = @"Rewards";
+    
+//    MCPercentageDoughnutView *percentageDoughnut = [[MCPercentageDoughnutView alloc] initWithFrame:self.progressBarFrameView.frame];
+//    percentageDoughnut = percentageDoughnut;
+//    percentageDoughnut.percentage = (1.f/3.f);
+//    [self.view addSubview:percentageDoughnut];
     
     NSNumber *pointsEarned = [[PFUser currentUser] objectForKey:POINTS];
     /* Load desired reward if it wasn't passed from previous view controller. */

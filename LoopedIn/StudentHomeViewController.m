@@ -38,6 +38,7 @@
 @end
 
 #define CHANGE_PROFILE_PIC_TAG 1
+#define LOGOUT_TAG 2
 
 @implementation StudentHomeViewController
 
@@ -119,8 +120,10 @@
 }
 
 - (void)goToSettings:(id)sender {
-    [PFUser logOut];
-    [self performSegueWithIdentifier:@"toLogIn" sender:self];
+    /* TEMP: just log the user out */
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log out" message:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = LOGOUT_TAG;
+    [alert show];
 }
 
 - (IBAction)myTasksPressed:(id)sender {
@@ -309,6 +312,11 @@
             picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             
             [self presentViewController:picker animated:YES completion:NULL];
+        }
+    } else if (alertView.tag == LOGOUT_TAG) {
+        if (buttonIndex == 1) {
+            [PFUser logOut];
+            [self performSegueWithIdentifier:@"toLogIn" sender:self];
         }
     }
 }

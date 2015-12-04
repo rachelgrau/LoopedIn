@@ -1766,13 +1766,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFz-qW-rUK">
                                 <rect key="frame" x="0.0" y="64" width="600" height="136"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="FP5-7O-9AD">
-                                        <rect key="frame" x="14" y="8" width="120" height="120"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="2FZ-0x-6PT"/>
-                                            <constraint firstAttribute="height" constant="120" id="vPL-mt-HbI"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50/100 points earned towards selected reward: Ice Cream Party!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhS-Hg-Jzh">
                                         <rect key="frame" x="382" y="0.0" width="201" height="136"/>
                                         <constraints>
@@ -1783,14 +1776,27 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="587-R5-eI1" userLabel="progressBar">
+                                        <rect key="frame" x="19" y="10" width="116" height="115"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="115" id="awj-cF-FJY"/>
+                                            <constraint firstAttribute="width" constant="116" id="u9f-nK-0fQ"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="ZhS-Hg-Jzh" secondAttribute="centerY" constant="0.5" id="0Od-xH-8oA"/>
-                                    <constraint firstItem="FP5-7O-9AD" firstAttribute="leading" secondItem="QFz-qW-rUK" secondAttribute="leading" constant="14" id="DZf-sE-4uM"/>
+                                    <constraint firstAttribute="centerY" secondItem="587-R5-eI1" secondAttribute="centerY" constant="0.5" id="ODv-7p-QIB"/>
+                                    <constraint firstItem="587-R5-eI1" firstAttribute="leading" secondItem="QFz-qW-rUK" secondAttribute="leading" constant="19" id="ZFE-uG-t62"/>
+                                    <constraint firstItem="587-R5-eI1" firstAttribute="top" secondItem="QFz-qW-rUK" secondAttribute="top" constant="10" id="aOf-21-dW3"/>
                                     <constraint firstAttribute="trailing" secondItem="ZhS-Hg-Jzh" secondAttribute="trailing" constant="17" id="jWj-DR-zjX"/>
-                                    <constraint firstAttribute="centerY" secondItem="FP5-7O-9AD" secondAttribute="centerY" id="rfE-0M-sGC"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aOf-21-dW3"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0jp-2F-ivg">
                                 <rect key="frame" x="0.0" y="200" width="600" height="400"/>
@@ -1847,6 +1853,7 @@
                     </view>
                     <connections>
                         <outlet property="desiredRewardLabel" destination="ZhS-Hg-Jzh" id="bdn-KT-dyF"/>
+                        <outlet property="progressBarFrameView" destination="587-R5-eI1" id="Vkr-lA-bNa"/>
                         <outlet property="tableView" destination="0jp-2F-ivg" id="4tZ-da-mwz"/>
                         <segue destination="JZM-Nc-ute" kind="show" identifier="showReward" id="ZYz-lh-Ldb"/>
                     </connections>
@@ -2728,7 +2735,6 @@
         <image name="grayArrow.png" width="227" height="307"/>
         <image name="greenRing.png" width="306" height="306"/>
         <image name="noProfPic.png" width="464" height="460"/>
-        <image name="placeholder.png" width="740" height="708"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YDE-vC-2ye"/>

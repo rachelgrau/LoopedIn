@@ -23,6 +23,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *rewardsButton;
 @end
 
+#define LOGOUT_TAG 1
+
 @implementation TeacherHomeViewController
 
 - (void)viewDidLoad {
@@ -62,8 +64,10 @@
 }
 
 - (void)goToSettings:(id)sender {
-    [PFUser logOut];
-    [self performSegueWithIdentifier:@"toLogIn" sender:self];
+    /* TEMP: just log the user out */
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log out" message:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = LOGOUT_TAG;
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +96,17 @@
     } else if ([segue.identifier isEqualToString:@"toRewardsList"]) {
         RewardsTableViewController *dest = segue.destinationViewController;
         dest.myClass = self.myClass;
+    }
+}
+
+#pragma mark - Alert View Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == LOGOUT_TAG) {
+        if (buttonIndex == 1) {
+            [PFUser logOut];
+            [self performSegueWithIdentifier:@"toLogIn" sender:self];
+        }
     }
 }
 

@@ -67,6 +67,11 @@
 		CCA205F41C043C3F007C97A3 /* FinishCreateTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA205F31C043C3F007C97A3 /* FinishCreateTaskViewController.m */; };
 		CCA20AFF1C05529600C0789C /* StudentTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */; };
 		CCA20B021C0558F900C0789C /* TaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCA20B011C0558F900C0789C /* TaskViewController.m */; };
+		CCBCF1541C114BF10093E66B /* MCNewCustomLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBCF14A1C114BF10093E66B /* MCNewCustomLayer.m */; };
+		CCBCF1551C114BF10093E66B /* MCNewCustomLayeredView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBCF14C1C114BF10093E66B /* MCNewCustomLayeredView.m */; };
+		CCBCF1561C114BF10093E66B /* MCPercentageDoughnutView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBCF14F1C114BF10093E66B /* MCPercentageDoughnutView.m */; };
+		CCBCF1571C114BF10093E66B /* MCSliceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBCF1511C114BF10093E66B /* MCSliceLayer.m */; };
+		CCBCF1581C114BF10093E66B /* MCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CCBCF1531C114BF10093E66B /* MCUtil.m */; };
 		CCC46E2A1C0671080098908A /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E291C0671080098908A /* LoadingView.m */; };
 		CCC46E311C069F360098908A /* RewardsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E301C069F360098908A /* RewardsTableViewController.m */; };
 		CCC46E341C06A3DC0098908A /* CreateRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC46E331C06A3DC0098908A /* CreateRewardViewController.m */; };
@@ -174,6 +179,18 @@
 		CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentTeacherViewController.m; sourceTree = "<group>"; };
 		CCA20B001C0558F900C0789C /* TaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskViewController.h; sourceTree = "<group>"; };
 		CCA20B011C0558F900C0789C /* TaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskViewController.m; sourceTree = "<group>"; };
+		CCBCF1481C114BF10093E66B /* MCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCore.h; sourceTree = "<group>"; };
+		CCBCF1491C114BF10093E66B /* MCNewCustomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNewCustomLayer.h; sourceTree = "<group>"; };
+		CCBCF14A1C114BF10093E66B /* MCNewCustomLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNewCustomLayer.m; sourceTree = "<group>"; };
+		CCBCF14B1C114BF10093E66B /* MCNewCustomLayeredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNewCustomLayeredView.h; sourceTree = "<group>"; };
+		CCBCF14C1C114BF10093E66B /* MCNewCustomLayeredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNewCustomLayeredView.m; sourceTree = "<group>"; };
+		CCBCF14D1C114BF10093E66B /* MCNewCustomLayeredView+MCCustomLayeredViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCNewCustomLayeredView+MCCustomLayeredViewSubclass.h"; sourceTree = "<group>"; };
+		CCBCF14E1C114BF10093E66B /* MCPercentageDoughnutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPercentageDoughnutView.h; sourceTree = "<group>"; };
+		CCBCF14F1C114BF10093E66B /* MCPercentageDoughnutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPercentageDoughnutView.m; sourceTree = "<group>"; };
+		CCBCF1501C114BF10093E66B /* MCSliceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSliceLayer.h; sourceTree = "<group>"; };
+		CCBCF1511C114BF10093E66B /* MCSliceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSliceLayer.m; sourceTree = "<group>"; };
+		CCBCF1521C114BF10093E66B /* MCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUtil.h; sourceTree = "<group>"; };
+		CCBCF1531C114BF10093E66B /* MCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUtil.m; sourceTree = "<group>"; };
 		CCC46E281C0671080098908A /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
 		CCC46E291C0671080098908A /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		CCC46E2F1C069F360098908A /* RewardsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardsTableViewController.h; sourceTree = "<group>"; };
@@ -324,6 +341,7 @@
 		CC5F94C11BE74D65007353F7 /* LoopedIn */ = {
 			isa = PBXGroup;
 			children = (
+				CCBCF1471C114BE60093E66B /* Progress Bar */,
 				CC00BAE41BEBF79900A13CA7 /* DBKeys.h */,
 				CC722A9E1BEBD7F60021D994 /* Log in / sign up */,
 				CC00BADC1BEBEB9C00A13CA7 /* Student */,
@@ -443,6 +461,25 @@
 				CCA20AFE1C05529600C0789C /* StudentTeacherViewController.m */,
 			);
 			name = Students;
+			sourceTree = "<group>";
+		};
+		CCBCF1471C114BE60093E66B /* Progress Bar */ = {
+			isa = PBXGroup;
+			children = (
+				CCBCF1481C114BF10093E66B /* MCCore.h */,
+				CCBCF1491C114BF10093E66B /* MCNewCustomLayer.h */,
+				CCBCF14A1C114BF10093E66B /* MCNewCustomLayer.m */,
+				CCBCF14B1C114BF10093E66B /* MCNewCustomLayeredView.h */,
+				CCBCF14C1C114BF10093E66B /* MCNewCustomLayeredView.m */,
+				CCBCF14D1C114BF10093E66B /* MCNewCustomLayeredView+MCCustomLayeredViewSubclass.h */,
+				CCBCF14E1C114BF10093E66B /* MCPercentageDoughnutView.h */,
+				CCBCF14F1C114BF10093E66B /* MCPercentageDoughnutView.m */,
+				CCBCF1501C114BF10093E66B /* MCSliceLayer.h */,
+				CCBCF1511C114BF10093E66B /* MCSliceLayer.m */,
+				CCBCF1521C114BF10093E66B /* MCUtil.h */,
+				CCBCF1531C114BF10093E66B /* MCUtil.m */,
+			);
+			name = "Progress Bar";
 			sourceTree = "<group>";
 		};
 		CCC46E2B1C069D0C0098908A /* Rewards */ = {
@@ -586,12 +623,15 @@
 				CCCE04C81BF285A200BAE3C3 /* Common.m in Sources */,
 				CC9431B41C0EA642005AD87E /* StudentTasksViewController.m in Sources */,
 				CC5F94C81BE74D65007353F7 /* AppDelegate.m in Sources */,
+				CCBCF1571C114BF10093E66B /* MCSliceLayer.m in Sources */,
 				CCA205F41C043C3F007C97A3 /* FinishCreateTaskViewController.m in Sources */,
 				CC5F94C51BE74D65007353F7 /* main.m in Sources */,
 				CC95A9A31BFBBFF800F8D882 /* StudentRewardViewController.m in Sources */,
 				CC722A9D1BEBD7F20021D994 /* LogInViewController.m in Sources */,
 				CC00BADB1BEBEB9700A13CA7 /* StudentHomeViewController.m in Sources */,
 				CCEC54A41BE8488F007970FA /* TeacherHomeViewController.m in Sources */,
+				CCBCF1541C114BF10093E66B /* MCNewCustomLayer.m in Sources */,
+				CCBCF1561C114BF10093E66B /* MCPercentageDoughnutView.m in Sources */,
 				CCC46E311C069F360098908A /* RewardsTableViewController.m in Sources */,
 				CC5F94CE1BE74D65007353F7 /* SignUpViewController.m in Sources */,
 				CCA20B021C0558F900C0789C /* TaskViewController.m in Sources */,
@@ -604,8 +644,10 @@
 				CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */,
 				CC9431B71C0EC58C005AD87E /* CompletedTasksTableViewController.m in Sources */,
 				CC00BADF1BEBEBAC00A13CA7 /* ParentHomeViewController.m in Sources */,
+				CCBCF1551C114BF10093E66B /* MCNewCustomLayeredView.m in Sources */,
 				CCA205EF1C0428A0007C97A3 /* CreateTaskViewController.m in Sources */,
 				CC4BEDF71C0F64C2005A9ADA /* StudentTaskViewController.m in Sources */,
+				CCBCF1581C114BF10093E66B /* MCUtil.m in Sources */,
 				CCA20AFF1C05529600C0789C /* StudentTeacherViewController.m in Sources */,
 				CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */,
 				CCC46E2A1C0671080098908A /* LoadingView.m in Sources */,

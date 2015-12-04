@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ParentHomeViewController : UIViewController
+@interface ParentHomeViewController : UIViewController <UIAlertViewDelegate>
 
 @end

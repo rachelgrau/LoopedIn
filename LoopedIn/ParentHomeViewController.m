@@ -9,6 +9,7 @@
 #import "ParentHomeViewController.h"
 #import "StudentTasksViewController.h"
 #import "ClassCollectionViewCell.h"
+#import "TextFieldPopUp.h"
 #import <Parse/Parse.h>
 #import "Common.h"
 #import "DBKeys.h"
@@ -20,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *parentNameLabel;
 @property NSIndexPath *selectedClassIndexPath;
 @end
+
+#define LOGOUT_TAG 1
 
 @implementation ParentHomeViewController
 
@@ -88,8 +91,10 @@
 }
 
 - (void)goToSettings:(id)sender {
-    [PFUser logOut];
-    [self performSegueWithIdentifier:@"toLogIn" sender:self];
+    /* TEMP: just log the user out */
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log out" message:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    alert.tag = LOGOUT_TAG;
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,16 +150,59 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.row == self.myClasses.count) {
-//        NSArray *arr = [NSArray arrayWithObjects:@"Join", nil];
-//        TextFieldPopUp *alertView = [[TextFieldPopUp alloc] initWithPlaceholder:@"Enter a class code" delegate:self buttonTitles:arr];
-//        [alertView showInView:self.view];
-//    } else if (self.classesLoaded) {
-//        self.selectedClass = [self.myClasses objectAtIndex:indexPath.row];
-//        [self performSegueWithIdentifier:@"toTasks" sender:self];
-//    }
+    if (self.myChildrenLoaded) {
+        if (indexPath.row == self.myChildren.count) {
+            NSArray *arr = [NSArray arrayWithObjects:@"Add Child", nil];
+            TextFieldPopUp *alertView = [[TextFieldPopUp alloc] initWithPlaceholder:@"Enter your child's email" delegate:self buttonTitles:arr];
+            [alertView showInView:self.view];
+        } else {
+            self.selectedClassIndexPath = indexPath;
+            [self performSegueWithIdentifier:@"toTasks" sender:self];
+        }
+    }
 }
 
+#pragma mark - Text Field Pop Up Delegate
+- (void)customAlertView:(TextFieldPopUp *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex withTextFieldText:(NSString *)text {
+    [alertView disableButton];
+    
+    PFQuery *query = [PFUser query];
+    [query whereKey:USERNAME equalTo:text];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *newChildObj, NSError *err) {
+        if (newChildObj) {
+            [newChildObj fetchInBackgroundWithBlock:^(PFObject *newChildFetched, NSError *err) {
+                PFUser *newChild = (PFUser *)newChildFetched;
+                NSString *believedParentEmail = [newChild objectForKey:@"parenthooodEmail"];
+                NSString *fullName = [newChild objectForKey:FULL_NAME];
+                NSString *actualParentEmail = [PFUser currentUser].username;
+//                if ([believedParentEmail isEqualToString:actualParentEmail]) {
+                    /* Update parent's parenthood email */
+                    [[PFUser currentUser] setObject:newChild.username forKey:PARENTHOOD_EMAIL];
+                    [[PFUser currentUser] saveInBackground];
+                    /* Create parenthood object */
+                    PFObject *parenthoodRelation = [PFObject objectWithClassName:PARENTHOOD_CLASS_NAME];
+                    [parenthoodRelation setObject:[PFUser currentUser] forKey:PARENT];
+                    [parenthoodRelation setObject:newChild forKey:CHILD];
+                    [parenthoodRelation saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
+                        if (success) {
+                            [alertView displaySuccessAndDisappear];
+                        } else {
+                            [alertView displayErrorMessage:@"Error adding child :("];
+                            [alertView enableButton];
+                        }
+                    }];
+
+//                } else {
+//                    [alertView displayErrorMessage:@"Error adding child :("];
+//                    [alertView enableButton];
+//                }
+            }];
+        } else {
+            [alertView displayErrorMessage:@"Error adding child :("];
+            [alertView enableButton];
+        }
+    }];
+}
 
 #pragma mark - Navigation
 
@@ -163,16 +211,28 @@
     if ([segue.identifier isEqualToString:@"toTasks"]) {
         StudentTasksViewController *dest = segue.destinationViewController;
         if (self.selectedClassIndexPath) {
+            /* Viewing the selected student's tasks */
+            PFUser *studentToView = [self.myChildren objectAtIndex:self.selectedClassIndexPath.row];
+            dest.student = studentToView;
             dest.classToShow = nil;
-            dest.student = [PFUser currentUser];
             self.selectedClassIndexPath = nil;
         } else {
-            dest.classToShow = [self.myChildren objectAtIndex:self.selectedClassIndexPath.row];
-            
+            /* Viewing this parent's task */
+            dest.classToShow = nil;
             dest.student = [PFUser currentUser];
         }
     }
 }
 
+#pragma mark - Alert View Delegate
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == LOGOUT_TAG) {
+        if (buttonIndex == 1) {
+            [PFUser logOut];
+            [self performSegueWithIdentifier:@"toLogIn" sender:self];
+        }
+    }
+}
 
 @end

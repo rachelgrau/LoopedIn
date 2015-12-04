@@ -238,7 +238,7 @@
     } else if (self.parentButton.isSelected) {
         NSString *studentEmail = self.parenthoodTextfield.text;
         PFQuery *query = [PFUser query];
-        [query whereKey:@"username" equalTo:studentEmail];
+        [query whereKey:USERNAME equalTo:studentEmail];
         PFUser *student = [query getFirstObject];
         [student fetchIfNeeded];
         if (student) {

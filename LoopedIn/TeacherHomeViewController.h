@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface TeacherHomeViewController : UIViewController
+@interface TeacherHomeViewController : UIViewController <UIAlertViewDelegate>
 /* This teacher's class */
 @property PFObject *myClass;
 @end

@@ -40,7 +40,6 @@
     
     self.hasLoadedTasks = NO;
     
-    [Common setBorder:self.completedTasksButton withColor:[UIColor blackColor]];
     [self.completedTasksButton setEnabled:NO];
     
     self.overdueTasks = [[NSMutableArray alloc] init];

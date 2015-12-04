@@ -17,6 +17,7 @@
 @property NSMutableArray *myChildren;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 @property BOOL myChildrenLoaded;
+@property (strong, nonatomic) IBOutlet UILabel *parentNameLabel;
 @end
 
 @implementation ParentHomeViewController
@@ -25,6 +26,28 @@
     [super viewDidLoad];
     self.myChildrenLoaded = NO;
     self.myChildren = [[NSMutableArray alloc] init];
+    
+    /* Set name label */
+    NSString *fullName = [[PFUser currentUser] objectForKey:FULL_NAME];
+    NSString *firstName = [Common getFirstNameFromFullName:fullName];
+    self.title = firstName;
+    UIFont *boldFont = [UIFont fontWithName:@"Avenir-Heavy" size:32.0f];
+    UIFont *normalFont = [UIFont fontWithName:@"Avenir-Book" size:32.0f];
+    
+    NSDictionary *boldAttr = @{
+                               NSFontAttributeName:boldFont
+                               };
+    NSDictionary *normalAttr = @{
+                                 NSFontAttributeName:normalFont
+                                 };
+    const NSRange range = NSMakeRange(0, firstName.length);
+    
+    NSMutableAttributedString *attributedText =
+    [[NSMutableAttributedString alloc] initWithString:fullName
+                                           attributes:normalAttr];
+    [attributedText setAttributes:boldAttr range:range];
+    [self.parentNameLabel setAttributedText:attributedText];
+    
     
     /* Set navigation title */
     [Common setUpNavBar:self];

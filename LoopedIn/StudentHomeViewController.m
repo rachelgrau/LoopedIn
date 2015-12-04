@@ -355,13 +355,35 @@
     return 1;
 }
 
+- (UIImage *)getImageForClass:(PFObject *)classObj {
+    NSString *classType = [classObj objectForKey:CLASS_TYPE];
+    if ([classType isEqualToString:CLASS_TYPE_ART]) {
+        return [UIImage imageNamed:@"art.png"];
+    } else if ([classType isEqualToString:CLASS_TYPE_ENGLISH]) {
+        return [UIImage imageNamed:@"english.png"];
+    } else if ([classType isEqualToString:CLASS_TYPE_HISTORY]) {
+        return [UIImage imageNamed:@"history.png"];
+    } else if ([classType isEqualToString:CLASS_TYPE_LANGUAGE]) {
+        return [UIImage imageNamed:@"language.png"];
+    } else if ([classType isEqualToString:CLASS_TYPE_MATH]) {
+        return [UIImage imageNamed:@"math.png"];
+    } else if ([classType isEqualToString:CLASS_TYPE_SCIENCE]) {
+        return [UIImage imageNamed:@"science.png"];
+    } else {
+        return [UIImage imageNamed:@"other.png"];
+    }
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ClassCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"classCell" forIndexPath:indexPath];
     if (indexPath.row == self.myClasses.count) {
         /* "Add class" cell */
-        [cell setUpCellWithClass:nil];
+        [cell setUpCellWithLabelText:@"Add Class" image:[UIImage imageNamed:@"addClass.png"] withTextColor:[UIColor colorWithRed:70.0/255.0 green:225.0/255.0 blue:182.0/255.0 alpha:1.0] circular:NO];
     } else {
-        [cell setUpCellWithClass:[self.myClasses objectAtIndex:indexPath.row]];
+        PFObject *classToDisplay = [self.myClasses objectAtIndex:indexPath.row];
+        NSString *className = [classToDisplay objectForKey:CLASS_NAME];
+        UIImage *classImage = [self getImageForClass:classToDisplay];
+        [cell setUpCellWithLabelText:className image:classImage withTextColor:[UIColor blackColor] circular:NO];
     }
     cell.backgroundColor = [UIColor whiteColor];
     return cell;

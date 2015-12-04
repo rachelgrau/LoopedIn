@@ -135,7 +135,12 @@
         if (self.selectedIndexPath.section == WANTS_REWARD_SECTION) {
             selectedUser = [self.wantsStudents objectAtIndex:indexPath.row];
         } else if (self.selectedIndexPath.section == EARNED_REWARD_SECTION) {
-            selectedUser = [self.earnedStudents objectAtIndex:indexPath.row];
+            if (self.earnedStudents.count > 0) {
+                selectedUser = [self.earnedStudents objectAtIndex:indexPath.row];
+            } else {
+                [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+                return;
+            }
         }
         if ([[selectedUser objectForKey:ROLE] isEqualToString: PARENT_ROLE]) {
             /* Parents don't have profiles */

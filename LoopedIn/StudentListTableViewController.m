@@ -21,8 +21,9 @@
 @implementation StudentListTableViewController
 
 - (void)viewDidLoad {
-    self.hasLoadedStudents = NO;
     [super viewDidLoad];
+    self.title = @"Students";
+    self.hasLoadedStudents = NO;
     PFRelation *relation = [self.myClass relationForKey:CLASS_STUDENTS];
     PFQuery *query = [relation query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *results, NSError *err) {

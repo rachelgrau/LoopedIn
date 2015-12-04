@@ -45,13 +45,14 @@
         }];
     }
     
+    /* Set class code label */
+    self.classCodeLabel.layer.masksToBounds = YES;
+    self.classCodeLabel.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
+    self.classCodeLabel.layer.borderWidth = 3.0f;
+    self.classCodeLabel.layer.cornerRadius = 2.0f;
+    
     /* Set navigation title */
     [Common setUpNavBar:self];
-    
-    /* Set borders of buttons */
-    [Common setBorder:self.studentsButton withColor:[UIColor blackColor]];
-    [Common setBorder:self.tasksButton withColor:[UIColor blackColor]];
-    [Common setBorder:self.rewardsButton withColor:[UIColor blackColor]];
     
     /* Add settings button */
     UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -82,6 +83,17 @@
     [self performSegueWithIdentifier:@"toLogIn" sender:self];
 }
 
+- (IBAction)clickedStudents:(id)sender {
+    [self performSegueWithIdentifier:@"toStudentList" sender:self];
+}
+
+- (IBAction)clickedRewards:(id)sender {
+    [self performSegueWithIdentifier:@"toRewardsList" sender:self];
+}
+
+- (IBAction)clickedTasks:(id)sender {
+    [self performSegueWithIdentifier:@"toTaskList" sender:self];
+}
 
 #pragma mark - Navigation
 

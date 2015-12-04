@@ -46,6 +46,13 @@
 #define CLASS_STUDENTS @"students"
 #define CLASS_TYPE @"classType"
 
+/* ClassMember table -- join table for classes and students */
+#define CLASS_MEMBER_CLASS_NAME @"ClassMember"
+#define CLASS_MEMBER_CLASS @"theClass"
+#define CLASS_MEMBER_STUDENT @"theStudent"
+#define CLASS_MEMBER_PARENT @"theParent"
+#define CLASS_MEMBER_POINTS_EARNED @"pointsEarned"
+
 /* Task table -- for a task object (1 per task) */
 #define TASK_CLASS_NAME @"Task"
 #define TASK_NAME @"name"

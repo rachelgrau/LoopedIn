@@ -273,7 +273,20 @@
                     /* User hasn't yet registered for this class -- add him/her! */
                     [relation addObject:[PFUser currentUser]];
                     [self addTasksForClass:class];
-                    [class saveInBackground];
+                    [class saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        /* Set up ClassMember object -- joins a class, a particular student and his/her parent */
+                        PFQuery *parentQuery = [PFQuery queryWithClassName:PARENTHOOD_CLASS_NAME];
+                        [parentQuery whereKey:CHILD equalTo:[PFUser currentUser]];
+                        [parentQuery getFirstObjectInBackgroundWithBlock:^(PFObject *parenthoodObj, NSError *err) {
+                            PFUser *parent = [parenthoodObj objectForKey:PARENT];
+                            PFObject *classMember = [PFObject objectWithClassName:CLASS_MEMBER_CLASS_NAME];
+                            [classMember setObject:class forKey:CLASS_MEMBER_CLASS];
+                            [classMember setObject:[PFUser currentUser] forKey:CLASS_MEMBER_STUDENT];
+                            [classMember setObject:parent forKey:CLASS_MEMBER_PARENT];
+                            [classMember setObject:@0 forKey:CLASS_MEMBER_POINTS_EARNED];
+                            [classMember saveInBackground];
+                        }];
+                    }];
                     PFRelation *myClasses = [[PFUser currentUser] relationForKey:MY_CLASSES];
                     [myClasses addObject:class];
                     [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL success, NSError *error) {

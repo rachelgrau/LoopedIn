@@ -12,6 +12,9 @@
 		CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE21BEBEFD800A13CA7 /* ChooseRoleViewController.m */; };
 		CC00BAE51BEBF79900A13CA7 /* DBKeys.h in Sources */ = {isa = PBXBuildFile; fileRef = CC00BAE41BEBF79900A13CA7 /* DBKeys.h */; };
 		CC00BAEA1BEBFB7700A13CA7 /* blurryClassroom.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */; };
+		CC2B4AA11C11877A004D36B7 /* studentsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4A9F1C11877A004D36B7 /* studentsIcon.png */; };
+		CC2B4AA21C11877A004D36B7 /* tasksIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4AA01C11877A004D36B7 /* tasksIcon.png */; };
+		CC2B4AA41C11877E004D36B7 /* rewardsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4AA31C11877E004D36B7 /* rewardsIcon.png */; };
 		CC2E324A1C10B8120041036D /* addClass.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2E32491C10B8120041036D /* addClass.png */; };
 		CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */; };
 		CC4BEDF71C0F64C2005A9ADA /* StudentTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BEDF61C0F64C2005A9ADA /* StudentTaskViewController.m */; };
@@ -103,6 +106,9 @@
 		CC00BAE21BEBEFD800A13CA7 /* ChooseRoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseRoleViewController.m; sourceTree = "<group>"; };
 		CC00BAE41BEBF79900A13CA7 /* DBKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBKeys.h; sourceTree = "<group>"; };
 		CC00BAE91BEBFB7700A13CA7 /* blurryClassroom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blurryClassroom.jpg; sourceTree = "<group>"; };
+		CC2B4A9F1C11877A004D36B7 /* studentsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentsIcon.png; sourceTree = "<group>"; };
+		CC2B4AA01C11877A004D36B7 /* tasksIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasksIcon.png; sourceTree = "<group>"; };
+		CC2B4AA31C11877E004D36B7 /* rewardsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rewardsIcon.png; sourceTree = "<group>"; };
 		CC2E32491C10B8120041036D /* addClass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addClass.png; sourceTree = "<group>"; };
 		CC34F22E1BFCF5A700826D90 /* SingleRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRewardViewController.h; sourceTree = "<group>"; };
 		CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRewardViewController.m; sourceTree = "<group>"; };
@@ -278,6 +284,9 @@
 		CC00BAE81BEBFB6800A13CA7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CC2B4A9F1C11877A004D36B7 /* studentsIcon.png */,
+				CC2B4AA31C11877E004D36B7 /* rewardsIcon.png */,
+				CC2B4AA01C11877A004D36B7 /* tasksIcon.png */,
 				CC2E32491C10B8120041036D /* addClass.png */,
 				CC4BEDFB1C101BF1005A9ADA /* science.png */,
 				CC4BEDFC1C101BF1005A9ADA /* art.png */,
@@ -579,6 +588,7 @@
 				CCE6754C1BEC335600E7821B /* Icon.png in Resources */,
 				CC5F94D11BE74D65007353F7 /* Main.storyboard in Resources */,
 				CC66D1841C02942F0026FA26 /* changeProfPic.png in Resources */,
+				CC2B4AA41C11877E004D36B7 /* rewardsIcon.png in Resources */,
 				CC00BAEA1BEBFB7700A13CA7 /* blurryClassroom.jpg in Resources */,
 				CC5F94D61BE74D65007353F7 /* LaunchScreen.xib in Resources */,
 				CCE6754E1BEC388900E7821B /* Icon_thin.png in Resources */,
@@ -586,7 +596,9 @@
 				CC66D1861C0298030026FA26 /* addProfPic.png in Resources */,
 				CC4BEE011C101BF1005A9ADA /* science.png in Resources */,
 				CC2E324A1C10B8120041036D /* addClass.png in Resources */,
+				CC2B4AA21C11877A004D36B7 /* tasksIcon.png in Resources */,
 				CC5F94D31BE74D65007353F7 /* Images.xcassets in Resources */,
+				CC2B4AA11C11877A004D36B7 /* studentsIcon.png in Resources */,
 				CC4BEE021C101BF1005A9ADA /* art.png in Resources */,
 				CC4BEE041C101BF1005A9ADA /* math.png in Resources */,
 				CC53C9991C038BF1002FF627 /* noProfPic.png in Resources */,
@@ -710,6 +722,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -729,7 +742,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -753,6 +766,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -766,7 +780,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -777,6 +791,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -784,6 +800,7 @@
 				INFOPLIST_FILE = LoopedIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -791,6 +808,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -798,6 +817,7 @@
 				INFOPLIST_FILE = LoopedIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

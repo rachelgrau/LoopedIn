@@ -27,6 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
     if (self.isEditing) {
         self.title = @"Edit Task";
         self.nameTextField.text = [self.task objectForKey:TASK_NAME];
@@ -41,6 +47,11 @@
     } else {
          self.title = @"Create Task";
     }
+}
+
+-(void)dismissKeyboard {
+    [self.nameTextField resignFirstResponder];
+    [self.descriptionTextField resignFirstResponder];
 }
 
 - (void)cancelEdit {

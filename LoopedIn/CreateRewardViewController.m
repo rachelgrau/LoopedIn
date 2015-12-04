@@ -21,7 +21,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.title = @"Create Reward";
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)dismissKeyboard {
+    [self.nameTextField resignFirstResponder];
+    [self.descriptionTextField resignFirstResponder];
+    [self.pointsTextField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

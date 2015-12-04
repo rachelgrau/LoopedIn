@@ -15,6 +15,7 @@
 		CC2B4AA11C11877A004D36B7 /* studentsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4A9F1C11877A004D36B7 /* studentsIcon.png */; };
 		CC2B4AA21C11877A004D36B7 /* tasksIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4AA01C11877A004D36B7 /* tasksIcon.png */; };
 		CC2B4AA41C11877E004D36B7 /* rewardsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2B4AA31C11877E004D36B7 /* rewardsIcon.png */; };
+		CC2B4AA71C119F0F004D36B7 /* SingleClassTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC2B4AA61C119F0F004D36B7 /* SingleClassTaskViewController.m */; };
 		CC2E324A1C10B8120041036D /* addClass.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2E32491C10B8120041036D /* addClass.png */; };
 		CC34F2301BFCF5A700826D90 /* SingleRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */; };
 		CC4BEDF71C0F64C2005A9ADA /* StudentTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BEDF61C0F64C2005A9ADA /* StudentTaskViewController.m */; };
@@ -109,6 +110,8 @@
 		CC2B4A9F1C11877A004D36B7 /* studentsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = studentsIcon.png; sourceTree = "<group>"; };
 		CC2B4AA01C11877A004D36B7 /* tasksIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasksIcon.png; sourceTree = "<group>"; };
 		CC2B4AA31C11877E004D36B7 /* rewardsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rewardsIcon.png; sourceTree = "<group>"; };
+		CC2B4AA51C119F0F004D36B7 /* SingleClassTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleClassTaskViewController.h; sourceTree = "<group>"; };
+		CC2B4AA61C119F0F004D36B7 /* SingleClassTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleClassTaskViewController.m; sourceTree = "<group>"; };
 		CC2E32491C10B8120041036D /* addClass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addClass.png; sourceTree = "<group>"; };
 		CC34F22E1BFCF5A700826D90 /* SingleRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRewardViewController.h; sourceTree = "<group>"; };
 		CC34F22F1BFCF5A700826D90 /* SingleRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRewardViewController.m; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				CC9431B61C0EC58C005AD87E /* CompletedTasksTableViewController.m */,
 				CC4BEDF51C0F64C2005A9ADA /* StudentTaskViewController.h */,
 				CC4BEDF61C0F64C2005A9ADA /* StudentTaskViewController.m */,
+				CC2B4AA51C119F0F004D36B7 /* SingleClassTaskViewController.h */,
+				CC2B4AA61C119F0F004D36B7 /* SingleClassTaskViewController.m */,
 			);
 			name = Tasks;
 			sourceTree = "<group>";
@@ -663,6 +668,7 @@
 				CCA20AFF1C05529600C0789C /* StudentTeacherViewController.m in Sources */,
 				CC53C9951C038311002FF627 /* StudentTableViewCell.m in Sources */,
 				CCC46E2A1C0671080098908A /* LoadingView.m in Sources */,
+				CC2B4AA71C119F0F004D36B7 /* SingleClassTaskViewController.m in Sources */,
 				CC00BAE31BEBEFD800A13CA7 /* ChooseRoleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -117,7 +117,7 @@
         buttonFrame.origin.y = currentY;
         self.button.frame = buttonFrame;
         self.button.titleLabel.font = [UIFont fontWithName:@"Avenir Book" size:16.0];
-        self.button.backgroundColor = [UIColor blackColor];
+        self.button.backgroundColor = [UIColor colorWithRed:68.f/255.f green:216.f/255.f blue:175.f/255.f alpha:1.0];
         [self.button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     }

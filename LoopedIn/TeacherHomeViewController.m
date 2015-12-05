@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     if (self.myClass) {
         self.classCodeLabel.text = [NSString stringWithFormat:@"Class code: %@", [self.myClass objectForKey:CLASS_CODE]];
     } else {

@@ -106,7 +106,7 @@
 }
 
 - (IBAction)buyRewardPressed:(id)sender {
-    LoadingView *loadingView = [[LoadingView alloc] initWithLoadingText:@"Buying..." hasNavBar:YES];
+    LoadingView *loadingView = [[LoadingView alloc] initWithLoadingText:@"Claiming..." hasNavBar:YES];
     [self.view addSubview:loadingView];
     [loadingView startLoading];
     NSInteger newPoints = [self.pointsEarned intValue] - [[self.desiredReward objectForKey:REWARD_POINTS] intValue];

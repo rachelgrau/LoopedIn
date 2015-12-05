@@ -121,7 +121,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (!self.hasLoadedStudents) return @"";
     else if (section == EARNED_REWARD_SECTION) {
-        return @"Earned Reward";
+        return @"Claimed Reward";
     } else if (section == WANTS_REWARD_SECTION) {
         return @"Wants Reward";
     } else return @"";

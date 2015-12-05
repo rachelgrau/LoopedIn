@@ -223,7 +223,8 @@
 }
 
 /* Creates an object in the Parenthood DB table connecting this child/parent (|user|) with his/her child/parent */
-- (void)createParenthoodRelation:(PFUser *)user {
+- (void)createParenthoodRelation:(PFUser *)user withCompletionBlock:(void (^)())callbackBlock
+{
     if (self.studentButton.isSelected) {
         NSString *parentEmail = self.parenthoodTextfield.text;
         PFQuery *query = [PFUser query];
@@ -255,6 +256,7 @@
                 [parenthoodRelation setObject:student forKey:CHILD];
                 [parenthoodRelation saveInBackgroundWithBlock:^(BOOL success, NSError *error) {
                     if (success) {
+                        callbackBlock();
                     }
                 }];
             }
@@ -296,20 +298,23 @@
     PFUser *currentUser = [PFUser currentUser];
     currentUser[ROLE] = role;
     if ([role isEqualToString:STUDENT_ROLE] || [role isEqualToString:PARENT_ROLE]) {
-        [self createParenthoodRelation:currentUser];
+        [self createParenthoodRelation:currentUser withCompletionBlock:^ {
+            if ([role isEqualToString:PARENT_ROLE]) {
+                [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [self performSegueWithIdentifier:@"toParentHome" sender:self];
+                }];
+            }
+        }];
+        if ([role isEqualToString:STUDENT_ROLE]) {
+            [self performSegueWithIdentifier:@"toStudentHome" sender:self];
+        }
     }
-    if ([role isEqualToString:STUDENT_ROLE]) {
-        [self performSegueWithIdentifier:@"toStudentHome" sender:self];
-    } else if ([role isEqualToString:TEACHER_ROLE]) {
+    if ([role isEqualToString:TEACHER_ROLE]) {
         UIView *background = [[UIView alloc] initWithFrame:self.view.frame];
         [background setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.6]];
         [self.view addSubview:background];
         [self.subjectTypeView setHidden:NO];
         [self.view bringSubviewToFront:self.subjectTypeView];
-    } else {
-        [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            [self performSegueWithIdentifier:@"toParentHome" sender:self];
-        }];
     }
 }
 

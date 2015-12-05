@@ -395,7 +395,7 @@
     ClassCollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"classCell" forIndexPath:indexPath];
     if (indexPath.row == self.myClasses.count) {
         /* "Add class" cell */
-        [cell setUpCellWithLabelText:@"Add Class" image:[UIImage imageNamed:@"addClass.png"] withTextColor:[UIColor colorWithRed:70.0/255.0 green:225.0/255.0 blue:182.0/255.0 alpha:1.0] circular:NO];
+        [cell setUpCellWithLabelText:@"Join Class" image:[UIImage imageNamed:@"addClass.png"] withTextColor:[UIColor colorWithRed:70.0/255.0 green:225.0/255.0 blue:182.0/255.0 alpha:1.0] circular:NO];
     } else {
         PFObject *classToDisplay = [self.myClasses objectAtIndex:indexPath.row];
         NSString *className = [classToDisplay objectForKey:CLASS_NAME];
